@@ -487,6 +487,59 @@
     .contact-section { margin: 0 -1.5rem; padding: 4rem 1.5rem; }
     footer { padding: 1.5rem; }
   }
+
+/* BLOG */
+.blog-card {
+  background: linear-gradient(180deg, rgba(0,255,136,0.03), transparent);
+  border: 1px solid var(--border);
+  padding: 1.6rem;
+  transition: all 0.25s ease;
+}
+
+.blog-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.blog-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+}
+
+.blog-index { color: var(--accent); }
+.blog-date { color: var(--muted); }
+
+.blog-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+
+.blog-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.blog-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 0.8rem;
+}
+
+.blog-link {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.blog-link:hover {
+  text-decoration: underline;
+}
+
 </style>
 </head>
 <body>
@@ -499,9 +552,10 @@
   <a href="#" class="nav-logo">PP // AI-SEC</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
+   <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#research">Research</a></li>
+    <li><a href="#blog">Logs</a></li> <!-- ADD THIS -->
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -760,6 +814,12 @@
   </div>
 </section>
 
+<!-- BLOG -->
+<section id="blog">
+  <div class="section-label">06 // Research Logs</div>
+  <div id="blog-container" class="projects-grid"></div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact" style="padding: 0;">
   <div class="contact-section reveal">
@@ -847,6 +907,46 @@
   }, { threshold: 0.5 });
   const heroStats = document.querySelector('.hero-stats');
   if (heroStats) statsObs.observe(heroStats);
+
+  // BLOG LOADER (MEDIUM CACHE)
+async function loadBlog() {
+  try {
+    const res = await fetch("data/blog.json");
+    const posts = await res.json();
+
+    const container = document.getElementById("blog-container");
+
+    posts.forEach((post, index) => {
+      const card = document.createElement("div");
+      card.className = "blog-card";
+
+      const date = new Date(post.date).toLocaleDateString();
+
+      card.innerHTML = `
+        <div class="blog-top">
+          <span class="blog-index">0${index + 1}</span>
+          <span class="blog-date">${date}</span>
+        </div>
+
+        <div class="blog-title">${post.title}</div>
+        <div class="blog-desc">${post.desc}</div>
+
+        <div class="blog-footer">
+          <a href="${post.link}" target="_blank" class="blog-link">
+            READ WRITEUP ↗
+          </a>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+
+  } catch (err) {
+    console.error("Blog load failed:", err);
+  }
+}
+
+loadBlog();
 </script>
 </body>
 </html>

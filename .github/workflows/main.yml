@@ -36,3 +36,9 @@ jobs:
           git add data/blog.json
           git commit -m "Update Medium cache" || echo "No changes"
           git push
+
+      - name: Fetch GitHub repos
+        run: python scripts/fetch_github.py
+
+      - run: python scripts/fetch_medium.py
+      - run: python scripts/fetch_github.py

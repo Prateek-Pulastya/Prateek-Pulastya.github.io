@@ -1,4 +1,4 @@
-name: Medium Blog Pipeline
+name: Content Pipeline
 
 on:
   schedule:
@@ -6,17 +6,15 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  
+  contents: write
 
 jobs:
-  update-blog:
+  update-content:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-        with:
-          persist-credentials: true
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -26,19 +24,18 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
+      # 🔥 RUN BOTH SCRIPTS FIRST
       - name: Fetch Medium posts
         run: python scripts/fetch_medium.py
-
-      - name: Commit and push
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions@users.noreply.github.com"
-          git add data/blog.json
-          git commit -m "Update Medium cache" || echo "No changes"
-          git push
 
       - name: Fetch GitHub repos
         run: python scripts/fetch_github.py
 
-      - run: python scripts/fetch_medium.py
-      - run: python scripts/fetch_github.py
+      # 🔥 THEN COMMIT BOTH FILES
+      - name: Commit and push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions@users.noreply.github.com"
+          git add data/blog.json data/repos.json
+          git commit -m "Update blog + repos" || echo "No changes"
+          git push

@@ -1,0 +1,35 @@
+name: GitHub Repos Pipeline
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-repos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+
+      - run: pip install requests
+
+      - name: Fetch repos
+        run: python scripts/fetch_repos.py
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "bot"
+          git config --global user.email "bot@github.com"
+          git add data/repos.json
+          git commit -m "Update repos cache" || echo "No changes"
+          git push

@@ -555,7 +555,7 @@
    <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#research">Research</a></li>
-    <li><a href="#blog">Logs</a></li> <!-- ADD THIS -->
+    <li><a href="#blog">Blogs</a></li> <!-- ADD THIS -->
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -704,56 +704,7 @@
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-label">03 // Projects</div>
-  <div class="projects-grid">
-
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT 001</div>
-      <div class="project-title">RAG-Scanner</div>
-      <div class="project-desc">Custom Python tool to automate Indirect Prompt Injection testing against RAG-based LLM systems. Simulates attacks where adversarial content indexed in a vector store hijacks LLM behavior at inference time.</div>
-      <div class="project-tags">
-        <span class="tag accent">Python</span>
-        <span class="tag">RAG</span>
-        <span class="tag">LLM Security</span>
-        <span class="tag">Prompt Injection</span>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT 002</div>
-      <div class="project-title">Mortgage Intelligence Pipeline</div>
-      <div class="project-desc">End-to-end AI pipeline for processing 200+ page mortgage blobs. Combined OCR (Tesseract, PaddleOCR), PDF parsing (PyMuPDF), LlamaIndex RAG, and open-source LLM evaluation for intelligent extraction and search.</div>
-      <div class="project-tags">
-        <span class="tag accent">LlamaIndex</span>
-        <span class="tag">PyMuPDF</span>
-        <span class="tag">Mistral</span>
-        <span class="tag">RAG</span>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT 003</div>
-      <div class="project-title">AI Threat Detection System</div>
-      <div class="project-desc">AI-powered threat detection with SHAP-based explainability for real-time response. Detection logic built using Python, SIEM tooling, and cloud platforms with full audit trail for regulatory compliance.</div>
-      <div class="project-tags">
-        <span class="tag accent">SHAP / XAI</span>
-        <span class="tag">Python</span>
-        <span class="tag">SIEM</span>
-        <span class="tag">EU AI Act</span>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT 004</div>
-      <div class="project-title">Custom Vulnerability Scoring Engine</div>
-      <div class="project-desc">Proprietary scoring framework that prioritizes vulnerabilities by business impact rather than CVSS alone. Reduced remediation cycles by 39% across client engagements at SK International.</div>
-      <div class="project-tags">
-        <span class="tag accent">Python</span>
-        <span class="tag">Risk Analysis</span>
-        <span class="tag">OWASP</span>
-      </div>
-    </div>
-
-  </div>
+  <div id="projects-container" class="projects-grid"></div>
 </section>
 
 <!-- CVE / RESEARCH -->
@@ -816,7 +767,7 @@
 
 <!-- BLOG -->
 <section id="blog">
-  <div class="section-label">06 // Research Logs</div>
+  <div class="section-label">06 // Research Blogs</div>
   <div id="blog-container" class="projects-grid"></div>
 </section>
 
@@ -947,6 +898,43 @@ async function loadBlog() {
 }
 
 loadBlog();
+
+  //LOAD REPOS
+async function loadRepos() {
+  try {
+    const res = await fetch("data/repos.json");
+    const repos = await res.json();
+
+    const container = document.getElementById("projects-container");
+
+    repos.forEach((repo, index) => {
+      const card = document.createElement("div");
+      card.className = "project-card";
+
+      card.innerHTML = `
+        <div class="project-num">REPO 00${index + 1}</div>
+        <div class="project-title">${repo.name}</div>
+        <div class="project-desc">${repo.desc}</div>
+
+        <div class="project-tags">
+          <span class="tag accent">${repo.language}</span>
+          <span class="tag">⭐ ${repo.stars}</span>
+        </div>
+      `;
+
+      card.onclick = () => {
+        window.open(repo.url, "_blank");
+      };
+
+      container.appendChild(card);
+    });
+
+  } catch (err) {
+    console.error("Repo load failed:", err);
+  }
+}
+
+loadRepos();  
 </script>
 </body>
 </html>

@@ -15,8 +15,9 @@ def fetch():
     response = requests.get(API_URL, headers=headers)
 
     if response.status_code != 200:
+        print("STATUS:", response.status_code)
+        print("RESPONSE:", response.text)
         raise Exception("GitHub API failed")
-
     repos = response.json()
 
     cleaned = []

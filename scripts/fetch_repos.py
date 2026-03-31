@@ -8,8 +8,12 @@ TOKEN = os.getenv("GH_TOKEN")
 API_URL = f"https://api.github.com/users/{USERNAME}/repos?per_page=100"
 
 def fetch():
+    if not TOKEN:
+        raise Exception("GH_TOKEN missing")
+
     headers = {
-        "Authorization": f"token {TOKEN}"
+        "Authorization": f"Bearer {TOKEN}",
+        "Accept": "application/vnd.github+json"
     }
 
     response = requests.get(API_URL, headers=headers)
@@ -18,24 +22,23 @@ def fetch():
         print("STATUS:", response.status_code)
         print("RESPONSE:", response.text)
         raise Exception("GitHub API failed")
+
     repos = response.json()
 
     cleaned = []
 
     for repo in repos:
-        # FILTER OUT USELESS REPOS
-        if repo["fork"]:
+        if repo.get("fork"):
             continue
 
         cleaned.append({
-            "name": repo["name"],
-            "desc": repo["description"] or "No description provided.",
-            "url": repo["html_url"],
-            "stars": repo["stargazers_count"],
-            "language": repo["language"] or "N/A"
+            "name": repo.get("name"),
+            "desc": repo.get("description") or "No description provided.",
+            "url": repo.get("html_url"),
+            "stars": repo.get("stargazers_count", 0),
+            "language": repo.get("language") or "N/A"
         })
 
-    # SORT BY STARS (SIGNAL > NOISE)
     cleaned = sorted(cleaned, key=lambda x: x["stars"], reverse=True)[:8]
 
     with open("data/repos.json", "w") as f:

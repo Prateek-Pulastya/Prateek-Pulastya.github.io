@@ -21,6 +21,13 @@
     "language": "HTML"
   },
   {
+    "name": "Hydroficient-Externship",
+    "desc": "This repository  contains the code, screenshots and final presentation of the extership.",
+    "url": "https://github.com/Prateek-Pulastya/Hydroficient-Externship",
+    "stars": 0,
+    "language": "Python"
+  },
+  {
     "name": "National-College-of-Ireland-Submissions",
     "desc": "This repository contains my submissions is my MSc in Cyber Security from National College of Ireland",
     "url": "https://github.com/Prateek-Pulastya/National-College-of-Ireland-Submissions",
@@ -47,12 +54,5 @@
     "url": "https://github.com/Prateek-Pulastya/Prateek-Pulastya.github.io",
     "stars": 0,
     "language": "HTML"
-  },
-  {
-    "name": "TODO-APP-Using-Python",
-    "desc": "No description provided.",
-    "url": "https://github.com/Prateek-Pulastya/TODO-APP-Using-Python",
-    "stars": 0,
-    "language": "CSS"
   }
 ]

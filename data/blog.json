@@ -1,5 +1,11 @@
 [
   {
+    "title": "How I Chained Three Bugs to XSS an Intigriti CTF \u2014 IDOR + DOM Clobbering + DOMPurify 3.0.9 Bypass",
+    "link": "https://prateekpulastya.medium.com/how-i-chained-three-bugs-to-xss-an-intigriti-ctf-idor-dom-clobbering-dompurify-3-0-9-bypass-25b74fc7afc7?source=rss-d299b07d0345------2",
+    "date": "Mon, 25 May 2026 09:54:11 GMT",
+    "desc": "No preview available."
+  },
+  {
     "title": "How an Unrestricted API Key in HTML Source Can Cost a Company $20,000 a Week",
     "link": "https://prateekpulastya.medium.com/how-an-unrestricted-api-key-in-html-source-can-cost-a-company-20-000-a-week-bcb79d777488?source=rss-d299b07d0345------2",
     "date": "Thu, 30 Apr 2026 15:54:03 GMT",
@@ -40,11 +46,5 @@
     "link": "https://prateekpulastya.medium.com/i-built-a-sub-20ms-llm-guardrail-service-from-scratch-heres-why-existing-solutions-weren-t-good-f9db012da283?source=rss-d299b07d0345------2",
     "date": "Sat, 14 Mar 2026 07:00:14 GMT",
     "desc": "No preview available."
-  },
-  {
-    "title": "Building an AI-Powered Network Threat Detection System with Explainable AI: A Complete Journey\u2026",
-    "link": "https://prateekpulastya.medium.com/building-an-ai-powered-network-threat-detection-system-with-explainable-ai-a-complete-journey-dfa32b0f7963?source=rss-d299b07d0345------2",
-    "date": "Mon, 08 Dec 2025 09:20:15 GMT",
-    "desc": "How I Built a Real-Time Cybersecurity Solution Using Machine Learning and SHAP&#x200A;&#x2014;&#x200A;And What Every Security Professional Should KnowContinue reading on Medium \u00bb"
   }
 ]

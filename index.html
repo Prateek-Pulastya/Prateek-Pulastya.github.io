@@ -487,59 +487,6 @@
     .contact-section { margin: 0 -1.5rem; padding: 4rem 1.5rem; }
     footer { padding: 1.5rem; }
   }
-
-/* BLOG */
-.blog-card {
-  background: linear-gradient(180deg, rgba(0,255,136,0.03), transparent);
-  border: 1px solid var(--border);
-  padding: 1.6rem;
-  transition: all 0.25s ease;
-}
-
-.blog-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-4px);
-}
-
-.blog-top {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
-}
-
-.blog-index { color: var(--accent); }
-.blog-date { color: var(--muted); }
-
-.blog-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin-bottom: 0.7rem;
-}
-
-.blog-desc {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin-bottom: 1rem;
-}
-
-.blog-footer {
-  border-top: 1px solid var(--border);
-  padding-top: 0.8rem;
-}
-
-.blog-link {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.75rem;
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.blog-link:hover {
-  text-decoration: underline;
-}
-
 </style>
 </head>
 <body>
@@ -552,10 +499,9 @@
   <a href="#" class="nav-logo">PP // AI-SEC</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-   <li><a href="#experience">Experience</a></li>
+    <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#research">Research</a></li>
-    <li><a href="#blog">Blogs</a></li> <!-- ADD THIS -->
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -584,16 +530,16 @@
 
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num">50+</div>
-      <div class="stat-label">CVEs Disclosed</div>
+      <div class="stat-num">2</div>
+      <div class="stat-label">MSc Degrees — AI + Cybersecurity</div>
     </div>
     <div class="stat">
-      <div class="stat-num">200+</div>
-      <div class="stat-label">Vulns Found</div>
+      <div class="stat-num">3</div>
+      <div class="stat-label">Active Platforms — HackerOne / Intigriti / huntr</div>
     </div>
     <div class="stat">
-      <div class="stat-num">2x</div>
-      <div class="stat-label">MSc Degrees</div>
+      <div class="stat-num" style="font-size: 1.6rem;">CLLMSP</div>
+      <div class="stat-label">Certified LLM Security Professional</div>
     </div>
   </div>
 </section>
@@ -605,7 +551,7 @@
     <div class="about-text">
       <h2>I engineer AI systems that are hard to abuse.</h2>
       <p>My work sits at the intersection of AI security, detection engineering, and adversarial machine learning. I don't treat AI risk as a policy problem — I treat it as a technical system problem.</p>
-      <p>Dual MSc in Cybersecurity (NCI Ireland) and Artificial Intelligence (BSBI Berlin). 50+ critical vulnerabilities responsibly disclosed. 95% remediation rate on red team reports.</p>
+      <p>Dual MSc in Cybersecurity (NCI Ireland) and Artificial Intelligence (BSBI Berlin). 14–17 months of enterprise penetration testing for clients including GMR and Nykaa, followed by active independent vulnerability research across HackerOne, Intigriti, and huntr, and an open-source LLM prompt-injection defense pipeline (Guardrail Service) built from the ground up.</p>
       <p style="color: var(--accent); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-top: 1.5rem;">Currently seeking IT security & AI-adjacent roles in Germany.</p>
     </div>
     <div>
@@ -627,6 +573,10 @@
         <div class="skill-tag">Burp Suite / Nmap</div>
         <div class="skill-tag">ISO 27001 / NIST</div>
         <div class="skill-tag">CEH Certified</div>
+        <div class="skill-tag">CLLMSP Certified</div>
+        <div class="skill-tag">Fortinet Certified Associate</div>
+        <div class="skill-tag">OCI AI Foundations</div>
+        <div class="skill-tag">Microsoft AZ-900</div>
       </div>
     </div>
   </div>
@@ -639,16 +589,16 @@
 
     <div class="exp-item reveal">
       <div class="exp-meta">
-        <div class="exp-date">APR 2025 – PRESENT</div>
-        <div class="exp-company">Freelance / Independent</div>
+        <div class="exp-date">APR 2026 – PRESENT</div>
+        <div class="exp-company">Independent Research</div>
       </div>
       <div>
-        <div class="exp-role">AI Security & Red Teaming Researcher</div>
+        <div class="exp-role">AI Security & Vulnerability Research</div>
         <ul class="exp-bullets">
-          <li>Independently disclosed 50+ critical vulnerabilities (AuthN/AuthZ/Logic) on production enterprise platforms via HackerOne and Bugcrowd.</li>
-          <li>Built a custom RAG-Scanner in Python to automate Indirect Prompt Injection testing, simulating attacks where malicious data hijacks LLM behavior.</li>
-          <li>Conducted deep-dive assessments of Agentic AI architectures, mapping attack vectors specific to autonomous LLM-to-API communication.</li>
-          <li>Delivered high-fidelity red team reports achieving a 95% remediation rate.</li>
+          <li>Active vulnerability researcher across HackerOne, Intigriti, and huntr — submissions include a CORS misconfiguration on Anduril, a path-traversal detection bypass in Aikido's firewall-java, and a Python sandbox escape in smolagents enabling arbitrary host command execution.</li>
+          <li>Built Guardrail Service, an open-source two-tier LLM prompt-injection defense pipeline combining Aho-Corasick pattern matching with a DeBERTa-v3 ONNX classifier — functional and deployed locally.</li>
+          <li>Certified LLM Security Professional (CLLMSP) — OWASP LLM Top 10, prompt injection, MCP security, guardrail architecture, NIST AI RMF.</li>
+          <li>Completed Intigriti Monthly CTF 0526 with a published technical writeup.</li>
         </ul>
       </div>
     </div>
@@ -670,15 +620,27 @@
 
     <div class="exp-item reveal">
       <div class="exp-meta">
+        <div class="exp-date">AUG 2022 – MAR 2025</div>
+        <div class="exp-company">Dublin, Ireland</div>
+      </div>
+      <div>
+        <div class="exp-role">Event Security — funding MSc and relocation</div>
+        <ul class="exp-bullets">
+          <li>Worked event security in Dublin while completing an MSc in Cybersecurity at National College of Ireland, to fund the degree and subsequent relocation to Berlin.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
         <div class="exp-date">JUL 2021 – JUL 2022</div>
         <div class="exp-company">SK International Pvt. Ltd.</div>
       </div>
       <div>
         <div class="exp-role">Penetration Tester</div>
         <ul class="exp-bullets">
-          <li>Detected and mitigated 200+ high-severity vulnerabilities across web and infrastructure layers aligned with OWASP Top 10.</li>
-          <li>Performed deep-dive secure code reviews of Python and Java codebases, eliminating logic-level flaws before production.</li>
-          <li>Reduced average remediation cycles by 39% with a custom vulnerability scoring system based on business impact.</li>
+          <li>Performed web and infrastructure penetration testing aligned with the OWASP Top 10 across client engagements.</li>
+          <li>Conducted secure code reviews of Python and Java codebases to identify logic-level flaws before production release.</li>
         </ul>
       </div>
     </div>
@@ -691,9 +653,9 @@
       <div>
         <div class="exp-role">Security Analyst</div>
         <ul class="exp-bullets">
-          <li>Enterprise-grade penetration testing for clients including GMR and Nykaa; identified 70+ high-risk vulnerabilities.</li>
-          <li>Enhanced ISO 27001 and NIST compliance documentation, increasing audit readiness by 25%.</li>
-          <li>Executed input validation and authentication testing, mitigating SQLi, XSS, and CSRF vulnerabilities pre-production.</li>
+          <li>Enterprise-grade penetration testing for clients including GMR and Nykaa.</li>
+          <li>Supported ISO 27001 and NIST compliance documentation as part of client audit cycles.</li>
+          <li>Executed input validation and authentication testing, covering SQLi, XSS, and CSRF vectors pre-production.</li>
         </ul>
       </div>
     </div>
@@ -704,37 +666,90 @@
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-label">03 // Projects</div>
-  <div id="projects-container" class="projects-grid"></div>
+  <div class="projects-grid">
+
+    <a href="https://github.com/Prateek-Pulastya/Guardrail-As-A-Service" target="_blank" class="project-card reveal" style="text-decoration:none; color:inherit; display:block;">
+      <div class="project-num">PROJECT 001 · OPEN SOURCE ↗</div>
+      <div class="project-title">Guardrail Service</div>
+      <div class="project-desc">Two-tier LLM prompt-injection defense pipeline: an Aho-Corasick pattern pre-filter feeding a DeBERTa-v3 ONNX classifier for adversarial input detection. Functional, deployed locally.</div>
+      <div class="project-tags">
+        <span class="tag accent">Python</span>
+        <span class="tag">ONNX</span>
+        <span class="tag">LLM Security</span>
+        <span class="tag">Prompt Injection</span>
+      </div>
+    </a>
+
+    <div class="project-card reveal">
+      <div class="project-num">PROJECT 002</div>
+      <div class="project-title">Mortgage Intelligence Pipeline</div>
+      <div class="project-desc">End-to-end AI pipeline for processing 200+ page mortgage blobs. Combined OCR (Tesseract, PaddleOCR), PDF parsing (PyMuPDF), LlamaIndex RAG, and open-source LLM evaluation for intelligent extraction and search.</div>
+      <div class="project-tags">
+        <span class="tag accent">LlamaIndex</span>
+        <span class="tag">PyMuPDF</span>
+        <span class="tag">Mistral</span>
+        <span class="tag">RAG</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">PROJECT 003</div>
+      <div class="project-title">Network Intrusion Detection System</div>
+      <div class="project-desc">ML-based network intrusion detection with SHAP explainability, so flagged traffic comes with an interpretable reason rather than a black-box score.</div>
+      <div class="project-tags">
+        <span class="tag accent">SHAP / XAI</span>
+        <span class="tag">Python</span>
+        <span class="tag">Machine Learning</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">PROJECT 004 · TOP PERFORMER</div>
+      <div class="project-title">Secure IoT Communication Pipeline</div>
+      <div class="project-desc">Built during the Hydroficient externship. TLS 1.3 and mTLS for transport security, HMAC-SHA256 message authentication, and replay-attack defense for IoT device communication.</div>
+      <div class="project-tags">
+        <span class="tag accent">TLS 1.3</span>
+        <span class="tag">mTLS</span>
+        <span class="tag">HMAC-SHA256</span>
+        <span class="tag">IoT Security</span>
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <!-- CVE / RESEARCH -->
 <section id="research" style="background: var(--surface);">
   <div class="section-label">04 // Vulnerability Research</div>
 
-  <div class="cve-banner reveal">
+  <div class="cve-banner reveal" style="border-left-color: var(--accent);">
     <div>
-      <div class="cve-count">50+</div>
-      <div class="cve-label">Critical Vulnerabilities Responsibly Disclosed</div>
+      <div class="cve-count" style="color: var(--accent); font-size: 2.6rem;">Active Researcher</div>
+      <div class="cve-label">Real-world submissions, not a claimed count</div>
     </div>
     <div>
       <p style="color: var(--muted); font-size: 0.88rem; max-width: 380px; line-height: 1.7; margin-bottom: 1.5rem;">
-        Independently researched and disclosed critical security vulnerabilities across authentication, access control, and input-validation layers on real-world production platforms.
+        CORS misconfiguration on Anduril · path-traversal detection bypass in Aikido's firewall-java (submitted via Intigriti) · Python sandbox escape in smolagents achieving arbitrary host command execution (submitted via huntr).
       </p>
       <div class="cve-platforms">
-        <div class="platform-badge">HackerOne</div>
-        <div class="platform-badge">Bugcrowd</div>
+        <a href="https://hackerone.com/prateek_22" target="_blank" class="platform-badge" style="text-decoration:none; color:inherit;">HackerOne ↗</a>
+        <a href="https://huntr.com/users/prateek-pulastya" target="_blank" class="platform-badge" style="text-decoration:none; color:inherit;">huntr ↗</a>
+        <div class="platform-badge">Intigriti</div>
       </div>
     </div>
     <div>
       <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-bottom: 1rem; letter-spacing: 0.1em;">FOCUS AREAS</div>
       <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-        <div style="font-size: 0.85rem; color: var(--text);">✓ Authentication & Authorization Bypass</div>
-        <div style="font-size: 0.85rem; color: var(--text);">✓ Input Validation & Injection Flaws</div>
-        <div style="font-size: 0.85rem; color: var(--text);">✓ Business Logic Vulnerabilities</div>
+        <div style="font-size: 0.85rem; color: var(--text);">✓ Access Control & Auth Bypass</div>
+        <div style="font-size: 0.85rem; color: var(--text);">✓ Input Validation & Path Traversal</div>
+        <div style="font-size: 0.85rem; color: var(--text);">✓ ML/AI Sandbox & Deserialization Flaws</div>
         <div style="font-size: 0.85rem; color: var(--accent);">✓ LLM / Agentic AI Attack Vectors</div>
       </div>
     </div>
   </div>
+  <p style="color: var(--muted); font-size: 0.85rem; margin-top: -2rem; margin-bottom: 2rem;">
+    Writeup: <a href="https://dev.to/prateek_pulastya_9975efac" target="_blank" style="color: var(--accent2);">Intigriti Monthly CTF 0526 — published technical breakdown ↗</a>
+  </p>
 </section>
 
 <!-- EDUCATION -->
@@ -763,12 +778,6 @@
       <div class="edu-year">2017 – 2021</div>
     </div>
   </div>
-</section>
-
-<!-- BLOG -->
-<section id="blog">
-  <div class="section-label">06 // Research Blogs</div>
-  <div id="blog-container" class="projects-grid"></div>
 </section>
 
 <!-- CONTACT -->
@@ -846,95 +855,27 @@
       el.textContent = Math.floor(current) + '+';
     }, 20);
   }
+  function animateCountPlain(el, target) {
+    let current = 0;
+    const step = target / 40;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { el.textContent = target; clearInterval(timer); return; }
+      el.textContent = Math.floor(current);
+    }, 20);
+  }
   const statsObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         const nums = e.target.querySelectorAll('.stat-num');
-        animateCount(nums[0], 50);
-        animateCount(nums[1], 200);
+        animateCountPlain(nums[0], 2);
+        animateCountPlain(nums[1], 3);
         statsObs.unobserve(e.target);
       }
     });
   }, { threshold: 0.5 });
   const heroStats = document.querySelector('.hero-stats');
   if (heroStats) statsObs.observe(heroStats);
-
-  // BLOG LOADER (MEDIUM CACHE)
-async function loadBlog() {
-  try {
-    const res = await fetch("data/blog.json");
-    const posts = await res.json();
-
-    const container = document.getElementById("blog-container");
-
-    posts.forEach((post, index) => {
-      const card = document.createElement("div");
-      card.className = "blog-card";
-
-      const date = new Date(post.date).toLocaleDateString();
-
-      card.innerHTML = `
-        <div class="blog-top">
-          <span class="blog-index">0${index + 1}</span>
-          <span class="blog-date">${date}</span>
-        </div>
-
-        <div class="blog-title">${post.title}</div>
-        <div class="blog-desc">${post.desc}</div>
-
-        <div class="blog-footer">
-          <a href="${post.link}" target="_blank" class="blog-link">
-            READ WRITEUP ↗
-          </a>
-        </div>
-      `;
-
-      container.appendChild(card);
-    });
-
-  } catch (err) {
-    console.error("Blog load failed:", err);
-  }
-}
-
-loadBlog();
-
-  //LOAD REPOS
-async function loadRepos() {
-  try {
-    const res = await fetch("data/repos.json");
-    const repos = await res.json();
-
-    const container = document.getElementById("projects-container");
-
-    repos.forEach((repo, index) => {
-      const card = document.createElement("div");
-      card.className = "project-card";
-
-      card.innerHTML = `
-        <div class="project-num">REPO 00${index + 1}</div>
-        <div class="project-title">${repo.name}</div>
-        <div class="project-desc">${repo.desc}</div>
-
-        <div class="project-tags">
-          <span class="tag accent">${repo.language}</span>
-          <span class="tag">⭐ ${repo.stars}</span>
-        </div>
-      `;
-
-      card.onclick = () => {
-        window.open(repo.url, "_blank");
-      };
-
-      container.appendChild(card);
-    });
-
-  } catch (err) {
-    console.error("Repo load failed:", err);
-  }
-}
-
-loadRepos();  
 </script>
 </body>
 </html>

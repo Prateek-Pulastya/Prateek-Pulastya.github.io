@@ -1,0 +1,60 @@
+name: Content Cache
+
+# Refreshes data/blog.json (Medium RSS) and data/repos.json (GitHub API).
+# Replaces the former main.yml + repos.yml, which were near-identical jobs on
+# separate crons that each produced their own commit.
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - ".github/workflows/content-cache.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: content-cache
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install "requests>=2.32,<3"
+
+      - name: Fetch Medium posts
+        run: python scripts/fetch_medium.py
+
+      - name: Fetch GitHub repos
+        run: python scripts/fetch_repos.py
+        env:
+          # Public repo listing needs no auth; the built-in token only raises
+          # the API rate limit. No GH_TOKEN secret to expire.
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Commit refreshed cache
+        run: |
+          if git diff --quiet -- data/; then
+            echo "Cache unchanged - nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/blog.json data/repos.json
+          git commit -m "chore: refresh content cache"
+          git push

@@ -1,50 +1,74 @@
 [
   {
-    "title": "How I Chained Three Bugs to XSS an Intigriti CTF \u2014 IDOR + DOM Clobbering + DOMPurify 3.0.9 Bypass",
-    "link": "https://prateekpulastya.medium.com/how-i-chained-three-bugs-to-xss-an-intigriti-ctf-idor-dom-clobbering-dompurify-3-0-9-bypass-25b74fc7afc7?source=rss-d299b07d0345------2",
+    "title": "How I Chained Three Bugs to XSS an Intigriti CTF — IDOR + DOM Clobbering + DOMPurify 3.0.9 Bypass",
+    "link": "https://prateekpulastya.medium.com/how-i-chained-three-bugs-to-xss-an-intigriti-ctf-idor-dom-clobbering-dompurify-3-0-9-bypass-25b74fc7afc7",
     "date": "Mon, 25 May 2026 09:54:11 GMT",
-    "desc": "No preview available."
+    "desc": "Intigriti May 2026 XSS Challenge — full write-up I spent a few hours on the Intigriti May 2026 challenge and ended up alert(document.domain) firing in headless Chromium. No single bug did…",
+    "tags": [
+      "bug-bounty",
+      "intigriti",
+      "ctf-writeup"
+    ],
+    "readingMinutes": 4
   },
   {
     "title": "How an Unrestricted API Key in HTML Source Can Cost a Company $20,000 a Week",
-    "link": "https://prateekpulastya.medium.com/how-an-unrestricted-api-key-in-html-source-can-cost-a-company-20-000-a-week-bcb79d777488?source=rss-d299b07d0345------2",
+    "link": "https://prateekpulastya.medium.com/how-an-unrestricted-api-key-in-html-source-can-cost-a-company-20-000-a-week-bcb79d777488",
     "date": "Thu, 30 Apr 2026 15:54:03 GMT",
-    "desc": "No preview available."
+    "desc": "A bug bounty case study: methodology, evidence, and the duplicate verdict that taught me the most. I found two Google Maps Platform API keys hardcoded into the public HTML and JavaScript…",
+    "tags": [
+      "google",
+      "bug-bounty",
+      "ethical-hacking"
+    ],
+    "readingMinutes": 5
   },
   {
     "title": "How I Found a GraphQL Endpoint Leaking Millions",
-    "link": "https://prateekpulastya.medium.com/how-i-found-a-graphql-endpoint-leaking-millions-5cbfd55d994e?source=rss-d299b07d0345------2",
+    "link": "https://prateekpulastya.medium.com/how-i-found-a-graphql-endpoint-leaking-millions-5cbfd55d994e",
     "date": "Mon, 20 Apr 2026 05:29:43 GMT",
-    "desc": "No preview available."
+    "desc": "User Records Without Authentication Introduction This write-up covers a mass user enumeration vulnerability I discovered during a bug bounty engagement on a large e-commerce marketplace…",
+    "tags": [
+      "data-leak-prevention",
+      "graphql",
+      "bug-bounty"
+    ],
+    "readingMinutes": 4
   },
   {
     "title": "Breaking Into a Major Email Platform With Two Vulnerabilities",
-    "link": "https://prateekpulastya.medium.com/breaking-into-a-major-email-platform-with-two-vulnerabilities-5deed8efbb81?source=rss-d299b07d0345------2",
+    "link": "https://prateekpulastya.medium.com/breaking-into-a-major-email-platform-with-two-vulnerabilities-5deed8efbb81",
     "date": "Sat, 18 Apr 2026 08:57:59 GMT",
-    "desc": "No preview available."
+    "desc": "CORS Misconfiguration (Critical 9.3) + Subdomain Takeover (High 7.5) Introduction What Is This About? This is a technical write-up of two security vulnerabilities I found while doing bug…",
+    "tags": [
+      "bug-bounty",
+      "cybersecurity",
+      "vulnerability"
+    ],
+    "readingMinutes": 6
   },
   {
-    "title": "TryHackMe Walkthrough \u2014 Input Manipulation & Prompt Injection",
-    "link": "https://prateekpulastya.medium.com/tryhackme-walkthrough-input-manipulation-prompt-injection-68795192eff8?source=rss-d299b07d0345------2",
+    "title": "TryHackMe Walkthrough — Input Manipulation & Prompt Injection",
+    "link": "https://prateekpulastya.medium.com/tryhackme-walkthrough-input-manipulation-prompt-injection-68795192eff8",
     "date": "Wed, 25 Mar 2026 13:59:19 GMT",
-    "desc": "No preview available."
+    "desc": "A hands-on walkthrough covering system prompt leakage, jailbreaking techniques, direct and indirect prompt injection, and live exploitation of an LLM-powered HR chatbot — mapped to OWASP…",
+    "tags": [
+      "llm",
+      "artificial-intelligence",
+      "tryhackme-walkthrough"
+    ],
+    "readingMinutes": 6
   },
   {
     "title": "TryHackMe Walkthrough: AI/ML Security Threats",
-    "link": "https://prateekpulastya.medium.com/tryhackme-walkthrough-ai-ml-security-threats-0a8c42a7555e?source=rss-d299b07d0345------2",
+    "link": "https://prateekpulastya.medium.com/tryhackme-walkthrough-ai-ml-security-threats-0a8c42a7555e",
     "date": "Wed, 25 Mar 2026 05:31:00 GMT",
-    "desc": "No preview available."
-  },
-  {
-    "title": "I Built a RAG Pipeline That Reads 200-Page Mortgage Files in 4 Seconds \u2014 Here\u2019s Everything I\u2026",
-    "link": "https://prateekpulastya.medium.com/i-built-a-rag-pipeline-that-reads-200-page-mortgage-files-in-4-seconds-heres-everything-i-b322cd358f5b?source=rss-d299b07d0345------2",
-    "date": "Sat, 21 Mar 2026 15:21:50 GMT",
-    "desc": "No preview available."
-  },
-  {
-    "title": "I Built a Sub-20ms LLM Guardrail Service From Scratch \u2014 Here\u2019s Why Existing Solutions Weren\u2019t Good\u2026",
-    "link": "https://prateekpulastya.medium.com/i-built-a-sub-20ms-llm-guardrail-service-from-scratch-heres-why-existing-solutions-weren-t-good-f9db012da283?source=rss-d299b07d0345------2",
-    "date": "Sat, 14 Mar 2026 07:00:14 GMT",
-    "desc": "No preview available."
+    "desc": "A technical walkthrough covering the AI/ML threat landscape, attack taxonomy, defensive strategies, and practical application of AI as a cyber assistant — mapped to MITRE ATLAS…",
+    "tags": [
+      "threat-intelligence",
+      "tryhackme",
+      "machine-learning"
+    ],
+    "readingMinutes": 4
   }
 ]

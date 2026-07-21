@@ -1,881 +1,1097 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Prateek Pulastya — AI Security & Red Team Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Prateek Pulastya — Security Engineer, AI &amp; Application Security</title>
+<meta name="description" content="Security engineer in Berlin working on AI/LLM security, application security and vulnerability research. Prompt-injection detection at sub-millisecond latency, evaluated against four external benchmarks."/>
+<meta name="author" content="Prateek Pulastya"/>
+<meta name="theme-color" content="#fbfaf9" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#0d0f12" media="(prefers-color-scheme: dark)"/>
+<link rel="canonical" href="https://prateek-pulastya.github.io/"/>
+
+<meta property="og:type" content="profile"/>
+<meta property="og:title" content="Prateek Pulastya — Security Engineer, AI &amp; Application Security"/>
+<meta property="og:description" content="AI/LLM security, application security, vulnerability research. Berlin, Germany."/>
+<meta property="og:url" content="https://prateek-pulastya.github.io/"/>
+<meta name="twitter:card" content="summary"/>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Prateek Pulastya",
+  "jobTitle": "Security Engineer — AI & Application Security",
+  "url": "https://prateek-pulastya.github.io/",
+  "email": "mailto:prateekpulastya220@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Berlin", "addressCountry": "DE" },
+  "sameAs": [
+    "https://www.linkedin.com/in/prateek-pulastya22",
+    "https://github.com/Prateek-Pulastya",
+    "https://prateekpulastya.medium.com"
+  ],
+  "knowsLanguage": ["English", "German", "Spanish"]
+}
+</script>
+
 <style>
-  :root {
-    --bg: #080c10;
-    --surface: #0d1117;
-    --border: #1a2332;
-    --accent: #00ff88;
-    --accent2: #00bfff;
-    --warn: #ff4444;
-    --text: #e2e8f0;
-    --muted: #4a5568;
-    --card: #111827;
-  }
+/* ============================================================
+   TOKENS
+   Light is the default: recruiters open portfolios on a laptop
+   in daylight and print them. Dark is opt-in via toggle or OS.
+   ============================================================ */
+:root {
+  --bg:      #fbfaf9;
+  --surface: #ffffff;
+  --raise:   #f4f2ef;
+  --line:    #e3dfd8;
+  --line-2:  #d3cdc3;
+  --ink:     #14161a;
+  --ink-2:   #3b4048;
+  --muted:   #6a6f78;
+  --accent:  #0b6b62;
+  --accent-2:#e8f3f1;
+  --flag:    #9a4b12;
+  --flag-bg: #fbf0e6;
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  html { scroll-behavior: smooth; }
+  --wrap: 1080px;
+  --r: 6px;
+  --shadow: 0 1px 2px rgba(20,22,26,.05), 0 8px 24px -16px rgba(20,22,26,.18);
+}
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    overflow-x: hidden;
-    cursor: none;
-  }
+html[data-theme="dark"] {
+  --bg:      #0d0f12;
+  --surface: #14171c;
+  --raise:   #1a1e24;
+  --line:    #262b33;
+  --line-2:  #333a44;
+  --ink:     #e7e9ec;
+  --ink-2:   #c2c7ce;
+  --muted:   #8d939d;
+  --accent:  #3fc9b8;
+  --accent-2:#12302d;
+  --flag:    #e0a06a;
+  --flag-bg: #2a1f14;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+}
 
-  /* CUSTOM CURSOR */
-  .cursor {
-    width: 12px; height: 12px;
-    background: var(--accent);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none; z-index: 9999;
-    transition: transform 0.1s ease;
-    mix-blend-mode: difference;
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --bg:#0d0f12; --surface:#14171c; --raise:#1a1e24; --line:#262b33; --line-2:#333a44;
+    --ink:#e7e9ec; --ink-2:#c2c7ce; --muted:#8d939d; --accent:#3fc9b8; --accent-2:#12302d;
+    --flag:#e0a06a; --flag-bg:#2a1f14;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
   }
-  .cursor-ring {
-    width: 36px; height: 36px;
-    border: 1px solid var(--accent);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none; z-index: 9998;
-    transition: all 0.15s ease;
-    opacity: 0.5;
-  }
+}
 
-  /* NOISE OVERLAY */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 1; opacity: 0.4;
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+}
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.5rem 4rem;
-    border-bottom: 1px solid transparent;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(0px);
-  }
-  nav.scrolled {
-    border-color: var(--border);
-    background: rgba(8,12,16,0.9);
-    backdrop-filter: blur(12px);
-  }
-  .nav-logo {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.85rem;
-    color: var(--accent);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-  }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-    font-family: 'Space Mono', monospace;
-  }
-  .nav-links a:hover { color: var(--accent); }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 0 4rem;
-    position: relative;
-    overflow: hidden;
-  }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
 
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    animation: gridPulse 8s ease-in-out infinite;
-  }
-  @keyframes gridPulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
-  }
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 999;
+  background: var(--accent); color: #fff; padding: .7rem 1.1rem; font-weight: 600;
+}
+.skip:focus { left: 8px; top: 8px; }
 
-  .hero-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex; align-items: center; gap: 0.75rem;
-    opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
-  }
-  .hero-tag::before {
-    content: '';
-    width: 40px; height: 1px;
-    background: var(--accent);
-  }
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: clamp(1.15rem, 4vw, 2.5rem); }
 
-  .hero h1 {
-    font-size: clamp(3rem, 7vw, 7rem);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    margin-bottom: 1rem;
-    opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
-  }
-  .hero h1 .name-line { display: block; }
-  .hero h1 .highlight {
-    color: transparent;
-    -webkit-text-stroke: 1px var(--accent);
-    display: block;
-  }
+/* ---------- type ---------- */
+h1, h2, h3, h4 { line-height: 1.2; font-weight: 650; letter-spacing: -0.017em; }
+.eyebrow {
+  font-family: var(--mono); font-size: .695rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted); font-weight: 500;
+}
+.lede { font-size: clamp(1.02rem, 1.7vw, 1.16rem); color: var(--ink-2); max-width: 62ch; }
+.small { font-size: .85rem; color: var(--muted); }
+.mono { font-family: var(--mono); }
 
-  .hero-desc {
-    max-width: 520px;
-    font-size: 1rem;
-    color: var(--muted);
-    line-height: 1.7;
-    margin: 1.5rem 0 2.5rem;
-    opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
-    font-weight: 400;
-  }
+/* ---------- nav ---------- */
+header.nav {
+  position: sticky; top: 0; z-index: 90;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-in { display: flex; align-items: center; gap: 1.5rem; height: 60px; }
+.brand {
+  font-family: var(--mono); font-size: .8rem; font-weight: 600; text-decoration: none;
+  letter-spacing: .02em; white-space: nowrap;
+}
+.brand span { color: var(--accent); }
+.nav-links { display: flex; gap: 1.45rem; list-style: none; margin-left: auto; }
+.nav-links a {
+  font-size: .82rem; color: var(--muted); text-decoration: none; font-weight: 500;
+  padding: .3rem 0; border-bottom: 1.5px solid transparent; transition: color .15s, border-color .15s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--ink); border-color: var(--accent); }
 
-  .hero-cta {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-    opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
-  }
-  .btn-primary {
-    background: var(--accent);
-    color: var(--bg);
-    padding: 0.85rem 2rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: 700;
-    transition: all 0.2s;
-    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  }
-  .btn-primary:hover { background: #00cc6a; transform: translateY(-2px); }
-  .btn-secondary {
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 0.85rem 2rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all 0.2s;
-  }
-  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+.toggle {
+  margin-left: auto; background: var(--surface); border: 1px solid var(--line);
+  color: var(--ink-2); width: 34px; height: 34px; border-radius: var(--r);
+  display: grid; place-items: center; cursor: pointer; flex: none; transition: border-color .15s;
+}
+.nav-links + .toggle { margin-left: 0; }
+.toggle:hover { border-color: var(--accent); color: var(--accent); }
+.toggle svg { width: 16px; height: 16px; }
+html[data-theme="dark"] .i-sun { display: block; }
+html[data-theme="dark"] .i-moon { display: none; }
+.i-sun { display: none; }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .i-sun { display: block; }
+  html:not([data-theme="light"]) .i-moon { display: none; }
+}
+@media (max-width: 780px) { .nav-links { display: none; } .toggle { margin-left: auto; } }
 
-  .hero-stats {
-    position: absolute; right: 4rem; bottom: 4rem;
-    display: flex; flex-direction: column; gap: 1.5rem;
-    opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
-  }
-  .stat { text-align: right; }
-  .stat-num {
-    font-size: 2.5rem; font-weight: 800;
-    color: var(--accent); line-height: 1;
-    font-family: 'Space Mono', monospace;
-  }
-  .stat-label {
-    font-size: 0.7rem; color: var(--muted);
-    letter-spacing: 0.15em; text-transform: uppercase;
-    font-family: 'Space Mono', monospace;
-  }
+/* ---------- sections ---------- */
+section { padding-block: clamp(3.4rem, 7vw, 5.4rem); border-top: 1px solid var(--line); }
+section:first-of-type { border-top: 0; }
+.sec-head { display: flex; align-items: baseline; gap: .85rem; margin-bottom: 2.1rem; flex-wrap: wrap; }
+.sec-num { font-family: var(--mono); font-size: .72rem; color: var(--accent); font-weight: 600; }
+.sec-head h2 { font-size: clamp(1.42rem, 3vw, 1.82rem); }
+.sec-head .note { margin-left: auto; font-size: .82rem; color: var(--muted); }
 
-  /* SCAN LINE */
-  .scanline {
-    position: absolute; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    opacity: 0.15;
-    animation: scan 6s linear infinite;
-  }
-  @keyframes scan {
-    0% { top: 0%; }
-    100% { top: 100%; }
-  }
+/* ---------- hero ---------- */
+.hero { padding-block: clamp(3rem, 8vw, 5rem) clamp(2.4rem, 5vw, 3.4rem); }
+.status-line {
+  display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem;
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .06em;
+  color: var(--accent); background: var(--accent-2);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  padding: .34rem .7rem; border-radius: 100px;
+}
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex: none; }
+.hero h1 { font-size: clamp(2.3rem, 6.2vw, 3.5rem); font-weight: 700; letter-spacing: -0.032em; }
+.hero .role {
+  font-size: clamp(1rem, 2.2vw, 1.16rem); color: var(--accent);
+  font-weight: 600; margin-top: .5rem; letter-spacing: -0.01em;
+}
+.hero .lede { margin-top: 1.15rem; }
 
-  /* SECTIONS */
-  section { padding: 6rem 4rem; position: relative; }
-  .section-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 3rem;
-    display: flex; align-items: center; gap: 1rem;
-  }
-  .section-label::after {
-    content: '';
-    flex: 1; max-width: 80px;
-    height: 1px; background: var(--accent);
-  }
+/* facts grid — the German-market answers a recruiter needs up front */
+.facts {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+  gap: 0; margin-top: 2.2rem; border: 1px solid var(--line);
+  border-radius: var(--r); overflow: hidden; background: var(--surface);
+}
+.fact { padding: .85rem 1rem; border-right: 1px solid var(--line); }
+.fact:last-child { border-right: 0; }
+.fact dt { font-family: var(--mono); font-size: .64rem; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
+.fact dd { font-size: .88rem; font-weight: 550; margin-top: .22rem; }
+@media (max-width: 620px) { .fact { border-right: 0; border-bottom: 1px solid var(--line); } .fact:last-child { border-bottom: 0; } }
 
-  /* ABOUT */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
-  }
-  .about-text h2 {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-  }
-  .about-text p {
-    color: var(--muted);
-    line-height: 1.8;
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-  }
+.cta-row { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.7rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: .45rem; text-decoration: none;
+  font-size: .875rem; font-weight: 550; padding: .58rem 1.05rem;
+  border-radius: var(--r); border: 1px solid var(--line-2); background: var(--surface);
+  transition: border-color .15s, background .15s, color .15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+html[data-theme="dark"] .btn.primary { color: #08201e; }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .btn.primary { color: #08201e; } }
+.btn.primary:hover { filter: brightness(1.08); color: #fff; }
+html[data-theme="dark"] .btn.primary:hover { color: #08201e; }
 
-  .skills-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
-  }
-  .skill-tag {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 0.75rem 1rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    color: var(--text);
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .skill-tag::before {
-    content: '';
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 2px; background: var(--accent);
-  }
-  .skill-tag:hover { border-color: var(--accent); color: var(--accent); transform: translateX(4px); }
+/* ---------- evidence strip ---------- */
+.evidence { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.ev { background: var(--surface); padding: 1.25rem 1.15rem; text-decoration: none; display: block; transition: background .15s; }
+.ev:hover { background: var(--raise); }
+.ev .n { font-family: var(--mono); font-size: 1.62rem; font-weight: 700; color: var(--accent); letter-spacing: -0.03em; line-height: 1.1; }
+.ev .l { font-size: .82rem; color: var(--ink-2); margin-top: .42rem; font-weight: 500; }
+.ev .s { font-size: .735rem; color: var(--muted); margin-top: .2rem; }
 
-  /* EXPERIENCE */
-  .exp-list { display: flex; flex-direction: column; gap: 0; }
-  .exp-item {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 3rem;
-    padding: 2.5rem 0;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    transition: all 0.3s;
-  }
-  .exp-item:hover { background: rgba(0,255,136,0.02); padding-left: 1rem; }
-  .exp-meta { padding-top: 0.2rem; }
-  .exp-date {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.5rem;
-  }
-  .exp-company {
-    font-size: 0.8rem; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.1em;
-  }
-  .exp-role {
-    font-size: 1.2rem; font-weight: 700;
-    margin-bottom: 1rem; line-height: 1.3;
-  }
-  .exp-bullets { list-style: none; }
-  .exp-bullets li {
-    color: var(--muted);
-    font-size: 0.88rem;
-    line-height: 1.6;
-    margin-bottom: 0.6rem;
-    padding-left: 1rem;
-    position: relative;
-  }
-  .exp-bullets li::before {
-    content: '▸';
-    position: absolute; left: 0;
-    color: var(--accent); font-size: 0.7rem;
-  }
+/* ---------- cards ---------- */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 1.4rem; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.1rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 1.1rem; }
 
-  /* PROJECTS */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
-  }
-  .project-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s;
-    cursor: pointer;
-  }
-  .project-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    transform: scaleX(0);
-    transition: transform 0.3s;
-    transform-origin: left;
-  }
-  .project-card:hover { border-color: rgba(0,255,136,0.3); transform: translateY(-4px); }
-  .project-card:hover::before { transform: scaleX(1); }
+/* ---------- featured case study ---------- */
+.feature { border: 1px solid var(--line-2); border-radius: var(--r); background: var(--surface); overflow: hidden; box-shadow: var(--shadow); }
+.feature-head { padding: 1.5rem clamp(1.2rem, 3vw, 1.9rem); border-bottom: 1px solid var(--line); }
+.feature-head h3 { font-size: clamp(1.2rem, 2.6vw, 1.44rem); margin-top: .55rem; }
+.feature-body { padding: clamp(1.2rem, 3vw, 1.9rem); display: grid; gap: 1.55rem; }
+/* Grid/flex children default to min-width:auto, so the 460px min-width table
+   below would widen its whole track and get clipped by .feature's overflow
+   instead of scrolling. Let them shrink. */
+.feature-body > *, .grid-2 > *, .grid-3 > * { min-width: 0; }
+.pill-row { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+.pill {
+  font-family: var(--mono); font-size: .685rem; letter-spacing: .04em;
+  padding: .22rem .55rem; border-radius: 3px; border: 1px solid var(--line-2); color: var(--muted);
+}
+.pill.on { border-color: color-mix(in srgb, var(--accent) 40%, transparent); color: var(--accent); background: var(--accent-2); }
 
-  .project-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem; color: var(--muted);
-    margin-bottom: 1.5rem; letter-spacing: 0.15em;
-  }
-  .project-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; }
-  .project-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.5rem; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    padding: 0.25rem 0.6rem;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    letter-spacing: 0.08em;
-  }
-  .tag.accent { border-color: var(--accent); color: var(--accent); }
+/* honest-number callout — the thing worth hiring for */
+.callout {
+  border-left: 3px solid var(--flag); background: var(--flag-bg);
+  padding: .95rem 1.15rem; border-radius: 0 var(--r) var(--r) 0;
+}
+.callout .t { font-weight: 650; font-size: .875rem; color: var(--flag); margin-bottom: .3rem; }
+.callout p { font-size: .875rem; color: var(--ink-2); }
 
-  /* CVE SECTION */
-  .cve-banner {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--warn);
-    padding: 2.5rem;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 2rem;
-    margin-bottom: 3rem;
-  }
-  .cve-count {
-    font-size: 4rem; font-weight: 800;
-    color: var(--warn);
-    font-family: 'Space Mono', monospace;
-    line-height: 1;
-  }
-  .cve-label { color: var(--muted); font-size: 0.85rem; margin-top: 0.25rem; }
-  .cve-platforms { display: flex; gap: 1rem; }
-  .platform-badge {
-    border: 1px solid var(--border);
-    padding: 0.5rem 1.25rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    color: var(--text);
-    text-transform: uppercase;
-  }
+/* data tables — real numbers deserve a real table */
+.table-scroll { overflow-x: auto; max-width: 100%; border: 1px solid var(--line); border-radius: var(--r); -webkit-overflow-scrolling: touch; }
+table { border-collapse: collapse; width: 100%; font-size: .845rem; min-width: 460px; }
+thead th {
+  text-align: left; font-family: var(--mono); font-size: .68rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted); font-weight: 600;
+  padding: .68rem .9rem; background: var(--raise); border-bottom: 1px solid var(--line); white-space: nowrap;
+}
+tbody td { padding: .64rem .9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { font-family: var(--mono); text-align: right; white-space: nowrap; }
+tr.key td { background: var(--accent-2); font-weight: 600; }
+tr.key td.num { color: var(--accent); }
+tr.muted-row td { color: var(--muted); }
 
-  /* EDUCATION */
-  .edu-grid { display: flex; flex-direction: column; gap: 1rem; }
-  .edu-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 1.75rem;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1rem;
-    transition: border-color 0.2s;
-  }
-  .edu-card:hover { border-color: var(--accent2); }
-  .edu-degree { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
-  .edu-school { color: var(--accent2); font-size: 0.85rem; }
-  .edu-year {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem; color: var(--muted);
-    letter-spacing: 0.1em; white-space: nowrap;
-  }
+/* ---------- findings ---------- */
+.finding { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 1.25rem 1.3rem; }
+.finding h3 { font-size: 1rem; margin-bottom: .1rem; }
+.finding .meta { display: flex; flex-wrap: wrap; gap: .45rem; align-items: center; margin-bottom: .7rem; }
+.finding p { font-size: .875rem; color: var(--ink-2); }
+.sev {
+  font-family: var(--mono); font-size: .66rem; font-weight: 700; letter-spacing: .07em;
+  padding: .18rem .45rem; border-radius: 3px; text-transform: uppercase;
+}
+.sev.crit { background: #fdeaea; color: #a11d24; }
+.sev.high { background: #fdf1e3; color: #94500f; }
+.sev.info { background: var(--raise); color: var(--muted); }
+html[data-theme="dark"] .sev.crit { background: #3a1618; color: #ff8087; }
+html[data-theme="dark"] .sev.high { background: #33220f; color: #e8a866; }
+.status { font-family: var(--mono); font-size: .69rem; color: var(--muted); }
 
-  /* CONTACT */
-  .contact-section {
-    background: var(--card);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    margin: 0 -4rem;
-    padding: 5rem 4rem;
-    text-align: center;
-  }
-  .contact-section h2 {
-    font-size: clamp(2.5rem, 5vw, 5rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 1rem;
-    line-height: 1;
-  }
-  .contact-section p { color: var(--muted); margin-bottom: 2.5rem; font-size: 0.95rem; }
-  .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
-  .contact-link {
-    display: flex; align-items: center; gap: 0.6rem;
-    border: 1px solid var(--border);
-    padding: 0.75rem 1.5rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text); text-decoration: none;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    transition: all 0.2s;
-  }
-  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+/* ---------- timeline ---------- */
+.tl { display: grid; gap: 0; }
+.job { display: grid; grid-template-columns: 168px 1fr; gap: 1.7rem; padding: 1.45rem 0; border-top: 1px solid var(--line); }
+.job:first-child { border-top: 0; padding-top: 0; }
+.job .when { font-family: var(--mono); font-size: .755rem; color: var(--muted); padding-top: .18rem; }
+.job .when .loc { display: block; margin-top: .25rem; }
+.job h3 { font-size: 1rem; }
+.job .org { font-size: .87rem; color: var(--accent); font-weight: 550; margin-bottom: .6rem; }
+.job ul { list-style: none; display: grid; gap: .42rem; }
+.job li { font-size: .875rem; color: var(--ink-2); padding-left: 1rem; position: relative; }
+.job li::before { content: ""; position: absolute; left: 0; top: .62em; width: 4px; height: 4px; border-radius: 50%; background: var(--line-2); }
+@media (max-width: 700px) { .job { grid-template-columns: 1fr; gap: .5rem; } }
 
-  /* FOOTER */
-  footer {
-    padding: 2rem 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-    border-top: 1px solid var(--border);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem; color: var(--muted);
-    letter-spacing: 0.1em;
-    flex-wrap: wrap; gap: 1rem;
-  }
+/* ---------- skills ---------- */
+.skill-group { border-top: 1px solid var(--line); padding: 1.1rem 0; display: grid; grid-template-columns: 190px 1fr; gap: 1.7rem; }
+.skill-group:first-child { border-top: 0; padding-top: 0; }
+.skill-group h3 { font-size: .89rem; font-weight: 600; }
+@media (max-width: 700px) { .skill-group { grid-template-columns: 1fr; gap: .55rem; } }
 
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+/* ---------- certs / edu ---------- */
+.cert { display: flex; gap: 1rem; align-items: flex-start; padding: .95rem 0; border-top: 1px solid var(--line); }
+.cert:first-child { border-top: 0; padding-top: 0; }
+.cert .body { flex: 1; }
+.cert h3 { font-size: .92rem; }
+.cert .iss { font-size: .82rem; color: var(--muted); margin-top: .12rem; }
+.verify { font-family: var(--mono); font-size: .72rem; color: var(--accent); text-decoration: none; white-space: nowrap; }
+.verify:hover { text-decoration: underline; }
 
-  .reveal {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+/* ---------- feed (blog / repos) ---------- */
+.feed-item { display: block; text-decoration: none; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 1.15rem 1.2rem; transition: border-color .15s, transform .15s; }
+.feed-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+.feed-item h3 { font-size: .935rem; margin-bottom: .4rem; }
+.feed-item p { font-size: .835rem; color: var(--muted); }
+.feed-meta { display: flex; gap: .55rem; flex-wrap: wrap; margin-top: .75rem; align-items: center; }
+.feed-state { color: var(--muted); font-size: .865rem; grid-column: 1 / -1; }
 
-  /* TERMINAL BLINK */
-  .blink {
-    animation: blink 1s step-end infinite;
-  }
-  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+/* ---------- contact ---------- */
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin-top: 1.8rem; }
+.contact-grid a { background: var(--surface); padding: 1.25rem; text-decoration: none; display: block; transition: background .15s; }
+.contact-grid a:hover { background: var(--raise); }
+.contact-grid .k { font-family: var(--mono); font-size: .67rem; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
+.contact-grid .v { font-size: .9rem; font-weight: 550; margin-top: .3rem; color: var(--accent); word-break: break-word; }
 
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--accent); }
+footer { border-top: 1px solid var(--line); padding-block: 2rem; }
+.foot-in { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; font-size: .8rem; color: var(--muted); }
 
-  /* MOBILE */
-  @media (max-width: 768px) {
-    nav { padding: 1.2rem 1.5rem; }
-    .nav-links { display: none; }
-    section { padding: 4rem 1.5rem; }
-    .hero { padding: 0 1.5rem; }
-    .hero-stats { position: static; margin-top: 3rem; flex-direction: row; flex-wrap: wrap; gap: 2rem; }
-    .about-grid { grid-template-columns: 1fr; }
-    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    .contact-section { margin: 0 -1.5rem; padding: 4rem 1.5rem; }
-    footer { padding: 1.5rem; }
-  }
+/* ---------- print: German hiring still prints PDFs ---------- */
+@media print {
+  :root { --bg:#fff; --surface:#fff; --raise:#fff; --line:#c9c9c9; --line-2:#999; --ink:#000; --ink-2:#222; --muted:#555; --accent:#0b6b62; --accent-2:#fff; --shadow:none; }
+  header.nav, .toggle, .cta-row, .skip { display: none !important; }
+  section { padding-block: 1.1rem; break-inside: avoid; }
+  .feature, .card, .finding, .feed-item { break-inside: avoid; box-shadow: none; }
+  a { text-decoration: none; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .68rem; color: #555; word-break: break-all; }
+  .feed-item, .ev { border: 1px solid #c9c9c9; }
+}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- NAV -->
-<nav id="nav">
-  <a href="#" class="nav-logo">PP // AI-SEC</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-grid"></div>
-  <div class="scanline"></div>
-
-  <div class="hero-tag">Available for opportunities · Berlin, Germany</div>
-
-  <h1>
-    <span class="name-line">Prateek</span>
-    <span class="highlight">Pulastya</span>
-  </h1>
-
-  <p class="hero-desc">
-    AI Security & Red Team Engineer. I break RAG pipelines, LLM architectures, and agentic systems — then build the controls to stop the next attacker from doing it.
-  </p>
-
-  <div class="hero-cta">
-    <a href="#contact" class="btn-primary">Get In Touch</a>
-    <a href="https://github.com/Prateek-Pulastya" target="_blank" class="btn-secondary">GitHub ↗</a>
-    <a href="https://www.linkedin.com/in/prateek-pulastya22/" target="_blank" class="btn-secondary">LinkedIn ↗</a>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">prateek<span>.</span>pulastya</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#credentials">Credentials</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="toggle" id="themeBtn" type="button" aria-label="Switch colour theme">
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
   </div>
+</header>
 
-  <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-num">2</div>
-      <div class="stat-label">MSc Degrees — AI + Cybersecurity</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">3</div>
-      <div class="stat-label">Active Platforms — HackerOne / Intigriti / huntr</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num" style="font-size: 1.6rem;">CLLMSP</div>
-      <div class="stat-label">Certified LLM Security Professional</div>
-    </div>
-  </div>
-</section>
+<main id="main">
+<span id="top"></span>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">01 // About</div>
-  <div class="about-grid reveal">
-    <div class="about-text">
-      <h2>I engineer AI systems that are hard to abuse.</h2>
-      <p>My work sits at the intersection of AI security, detection engineering, and adversarial machine learning. I don't treat AI risk as a policy problem — I treat it as a technical system problem.</p>
-      <p>Dual MSc in Cybersecurity (NCI Ireland) and Artificial Intelligence (BSBI Berlin). 14–17 months of enterprise penetration testing for clients including GMR and Nykaa, followed by active independent vulnerability research across HackerOne, Intigriti, and huntr, and an open-source LLM prompt-injection defense pipeline (Guardrail Service) built from the ground up.</p>
-      <p style="color: var(--accent); font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-top: 1.5rem;">Currently seeking IT security & AI-adjacent roles in Germany.</p>
-    </div>
-    <div>
-      <div style="margin-bottom: 1rem; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em;">CORE COMPETENCIES</div>
-      <div class="skills-grid">
-        <div class="skill-tag">AI Red Teaming</div>
-        <div class="skill-tag">Prompt Injection</div>
-        <div class="skill-tag">RAG Security</div>
-        <div class="skill-tag">LLM Threat Modeling</div>
-        <div class="skill-tag">Detection Engineering</div>
-        <div class="skill-tag">Adversarial ML</div>
-        <div class="skill-tag">Penetration Testing</div>
-        <div class="skill-tag">OWASP / CVE Research</div>
-        <div class="skill-tag">Python Automation</div>
-        <div class="skill-tag">SHAP / XAI</div>
-        <div class="skill-tag">EU AI Act Compliance</div>
-        <div class="skill-tag">Cloud Security (OCI)</div>
-        <div class="skill-tag">SIEM / Splunk</div>
-        <div class="skill-tag">Burp Suite / Nmap</div>
-        <div class="skill-tag">ISO 27001 / NIST</div>
-        <div class="skill-tag">CEH Certified</div>
-        <div class="skill-tag">CLLMSP Certified</div>
-        <div class="skill-tag">Fortinet Certified Associate</div>
-        <div class="skill-tag">OCI AI Foundations</div>
-        <div class="skill-tag">Microsoft AZ-900</div>
-      </div>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <p class="status-line"><span class="dot" aria-hidden="true"></span> Open to security roles — Berlin / remote in Germany</p>
+    <h1>Prateek Pulastya</h1>
+    <p class="role">Security Engineer — AI &amp; Application Security</p>
+    <p class="lede">
+      I build and break the controls around LLM-powered systems. Most recently a two-tier
+      prompt-injection filter that resolves the common path in 0.14&nbsp;ms and is measured
+      against four external benchmarks — including the ones where it does badly.
+    </p>
+
+    <dl class="facts">
+      <div class="fact"><dt>Based in</dt><dd>Berlin, Germany</dd></div>
+      <div class="fact"><dt>Languages</dt><dd>English (C1+) · German (A2) · Spanish (A2)</dd></div>
+      <div class="fact"><dt>Focus</dt><dd>AI/LLM Security · AppSec · Product Security</dd></div>
+      <div class="fact"><dt>Experience</dt><dd>5+ yrs security, incl. 2 yrs security engineering</dd></div>
+      <div class="fact"><dt>Education</dt><dd>MSc Cybersecurity · MSc AI (in progress)</dd></div>
+    </dl>
+
+    <div class="cta-row">
+      <a class="btn primary" href="mailto:prateekpulastya220@gmail.com">Email me</a>
+      <a class="btn" href="https://github.com/Prateek-Pulastya" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/prateek-pulastya22" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://prateekpulastya.medium.com" rel="noopener">Write-ups</a>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE -->
-<section id="experience" style="background: var(--surface);">
-  <div class="section-label">02 // Experience</div>
-  <div class="exp-list">
-
-    <div class="exp-item reveal">
-      <div class="exp-meta">
-        <div class="exp-date">APR 2026 – PRESENT</div>
-        <div class="exp-company">Independent Research</div>
-      </div>
-      <div>
-        <div class="exp-role">AI Security & Vulnerability Research</div>
-        <ul class="exp-bullets">
-          <li>Active vulnerability researcher across HackerOne, Intigriti, and huntr — submissions include a CORS misconfiguration on Anduril, a path-traversal detection bypass in Aikido's firewall-java, and a Python sandbox escape in smolagents enabling arbitrary host command execution.</li>
-          <li>Built Guardrail Service, an open-source two-tier LLM prompt-injection defense pipeline combining Aho-Corasick pattern matching with a DeBERTa-v3 ONNX classifier — functional and deployed locally.</li>
-          <li>Certified LLM Security Professional (CLLMSP) — OWASP LLM Top 10, prompt injection, MCP security, guardrail architecture, NIST AI RMF.</li>
-          <li>Completed Intigriti Monthly CTF 0526 with a published technical writeup.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-item reveal">
-      <div class="exp-meta">
-        <div class="exp-date">DEC 2025 – FEB 2026</div>
-        <div class="exp-company">Outamation</div>
-      </div>
-      <div>
-        <div class="exp-role">AI Systems & Document Intelligence Extern</div>
-        <ul class="exp-bullets">
-          <li>Built modular AI-powered pipelines processing 200+ page mortgage blobs using OCR (Tesseract, PaddleOCR), PDF parsing (PyMuPDF), and RAG techniques.</li>
-          <li>Developed a document retrieval system using LlamaIndex with chunk tuning, metadata filtering, and open-source LLM evaluation (Mistral, Phi-2).</li>
-          <li>Benchmarked OCR accuracy, RAG retrieval quality, and routing performance; delivered technical deployment recommendations.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-item reveal">
-      <div class="exp-meta">
-        <div class="exp-date">AUG 2022 – MAR 2025</div>
-        <div class="exp-company">Dublin, Ireland</div>
-      </div>
-      <div>
-        <div class="exp-role">Event Security — funding MSc and relocation</div>
-        <ul class="exp-bullets">
-          <li>Worked event security in Dublin while completing an MSc in Cybersecurity at National College of Ireland, to fund the degree and subsequent relocation to Berlin.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-item reveal">
-      <div class="exp-meta">
-        <div class="exp-date">JUL 2021 – JUL 2022</div>
-        <div class="exp-company">SK International Pvt. Ltd.</div>
-      </div>
-      <div>
-        <div class="exp-role">Penetration Tester</div>
-        <ul class="exp-bullets">
-          <li>Performed web and infrastructure penetration testing aligned with the OWASP Top 10 across client engagements.</li>
-          <li>Conducted secure code reviews of Python and Java codebases to identify logic-level flaws before production release.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-item reveal">
-      <div class="exp-meta">
-        <div class="exp-date">FEB 2021 – JUN 2021</div>
-        <div class="exp-company">Kratikal Tech. Pvt. Ltd.</div>
-      </div>
-      <div>
-        <div class="exp-role">Security Analyst</div>
-        <ul class="exp-bullets">
-          <li>Enterprise-grade penetration testing for clients including GMR and Nykaa.</li>
-          <li>Supported ISO 27001 and NIST compliance documentation as part of client audit cycles.</li>
-          <li>Executed input validation and authentication testing, covering SQLi, XSS, and CSRF vectors pre-production.</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">03 // Projects</div>
-  <div class="projects-grid">
-
-    <a href="https://github.com/Prateek-Pulastya/Guardrail-As-A-Service" target="_blank" class="project-card reveal" style="text-decoration:none; color:inherit; display:block;">
-      <div class="project-num">PROJECT 001 · OPEN SOURCE ↗</div>
-      <div class="project-title">Guardrail Service</div>
-      <div class="project-desc">Two-tier LLM prompt-injection defense pipeline: an Aho-Corasick pattern pre-filter feeding a DeBERTa-v3 ONNX classifier for adversarial input detection. Functional, deployed locally.</div>
-      <div class="project-tags">
-        <span class="tag accent">Python</span>
-        <span class="tag">ONNX</span>
-        <span class="tag">LLM Security</span>
-        <span class="tag">Prompt Injection</span>
-      </div>
-    </a>
-
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT 002</div>
-      <div class="project-title">Mortgage Intelligence Pipeline</div>
-      <div class="project-desc">End-to-end AI pipeline for processing 200+ page mortgage blobs. Combined OCR (Tesseract, PaddleOCR), PDF parsing (PyMuPDF), LlamaIndex RAG, and open-source LLM evaluation for intelligent extraction and search.</div>
-      <div class="project-tags">
-        <span class="tag accent">LlamaIndex</span>
-        <span class="tag">PyMuPDF</span>
-        <span class="tag">Mistral</span>
-        <span class="tag">RAG</span>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT 003</div>
-      <div class="project-title">Network Intrusion Detection System</div>
-      <div class="project-desc">ML-based network intrusion detection with SHAP explainability, so flagged traffic comes with an interpretable reason rather than a black-box score.</div>
-      <div class="project-tags">
-        <span class="tag accent">SHAP / XAI</span>
-        <span class="tag">Python</span>
-        <span class="tag">Machine Learning</span>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT 004 · TOP PERFORMER</div>
-      <div class="project-title">Secure IoT Communication Pipeline</div>
-      <div class="project-desc">Built during the Hydroficient externship. TLS 1.3 and mTLS for transport security, HMAC-SHA256 message authentication, and replay-attack defense for IoT device communication.</div>
-      <div class="project-tags">
-        <span class="tag accent">TLS 1.3</span>
-        <span class="tag">mTLS</span>
-        <span class="tag">HMAC-SHA256</span>
-        <span class="tag">IoT Security</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- CVE / RESEARCH -->
-<section id="research" style="background: var(--surface);">
-  <div class="section-label">04 // Vulnerability Research</div>
-
-  <div class="cve-banner reveal" style="border-left-color: var(--accent);">
-    <div>
-      <div class="cve-count" style="color: var(--accent); font-size: 2.6rem;">Active Researcher</div>
-      <div class="cve-label">Real-world submissions, not a claimed count</div>
-    </div>
-    <div>
-      <p style="color: var(--muted); font-size: 0.88rem; max-width: 380px; line-height: 1.7; margin-bottom: 1.5rem;">
-        CORS misconfiguration on Anduril · path-traversal detection bypass in Aikido's firewall-java (submitted via Intigriti) · Python sandbox escape in smolagents achieving arbitrary host command execution (submitted via huntr).
-      </p>
-      <div class="cve-platforms">
-        <a href="https://hackerone.com/prateek_22" target="_blank" class="platform-badge" style="text-decoration:none; color:inherit;">HackerOne ↗</a>
-        <a href="https://huntr.com/users/prateek-pulastya" target="_blank" class="platform-badge" style="text-decoration:none; color:inherit;">huntr ↗</a>
-        <div class="platform-badge">Intigriti</div>
-      </div>
-    </div>
-    <div>
-      <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-bottom: 1rem; letter-spacing: 0.1em;">FOCUS AREAS</div>
-      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-        <div style="font-size: 0.85rem; color: var(--text);">✓ Access Control & Auth Bypass</div>
-        <div style="font-size: 0.85rem; color: var(--text);">✓ Input Validation & Path Traversal</div>
-        <div style="font-size: 0.85rem; color: var(--text);">✓ ML/AI Sandbox & Deserialization Flaws</div>
-        <div style="font-size: 0.85rem; color: var(--accent);">✓ LLM / Agentic AI Attack Vectors</div>
-      </div>
-    </div>
-  </div>
-  <p style="color: var(--muted); font-size: 0.85rem; margin-top: -2rem; margin-bottom: 2rem;">
-    Writeup: <a href="https://dev.to/prateek_pulastya_9975efac" target="_blank" style="color: var(--accent2);">Intigriti Monthly CTF 0526 — published technical breakdown ↗</a>
-  </p>
-</section>
-
-<!-- EDUCATION -->
-<section id="education">
-  <div class="section-label">05 // Education</div>
-  <div class="edu-grid reveal">
-    <div class="edu-card">
-      <div>
-        <div class="edu-degree">MSc Artificial Intelligence</div>
-        <div class="edu-school">Berlin School of Business & Innovation (BSBI)</div>
-      </div>
-      <div class="edu-year">2025 – 2027</div>
-    </div>
-    <div class="edu-card">
-      <div>
-        <div class="edu-degree">MSc Cybersecurity</div>
-        <div class="edu-school">National College of Ireland</div>
-      </div>
-      <div class="edu-year">2022 – 2023</div>
-    </div>
-    <div class="edu-card">
-      <div>
-        <div class="edu-degree">BTech Information Technology</div>
-        <div class="edu-school">Panipat Institute of Engineering and Technology</div>
-      </div>
-      <div class="edu-year">2017 – 2021</div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" style="padding: 0;">
-  <div class="contact-section reveal">
-    <h2>Let's work<br/><span style="color: var(--accent);">together.</span></h2>
-    <p>Open to AI security, red team, and detection engineering roles in Germany.</p>
-    <div class="contact-links">
-      <a href="mailto:prateekpulastya220@gmail.com" class="contact-link">
-        <span>✉</span> Email
+<!-- ============ EVIDENCE ============ -->
+<section aria-label="Evidence at a glance">
+  <div class="wrap">
+    <div class="evidence">
+      <a class="ev" href="#work">
+        <div class="n">0.79</div>
+        <div class="l">Held-out Tier&nbsp;1 recall</div>
+        <div class="s">The honest number, not the 1.00 in-sample</div>
       </a>
-      <a href="https://www.linkedin.com/in/prateek-pulastya22/" target="_blank" class="contact-link">
-        <span>in</span> LinkedIn
+      <a class="ev" href="#research">
+        <div class="n">9.9</div>
+        <div class="l">CVSS sandbox escape</div>
+        <div class="s">CWE-94, arbitrary host command execution</div>
       </a>
-      <a href="https://github.com/Prateek-Pulastya" target="_blank" class="contact-link">
-        <span>⌥</span> GitHub
+      <a class="ev" href="#research">
+        <div class="n">#1</div>
+        <div class="l">Intigriti quarterly leaderboard</div>
+        <div class="s">RO07 Ch13f · Top 10 Bug Baron</div>
+      </a>
+      <a class="ev" href="#work">
+        <div class="n">4</div>
+        <div class="l">External benchmarks</div>
+        <div class="s">BIPIA · NotInject · OPI · held-out split</div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ============ FEATURED WORK ============ -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>Selected work</h2>
+      <span class="note">Everything below links to source</span>
+    </div>
+
+    <article class="feature">
+      <div class="feature-head">
+        <p class="eyebrow">Featured · Open source · Python</p>
+        <h3>GuardRail-as-a-Service — prompt-injection detection for production LLM serving</h3>
+        <p class="lede" style="margin-top:.7rem">
+          A two-tier pipeline that filters prompts before they reach the model. Tier&nbsp;1 is a
+          deterministic Aho-Corasick + regex matcher that clears the common path in under
+          0.1&nbsp;ms; Tier&nbsp;2 is a DeBERTa-v3 ONNX classifier that only ever sees what
+          Tier&nbsp;1 lets through.
+        </p>
+        <div class="pill-row" style="margin-top:1rem">
+          <span class="pill on">Python</span>
+          <span class="pill on">ONNX</span>
+          <span class="pill">Aho-Corasick</span>
+          <span class="pill">DeBERTa-v3</span>
+          <span class="pill">Docker</span>
+          <span class="pill">Prometheus / Grafana</span>
+          <span class="pill">Semgrep · Bandit · Safety in CI</span>
+        </div>
+        <div class="cta-row" style="margin-top:1.15rem">
+          <a class="btn primary" href="https://github.com/Prateek-Pulastya/Guardrail-As-A-Service-V2" rel="noopener">Repository</a>
+          <a class="btn" href="https://github.com/Prateek-Pulastya/Guardrail-As-A-Service-V2/blob/main/paper/guardrail_paper.pdf" rel="noopener">Paper (PDF)</a>
+          <a class="btn" href="https://github.com/Prateek-Pulastya/Guardrail-As-A-Service-V2/blob/main/EVALUATION.md" rel="noopener">Evaluation</a>
+          <a class="btn" href="https://github.com/Prateek-Pulastya/Guardrail-As-A-Service-V2/blob/main/RUNBOOK.md" rel="noopener">Runbook</a>
+        </div>
+      </div>
+
+      <div class="feature-body">
+        <div class="callout">
+          <div class="t">The number I lead with is the weaker one</div>
+          <p>
+            Tier&nbsp;1's blocklist was tuned by inspecting the attacks it missed on my own corpus,
+            so its 1.000 in-sample recall is partly memorisation. Split 60/40 and refitted on the
+            training half only, it scores <strong>0.7895</strong> on held-out data — a 21-point
+            overstatement if I quoted the in-sample figure. The repo says so in its own README,
+            labels the contaminated row “not a result”, and stores every number as reproducible
+            JSON under <code class="mono">results/</code>.
+          </p>
+        </div>
+
+        <div>
+          <p class="eyebrow" style="margin-bottom:.7rem">Measured performance</p>
+          <div class="table-scroll">
+            <table>
+              <caption class="small" style="text-align:left;padding:.6rem .9rem;color:var(--muted)">
+                Corpus: 271 samples (190 attack / 81 benign) across 10 attack classes. Local Docker, CPU inference.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Evaluation</th>
+                  <th scope="col" class="num">Tier 1 recall</th>
+                  <th scope="col" class="num">FPR</th>
+                  <th scope="col">Reading</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="muted-row">
+                  <td>In-house corpus (in-sample)</td>
+                  <td class="num">1.000</td><td class="num">0.000</td>
+                  <td>Fit, not generalisation</td>
+                </tr>
+                <tr class="key">
+                  <td>Held-out split, train-fitted rules</td>
+                  <td class="num">0.7895</td><td class="num">0.000</td>
+                  <td>Best estimate of real performance</td>
+                </tr>
+                <tr>
+                  <td>Open-Prompt-Injection (<code class="mono">source="data"</code>)</td>
+                  <td class="num">1.000</td><td class="num">0.006</td>
+                  <td>External benchmark</td>
+                </tr>
+                <tr>
+                  <td>BIPIA (<code class="mono">source="data"</code>)</td>
+                  <td class="num">0.480</td><td class="num">0.017</td>
+                  <td>Where it underperforms</td>
+                </tr>
+                <tr>
+                  <td>NotInject (benign only, over-defense)</td>
+                  <td class="num">—</td><td class="num">0.000</td>
+                  <td>No over-blocking at Tier 1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="small" style="margin-top:.7rem">
+            Latency p50 / p95 / p99 — 0.14&nbsp;ms / 26.21&nbsp;ms / 32.11&nbsp;ms. Tier&nbsp;1 alone: p50 0.09&nbsp;ms.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <p class="eyebrow">Engineering decision</p>
+            <h3 style="font-size:.97rem;margin:.4rem 0 .5rem">Tier 2 ships monitor-only</h3>
+            <p class="small" style="color:var(--ink-2)">
+              On the NotInject over-defense benchmark the classifier blocks 40.4% of benign prompts
+              against Tier&nbsp;1's 0.0%, and the over-defense is not threshold-separable. So it scores
+              and logs a <code class="mono">TIER2-FLAG</code> but does not block. The cost is a recall
+              ceiling, stated explicitly rather than hidden; the blocking mode stays reachable via
+              <code class="mono">POST /validate?tier=2</code>.
+            </p>
+          </div>
+          <div class="card">
+            <p class="eyebrow">Engineering decision</p>
+            <h3 style="font-size:.97rem;margin:.4rem 0 .5rem">Double scan, and fail open</h3>
+            <p class="small" style="color:var(--ink-2)">
+              Tier&nbsp;1 scans normalised text first (keeping <code class="mono">|</code>,
+              <code class="mono">_</code>, <code class="mono">-</code> so markers like
+              <code class="mono">&lt;|im_start|&gt;</code> still match), then a de-leeted, separator-stripped
+              variant — which is what catches <code class="mono">1gn0r3 prev10us 1nstruct10ns</code>.
+              If the Tier&nbsp;2 model errors, the request is allowed: availability over coverage, deliberately.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <p class="eyebrow" style="margin-bottom:.7rem">Baseline comparison — read carefully</p>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th scope="col">Metric</th><th scope="col" class="num">GuardRail</th><th scope="col" class="num">Llama-Guard-3-8B</th></tr></thead>
+              <tbody>
+                <tr><td>Recall</td><td class="num">1.0000</td><td class="num">0.1316</td></tr>
+                <tr><td>Precision</td><td class="num">1.0000</td><td class="num">1.0000</td></tr>
+                <tr><td>Latency p50</td><td class="num">0.16 ms</td><td class="num">1708 ms</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="small" style="margin-top:.7rem">
+            This is <strong>not</strong> “7× better than LlamaGuard”. Llama-Guard-3 is a content-safety
+            classifier whose S1–S13 taxonomy does not include prompt injection — it missed 165/190 attacks
+            because it is not an injection detector. The defensible claim is that content-safety guardrails
+            do not transfer to prompt-injection detection. The latency figure is local Ollama inference on a
+            GTX 1650, not a hosted API round-trip, and the results JSON records that so it cannot be
+            misquoted downstream.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <div class="grid-3" style="margin-top:1.5rem">
+      <article class="card">
+        <p class="eyebrow">Project · ML security</p>
+        <h3 style="font-size:1rem;margin:.45rem 0 .55rem">Explainable threat detection</h3>
+        <p class="small" style="color:var(--ink-2)">
+          Network intrusion detection over the CICIDS2017 benchmark across six attack classes, with SHAP
+          attribution attached to every alert. Built for the actual SOC problem: not “is this an attack”
+          but “which features made you say so”, so triage doesn't start from a black-box score.
+        </p>
+        <div class="pill-row" style="margin-top:.9rem"><span class="pill">Python</span><span class="pill">SHAP</span><span class="pill">CICIDS2017</span></div>
+        <p style="margin-top:.9rem"><a class="verify" href="https://github.com/Prateek-Pulastya/AI-Powered-Threat-Detection-System-with-Explainability" rel="noopener">View source →</a></p>
+      </article>
+
+      <article class="card">
+        <p class="eyebrow">Project · IoT · Top 10% extern</p>
+        <h3 style="font-size:1rem;margin:.45rem 0 .55rem">Secure MQTT pipeline</h3>
+        <p class="small" style="color:var(--ink-2)">
+          Hardened an unsecured hotel water-monitoring deployment through four independent layers —
+          TLS 1.2/1.3 on 8883, mTLS client certs, HMAC-SHA256 message authentication, replay defense.
+          STRIDE threat model first, then attack simulations before and after each layer to prove each
+          one stops what the previous cannot. Added latency: under 1 ms.
+        </p>
+        <div class="pill-row" style="margin-top:.9rem"><span class="pill">MQTT</span><span class="pill">mTLS</span><span class="pill">STRIDE</span></div>
+        <p style="margin-top:.9rem"><a class="verify" href="https://github.com/Prateek-Pulastya/Hydroficient-Externship" rel="noopener">View source →</a></p>
+      </article>
+
+      <article class="card">
+        <p class="eyebrow">Project · Applied AI</p>
+        <h3 style="font-size:1rem;margin:.45rem 0 .55rem">Mortgage document intelligence</h3>
+        <p class="small" style="color:var(--ink-2)">
+          Retrieval pipeline over 200+ page mortgage blobs: OCR (Tesseract, PaddleOCR), PyMuPDF parsing,
+          LlamaIndex RAG tuned via chunk sizing and metadata filtering. Benchmarked OCR accuracy,
+          retrieval quality and routing across Mistral and Phi-2 before recommending a deployment.
+        </p>
+        <div class="pill-row" style="margin-top:.9rem"><span class="pill">LlamaIndex</span><span class="pill">RAG</span><span class="pill">PyMuPDF</span></div>
+        <p style="margin-top:.9rem"><a class="verify" href="https://github.com/Prateek-Pulastya/Outamation-Externship" rel="noopener">View source →</a></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESEARCH ============ -->
+<section id="research">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>Vulnerability research &amp; disclosure</h2>
+      <span class="note">Outcomes reported as they landed</span>
+    </div>
+
+    <p class="lede" style="margin-bottom:1.6rem">
+      Independent research through private bug bounty and coordinated disclosure —
+      <strong>#1 quarterly leaderboard (RO07 Ch13f)</strong> and <strong>Top 10 Bug Baron</strong> on
+      Intigriti. Several findings below closed as duplicate or informative. They are listed with that
+      outcome intact, because the methodology is the transferable part and a portfolio that only shows
+      wins tells you nothing about calibration.
+    </p>
+
+    <div class="grid-2">
+      <article class="finding">
+        <div class="meta"><span class="sev crit">CVSS 9.9</span><span class="status">CWE-94 · via huntr</span></div>
+        <h3>Sandbox escape in <span class="mono">smolagents</span></h3>
+        <p>
+          Code-injection flaw in the agent execution sandbox permitting arbitrary command execution on
+          the host — the boundary an agentic framework exists to enforce. Disclosed responsibly to the
+          maintainers.
+        </p>
+      </article>
+
+      <article class="finding">
+        <div class="meta"><span class="sev high">High</span><span class="status">Detection bypass · via Intigriti</span></div>
+        <h3>Path-traversal bypass in Aikido <span class="mono">firewall-java</span></h3>
+        <p>
+          Payload construction that evaded the WAF's path-traversal detection while remaining a working
+          traversal — a security control failing open against the exact class it advertises.
+        </p>
+      </article>
+
+      <article class="finding">
+        <div class="meta"><span class="sev crit">Critical</span><span class="status">Closed: duplicate (valid)</span></div>
+        <h3>CORS origin reflection → account takeover</h3>
+        <p>
+          A REST API reflected any attacker-supplied <span class="mono">Origin</span> verbatim while
+          returning <span class="mono">Access-Control-Allow-Credentials: true</span>, with the session
+          cookie scoped to the root domain and missing <span class="mono">HttpOnly</span>. One visit to a
+          malicious page silently exfiltrated profile data, API keys and marketing contact databases as
+          the logged-in user. Fix: server-side origin allowlist at the gateway, HttpOnly as defence in depth.
+        </p>
+      </article>
+
+      <article class="finding">
+        <div class="meta"><span class="sev crit">Critical</span><span class="status">Closed: duplicate (confirmed valid)</span></div>
+        <h3>Unauthenticated GraphQL user enumeration — 57M records</h3>
+        <p>
+          Introspection was disabled, but validation-error field enumeration exposed a Relay-style
+          <span class="mono">users</span> connection accepting cursor pagination unauthenticated, with no
+          rate limiting and no depth restriction. <span class="mono">totalCount</span> returned 57,316,627,
+          confirmed live by a 209,852-account delta over eight days. Full export was reachable in roughly
+          32 hours at a conservative 10 req/s.
+        </p>
+      </article>
+
+      <article class="finding">
+        <div class="meta"><span class="sev high">High</span><span class="status">Triaged duplicate · P4</span></div>
+        <h3>Unrestricted Google Maps API keys in page source</h3>
+        <p>
+          Two keys hardcoded into served HTML and a webpack bundle, both issued with no referrer, IP or
+          API restriction — extractable with a single unauthenticated <span class="mono">curl</span>. A
+          controlled 50-request load test returned 50/50 <span class="mono">OK</span> with zero throttling,
+          establishing roughly $121/hour of billable abuse from one workstation. CWE-798; OWASP API4:2023.
+        </p>
+      </article>
+
+      <article class="finding">
+        <div class="meta"><span class="sev info">Informative</span><span class="status">Closed: theoretical exploitability</span></div>
+        <h3>Dangling Route53 delegation → subdomain takeover</h3>
+        <p>
+          Certificate-transparency enumeration surfaced a staging subdomain with live NS delegation into
+          an abandoned Route53 zone (<span class="mono">SOA serial=1</span>). Because Route53 returns
+          deleted zones' nameservers to a shared pool, any AWS account could reclaim authority — and the
+          root-scoped session cookie made that directly exploitable. Of 11 NXDOMAIN candidates checked via
+          passive DNS and Wayback CDX, exactly one was still delegated.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Experience</h2></div>
+    <div class="tl">
+
+      <article class="job">
+        <div class="when">Apr 2025 — Present<span class="loc">Berlin, Germany</span></div>
+        <div>
+          <h3>Independent Security Researcher</h3>
+          <p class="org">Freelance / Self-employed</p>
+          <ul>
+            <li>Security assessments across web applications, APIs, AI/ML libraries and cloud services through private bug bounty and coordinated disclosure programmes.</li>
+            <li>#1 Quarterly Leaderboard (RO07 Ch13f) and Top 10 Quarterly Leaderboard (Bug Baron) on Intigriti.</li>
+            <li>Disclosed a CVSS 9.9 (CWE-94) sandbox escape and a security-control detection bypass, using fuzzing (libFuzzer, CI Fuzz), static analysis (Semgrep) and custom Python tooling.</li>
+            <li>Built Python security automation for reconnaissance, vulnerability validation and log analysis while researching prompt injection, RAG security and AI evaluation methodology.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="when">Dec 2025 — Feb 2026<span class="loc">Remote</span></div>
+        <div>
+          <h3>AI Systems &amp; Document Intelligence Extern</h3>
+          <p class="org">Outamation</p>
+          <ul>
+            <li>Built modular AI pipelines processing 200+ page mortgage blobs — OCR (Tesseract, PaddleOCR), PDF parsing (PyMuPDF) and RAG for extraction, classification and search.</li>
+            <li>Developed a LlamaIndex retrieval system tuned through chunk sizing and metadata filtering, evaluating Mistral and Phi-2.</li>
+            <li>Benchmarked OCR accuracy, retrieval quality and routing end-to-end; delivered a technical report on model trade-offs plus a demo UI.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="when">Mar 2023 — Feb 2025</div>
+        <div>
+          <h3>Cyber Security Engineer</h3>
+          <p class="org">SK International Pvt. Ltd.</p>
+          <ul>
+            <li>Application and API security assessments with Burp Suite Professional, Nmap and Tenable Nessus against the OWASP Top 10, working with developers through remediation.</li>
+            <li>Embedded security into the SDLC via threat modelling, secure design review, dependency analysis and CI/CD security validation.</li>
+            <li>Engineered monitoring and incident-response workflows in Microsoft Sentinel and Defender for Endpoint, automating operations in Python and PowerShell.</li>
+            <li>Hardened AWS and Azure through IAM least-privilege, MFA, secure configuration baselines and continuous vulnerability management.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="when">Aug 2022 — Mar 2025<span class="loc">Dublin, Ireland</span></div>
+        <div>
+          <h3>Event Security Officer</h3>
+          <p class="org">Sword Security Group</p>
+          <ul>
+            <li>Worked event security at 10,000+ capacity venues alongside the MSc in Cybersecurity, funding the degree and the relocation to Berlin.</li>
+            <li>Access control, crowd management and incident response across a 2.5-year tenure with zero major security incidents.</li>
+            <li>Coordinated multi-team operations during peak periods; standardised comms protocols cut emergency response time from 48 to 24 minutes.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="when">Jun 2021 — Jul 2021<span class="loc">Gurugram, India</span></div>
+        <div>
+          <h3>Student Intern — Cyber Security</h3>
+          <p class="org">Gurugram Police Cyber Security Summer Internship</p>
+          <ul>
+            <li>Supported live cybercrime investigations with Wireshark and Splunk, analysing network traffic and system logs to build evidentiary records.</li>
+            <li>Helped draft GDPR-aligned data classification and evidence-handling procedures, improving chain-of-custody integrity.</li>
+            <li>Delivered phishing and social-engineering awareness training, contributing to a 30% drop in reported incidents among trained teams.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="when">Feb 2021 — Jun 2021<span class="loc">Delhi, India</span></div>
+        <div>
+          <h3>Security Analyst (Penetration Tester)</h3>
+          <p class="org">Kratikal Tech. Pvt. Ltd.</p>
+          <ul>
+            <li>Enterprise penetration testing for clients including GMR and Nykaa, identifying 70+ high-risk vulnerabilities across web applications, APIs and network infrastructure.</li>
+            <li>Delivered business-aligned remediation reports mapped to the OWASP Top 10 with prioritised fixes ahead of production deployment.</li>
+            <li>Supported ISO 27001 and NIST gap analysis, cutting compliance review cycles by 25% through structured control mapping.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="when">Aug 2020 — Oct 2020<span class="loc">India</span></div>
+        <div>
+          <h3>Cyber Security Intern</h3>
+          <p class="org">Ethical Edufabrica Pvt. Ltd.</p>
+          <ul>
+            <li>Manual penetration testing with Burp Suite, Nessus and Nmap across simulated enterprise environments.</li>
+            <li>Designed ransomware defence strategies and incident-response playbooks, reducing simulated endpoint exposure by 45% in controlled attack scenarios.</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Technical scope</h2></div>
+
+    <div class="skill-group">
+      <h3>AI &amp; LLM security</h3>
+      <div class="pill-row">
+        <span class="pill on">Prompt injection detection</span><span class="pill on">RAG security</span>
+        <span class="pill on">AI red teaming</span><span class="pill">OWASP LLM Top 10</span>
+        <span class="pill">NIST AI RMF</span><span class="pill">Guardrail architecture</span>
+        <span class="pill">MCP security</span><span class="pill">Adversarial evaluation</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <h3>Application &amp; API security</h3>
+      <div class="pill-row">
+        <span class="pill on">OWASP Top 10</span><span class="pill on">Threat modelling (STRIDE)</span>
+        <span class="pill">Burp Suite Pro</span><span class="pill">Secure code review</span>
+        <span class="pill">Secure SDLC</span><span class="pill">API security</span>
+        <span class="pill">CI/CD security validation</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <h3>Offensive security</h3>
+      <div class="pill-row">
+        <span class="pill on">Penetration testing</span><span class="pill">Fuzzing (libFuzzer, CI Fuzz)</span>
+        <span class="pill">Semgrep · Bandit</span><span class="pill">Nmap · Nessus</span>
+        <span class="pill">Vulnerability research</span><span class="pill">CTF</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <h3>Cloud, detection &amp; infrastructure</h3>
+      <div class="pill-row">
+        <span class="pill">AWS · Azure · OCI</span><span class="pill">IAM least-privilege</span>
+        <span class="pill">Microsoft Sentinel</span><span class="pill">Defender for Endpoint</span>
+        <span class="pill">Splunk</span><span class="pill">Docker</span>
+        <span class="pill">Prometheus · Grafana</span><span class="pill">ISO 27001 · NIST CSF</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <h3>Engineering</h3>
+      <div class="pill-row">
+        <span class="pill on">Python</span><span class="pill">PowerShell</span>
+        <span class="pill">ONNX Runtime</span><span class="pill">GitHub Actions</span>
+        <span class="pill">Pytest</span><span class="pill">LlamaIndex</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREDENTIALS ============ -->
+<section id="credentials">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Credentials</h2><span class="note">Certificates held on file</span></div>
+
+    <div class="grid-2">
+      <div>
+        <p class="eyebrow" style="margin-bottom:1rem">Certifications</p>
+
+        <div class="cert">
+          <div class="body">
+            <h3>Certified LLM Security Professional (CLLMSP)</h3>
+            <p class="iss">Red Team Leaders · issued June 2026</p>
+          </div>
+          <a class="verify" href="https://courses.redteamleaders.com/exam-completion/7fdd1971d57853c3" rel="noopener">Verify →</a>
+        </div>
+
+        <div class="cert">
+          <div class="body">
+            <h3>Fortinet Certified Associate in Cybersecurity</h3>
+            <p class="iss">Fortinet · Oct 2025 – Oct 2027 · ID 7813549201PP</p>
+          </div>
+          <a class="verify" href="https://training.fortinet.com/admin/tool/certificate/index.php" rel="noopener">Verify →</a>
+        </div>
+
+        <div class="cert">
+          <div class="body">
+            <h3>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate</h3>
+            <p class="iss">Oracle · issued August 2025 · ID 102394776OCI25AICFA</p>
+          </div>
+        </div>
+
+        <div class="cert">
+          <div class="body">
+            <h3>Certified Network Security Specialist (CNSS)</h3>
+            <p class="iss">International Cybersecurity Institute</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="eyebrow" style="margin-bottom:1rem">Recognition &amp; education</p>
+
+        <div class="cert">
+          <div class="body">
+            <h3>Top Performer — Hydroficient IoT Cyber Defense Externship</h3>
+            <p class="iss">Extern · April 2026 · awarded to the top 10% of participants</p>
+          </div>
+        </div>
+
+        <div class="cert">
+          <div class="body">
+            <h3>Completer — Outamation AI Document Insights Externship</h3>
+            <p class="iss">Extern · February 2026</p>
+          </div>
+        </div>
+
+        <div class="cert" style="border-top:1px solid var(--line);margin-top:1.4rem;padding-top:1.4rem">
+          <div class="body">
+            <h3>MSc Artificial Intelligence</h3>
+            <p class="iss">Berlin School of Business &amp; Innovation · Oct 2025 – Apr 2027 (in progress)</p>
+          </div>
+        </div>
+
+        <div class="cert">
+          <div class="body">
+            <h3>MSc Cyber Security</h3>
+            <p class="iss">National College of Ireland · Jan 2022 – Feb 2023</p>
+            <p class="iss">Thesis: enhancing authentication and authorization in cloud services using blockchain</p>
+          </div>
+        </div>
+
+        <div class="cert">
+          <div class="body">
+            <h3>BTech Information Technology</h3>
+            <p class="iss">Panipat Institute of Engineering and Technology · 2017 – 2021</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WRITING (live from data/blog.json) ============ -->
+<section id="writing">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">06</span><h2>Write-ups</h2>
+      <span class="note">Auto-synced from Medium every 6 hours</span>
+    </div>
+    <div class="grid-3" id="blogFeed">
+      <p class="feed-state">Loading write-ups…</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPEN SOURCE (live from data/repos.json) ============ -->
+<section id="repos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">07</span><h2>Open source</h2>
+      <span class="note">Auto-synced from the GitHub API</span>
+    </div>
+    <div class="grid-3" id="repoFeed">
+      <p class="feed-state">Loading repositories…</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">08</span><h2>Get in touch</h2></div>
+    <p class="lede">
+      Open to security engineering roles in Germany — AI/LLM security, application security,
+      product security. Happy to walk through any result on this page, including the ones that
+      did not go my way.
+    </p>
+    <div class="contact-grid">
+      <a href="mailto:prateekpulastya220@gmail.com"><div class="k">Email</div><div class="v">prateekpulastya220@gmail.com</div></a>
+      <a href="https://www.linkedin.com/in/prateek-pulastya22" rel="noopener"><div class="k">LinkedIn</div><div class="v">/in/prateek-pulastya22</div></a>
+      <a href="https://github.com/Prateek-Pulastya" rel="noopener"><div class="k">GitHub</div><div class="v">@Prateek-Pulastya</div></a>
+      <a href="https://prateekpulastya.medium.com" rel="noopener"><div class="k">Medium</div><div class="v">@prateekpulastya</div></a>
+    </div>
+  </div>
+</section>
+</main>
+
 <footer>
-  <span>© 2026 Prateek Pulastya</span>
-  <span style="color: var(--accent); font-size: 0.65rem;">BERLIN · GERMANY<span class="blink">_</span></span>
-  <span>AI SEC & RED TEAM ENGINEER</span>
+  <div class="wrap foot-in">
+    <span>© <span id="yr">2026</span> Prateek Pulastya · Berlin, Germany</span>
+    <span class="mono">Security engineer — AI &amp; application security</span>
+  </div>
 </footer>
 
 <script>
-  // CUSTOM CURSOR
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.transform = `translate(${mx - 6}px, ${my - 6}px)`;
-  });
-  function animateRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
+(function () {
+  "use strict";
 
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => { cursor.style.transform += ' scale(2)'; ring.style.opacity = '1'; });
-    el.addEventListener('mouseleave', () => { ring.style.opacity = '0.5'; });
+  /* ---------- theme ---------- */
+  var root = document.documentElement;
+  try {
+    var saved = localStorage.getItem("theme");
+    if (saved) root.setAttribute("data-theme", saved);
+  } catch (e) { /* private mode: fall back to OS preference */ }
+
+  document.getElementById("themeBtn").addEventListener("click", function () {
+    var isDark = root.getAttribute("data-theme") === "dark" ||
+      (!root.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+    var next = isDark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (e) {}
   });
 
-  // NAV SCROLL
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  });
+  document.getElementById("yr").textContent = new Date().getFullYear();
 
-  // REVEAL ON SCROLL
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(r => observer.observe(r));
+  /* ---------- scrollspy ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".nav-links a"));
+  var targets = links
+    .map(function (a) { return document.querySelector(a.getAttribute("href")); })
+    .filter(Boolean);
 
-  // COUNTER ANIMATION
-  function animateCount(el, target) {
-    let current = 0;
-    const step = target / 60;
-    const timer = setInterval(() => {
-      current += step;
-      if (current >= target) { el.textContent = target + '+'; clearInterval(timer); return; }
-      el.textContent = Math.floor(current) + '+';
-    }, 20);
+  if ("IntersectionObserver" in window && targets.length) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        links.forEach(function (a) {
+          a.classList.toggle("active", a.getAttribute("href") === "#" + entry.target.id);
+        });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    targets.forEach(function (t) { spy.observe(t); });
   }
-  function animateCountPlain(el, target) {
-    let current = 0;
-    const step = target / 40;
-    const timer = setInterval(() => {
-      current += step;
-      if (current >= target) { el.textContent = target; clearInterval(timer); return; }
-      el.textContent = Math.floor(current);
-    }, 20);
+
+  /* ---------- feeds ----------
+     Feed content is injected with textContent, never innerHTML. The JSON is
+     built from third-party RSS, so treating it as markup would be a DOM XSS
+     sink on a security portfolio. */
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
   }
-  const statsObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const nums = e.target.querySelectorAll('.stat-num');
-        animateCountPlain(nums[0], 2);
-        animateCountPlain(nums[1], 3);
-        statsObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  const heroStats = document.querySelector('.hero-stats');
-  if (heroStats) statsObs.observe(heroStats);
+
+  function state(mount, msg) {
+    mount.textContent = "";
+    mount.appendChild(el("p", "feed-state", msg));
+  }
+
+  function shortDate(value) {
+    var d = new Date(value);
+    if (isNaN(d)) return "";
+    return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  }
+
+  function load(url, mount, render, emptyMsg) {
+    fetch(url, { cache: "no-cache" })
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
+      })
+      .then(function (items) {
+        if (!Array.isArray(items) || !items.length) return state(mount, emptyMsg);
+        mount.textContent = "";
+        items.forEach(function (item) { mount.appendChild(render(item)); });
+      })
+      .catch(function () { state(mount, emptyMsg); });
+  }
+
+  load("data/blog.json", document.getElementById("blogFeed"), function (post) {
+    var a = el("a", "feed-item");
+    a.href = post.link;
+    a.rel = "noopener";
+    a.appendChild(el("h3", null, post.title));
+    a.appendChild(el("p", null, post.desc));
+
+    var meta = el("div", "feed-meta");
+    meta.appendChild(el("span", "pill", shortDate(post.date)));
+    if (post.readingMinutes) meta.appendChild(el("span", "pill", post.readingMinutes + " min read"));
+    (post.tags || []).slice(0, 2).forEach(function (t) { meta.appendChild(el("span", "pill on", t)); });
+    a.appendChild(meta);
+    return a;
+  }, "Write-ups are on Medium — medium.com/@prateekpulastya");
+
+  load("data/repos.json", document.getElementById("repoFeed"), function (repo) {
+    var a = el("a", "feed-item");
+    a.href = repo.url;
+    a.rel = "noopener";
+    a.appendChild(el("h3", null, repo.name.replace(/-/g, " ")));
+    a.appendChild(el("p", null, repo.desc));
+
+    var meta = el("div", "feed-meta");
+    if (repo.language && repo.language !== "N/A") meta.appendChild(el("span", "pill on", repo.language));
+    if (repo.pushedAt) meta.appendChild(el("span", "pill", "updated " + shortDate(repo.pushedAt)));
+    a.appendChild(meta);
+    return a;
+  }, "Repositories are on GitHub — github.com/Prateek-Pulastya");
+})();
 </script>
 </body>
 </html>

@@ -1,56 +1,84 @@
 [
   {
     "name": "Guardrail-As-A-Service-V2",
-    "desc": "No description provided.",
+    "desc": "Two-tier prompt-injection detection for production LLM serving — Aho-Corasick + regex Tier 1 (p50 0.14ms) feeding a monitor-only DeBERTa-v3 ONNX classifier. Evaluated against 4 external benchmarks.",
     "url": "https://github.com/Prateek-Pulastya/Guardrail-As-A-Service-V2",
     "stars": 0,
     "language": "Python",
-    "topics": [],
-    "pushedAt": "2026-07-25T09:43:36Z"
+    "topics": [
+      "ai-security",
+      "deberta",
+      "guardrails",
+      "llm-security"
+    ],
+    "pushedAt": "2026-07-25T19:14:08Z"
   },
   {
     "name": "AI-Powered-Threat-Detection-System-with-Explainability",
-    "desc": "No description provided.",
+    "desc": "ML network intrusion detection on CICIDS2017 (6 attack classes) with SHAP explainability — every alert ships with the features that triggered it, not just a label.",
     "url": "https://github.com/Prateek-Pulastya/AI-Powered-Threat-Detection-System-with-Explainability",
     "stars": 0,
     "language": "Python",
-    "topics": [],
-    "pushedAt": "2026-01-08T16:14:52Z"
+    "topics": [
+      "cybersecurity",
+      "explainable-ai",
+      "intrusion-detection",
+      "machine-learning"
+    ],
+    "pushedAt": "2026-07-25T19:23:09Z"
   },
   {
     "name": "Hydroficient-Externship",
-    "desc": "This repository  contains the code, screenshots and final presentation of the extership.",
+    "desc": "Secure IoT (MQTT) pipeline for a hotel water-monitoring system — STRIDE threat model hardened with TLS 1.3/mTLS, HMAC-SHA256, and replay defence, validated by live attack simulation.",
     "url": "https://github.com/Prateek-Pulastya/Hydroficient-Externship",
     "stars": 0,
     "language": "Python",
-    "topics": [],
-    "pushedAt": "2026-04-07T06:16:20Z"
+    "topics": [
+      "iot-security",
+      "mqtt",
+      "stride",
+      "threat-modeling"
+    ],
+    "pushedAt": "2026-07-25T19:25:31Z"
   },
   {
-    "name": "Eco-Travel-Advisor-Conversational-Agent-for-Sustainable-Tourism-Planning-using-the-Rasa-Platform",
-    "desc": "Prateek Pulastya Assignment for Advanced Conversational UI Design and Chatbot Development",
-    "url": "https://github.com/Prateek-Pulastya/Eco-Travel-Advisor-Conversational-Agent-for-Sustainable-Tourism-Planning-using-the-Rasa-Platform",
+    "name": "TODO-APP-Using-Python",
+    "desc": "Simple command-line to-do list app in Python (2021).",
+    "url": "https://github.com/Prateek-Pulastya/TODO-APP-Using-Python",
     "stars": 0,
-    "language": "Python",
-    "topics": [],
-    "pushedAt": "2026-06-18T10:23:33Z"
+    "language": "CSS",
+    "topics": [
+      "beginner-project",
+      "python"
+    ],
+    "pushedAt": "2026-07-25T19:44:49Z"
   },
   {
-    "name": "Guardrail-As-A-Service",
-    "desc": "No description provided.",
-    "url": "https://github.com/Prateek-Pulastya/Guardrail-As-A-Service",
+    "name": "Enhancing-Authentication-and-Authorization-in-Cloud-Services-Using-Blockchain",
+    "desc": "MSc thesis — enhancing authentication and authorization in cloud services using blockchain.",
+    "url": "https://github.com/Prateek-Pulastya/Enhancing-Authentication-and-Authorization-in-Cloud-Services-Using-Blockchain",
     "stars": 0,
     "language": "HTML",
-    "topics": [],
-    "pushedAt": "2026-03-28T19:53:44Z"
+    "topics": [
+      "authentication",
+      "blockchain",
+      "cloud-security",
+      "msc-thesis"
+    ],
+    "pushedAt": "2026-07-25T19:42:19Z"
   },
   {
     "name": "Outamation-Externship",
-    "desc": "No description provided.",
+    "desc": "Document-intelligence pipeline for 200+ page mortgage documents — OCR (Tesseract, PaddleOCR), PyMuPDF parsing, and LlamaIndex RAG with open-source LLM evaluation.",
     "url": "https://github.com/Prateek-Pulastya/Outamation-Externship",
     "stars": 0,
     "language": "Jupyter Notebook",
-    "topics": [],
-    "pushedAt": "2026-03-14T12:06:22Z"
+    "topics": [
+      "document-intelligence",
+      "llamaindex",
+      "nlp",
+      "ocr"
+    ],
+    "pushedAt": "2026-07-25T19:30:53Z"
   }
 ]

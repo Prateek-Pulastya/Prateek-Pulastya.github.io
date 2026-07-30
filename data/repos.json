@@ -42,6 +42,15 @@
     "pushedAt": "2026-07-25T19:25:31Z"
   },
   {
+    "name": "security-compliance-academy",
+    "desc": "No description provided.",
+    "url": "https://github.com/Prateek-Pulastya/security-compliance-academy",
+    "stars": 0,
+    "language": "TypeScript",
+    "topics": [],
+    "pushedAt": "2026-07-30T13:37:54Z"
+  },
+  {
     "name": "TODO-APP-Using-Python",
     "desc": "Simple command-line to-do list app in Python (2021).",
     "url": "https://github.com/Prateek-Pulastya/TODO-APP-Using-Python",
@@ -66,19 +75,5 @@
       "msc-thesis"
     ],
     "pushedAt": "2026-07-25T19:42:19Z"
-  },
-  {
-    "name": "Outamation-Externship",
-    "desc": "Document-intelligence pipeline for 200+ page mortgage documents — OCR (Tesseract, PaddleOCR), PyMuPDF parsing, and LlamaIndex RAG with open-source LLM evaluation.",
-    "url": "https://github.com/Prateek-Pulastya/Outamation-Externship",
-    "stars": 0,
-    "language": "Jupyter Notebook",
-    "topics": [
-      "document-intelligence",
-      "llamaindex",
-      "nlp",
-      "ocr"
-    ],
-    "pushedAt": "2026-07-25T19:30:53Z"
   }
 ]

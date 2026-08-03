@@ -1,5 +1,17 @@
 [
   {
+    "title": "I built a prompt injection detector and then spent three months proving it didn’t work",
+    "link": "https://prateekpulastya.medium.com/i-built-a-prompt-injection-detector-and-then-spent-three-months-proving-it-didnt-work-91955e5410c9",
+    "date": "Mon, 03 Aug 2026 08:33:29 GMT",
+    "desc": "The first number looked great. 1.000 recall, zero false positives. Every attack blocked, every legitimate prompt passed through. I was basically done. Then I ran a real holdout and got…",
+    "tags": [
+      "cybersecurity",
+      "guardrail",
+      "artificial-intelligence"
+    ],
+    "readingMinutes": 7
+  },
+  {
     "title": "How I Chained Three Bugs to XSS an Intigriti CTF — IDOR + DOM Clobbering + DOMPurify 3.0.9 Bypass",
     "link": "https://prateekpulastya.medium.com/how-i-chained-three-bugs-to-xss-an-intigriti-ctf-idor-dom-clobbering-dompurify-3-0-9-bypass-25b74fc7afc7",
     "date": "Mon, 25 May 2026 09:54:11 GMT",
@@ -58,17 +70,5 @@
       "tryhackme-walkthrough"
     ],
     "readingMinutes": 6
-  },
-  {
-    "title": "TryHackMe Walkthrough: AI/ML Security Threats",
-    "link": "https://prateekpulastya.medium.com/tryhackme-walkthrough-ai-ml-security-threats-0a8c42a7555e",
-    "date": "Wed, 25 Mar 2026 05:31:00 GMT",
-    "desc": "A technical walkthrough covering the AI/ML threat landscape, attack taxonomy, defensive strategies, and practical application of AI as a cyber assistant — mapped to MITRE ATLAS…",
-    "tags": [
-      "threat-intelligence",
-      "tryhackme",
-      "machine-learning"
-    ],
-    "readingMinutes": 4
   }
 ]

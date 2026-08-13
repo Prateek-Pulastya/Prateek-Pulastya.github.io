@@ -1,7 +1,19 @@
 [
   {
+    "title": "I built an app with six security bugs on purpose. The hard part wasn’t fixing them.",
+    "link": "https://prateekpulastya.medium.com/i-built-an-app-with-six-security-bugs-on-purpose-the-hard-part-wasnt-fixing-them-f259309c08c8",
+    "date": "Thu, 13 Aug 2026 18:46:44 GMT",
+    "desc": "I break into things for a living, or at least for sport. Most of my security work points one direction: find the bug, prove it, write it up. So I wanted to build something that pointed the…",
+    "tags": [
+      "cloud-security",
+      "bug-bounty-tips",
+      "secure-coding"
+    ],
+    "readingMinutes": 5
+  },
+  {
     "title": "I built a prompt injection detector and then spent three months proving it didn’t work",
-    "link": "https://prateekpulastya.medium.com/i-built-a-prompt-injection-detector-and-then-spent-three-months-proving-it-didnt-work-91955e5410c9",
+    "link": "https://blog.securitybreak.io/i-built-a-prompt-injection-detector-and-then-spent-three-months-proving-it-didnt-work-91955e5410c9",
     "date": "Mon, 03 Aug 2026 08:33:29 GMT",
     "desc": "The first number looked great. 1.000 recall, zero false positives. Every attack blocked, every legitimate prompt passed through. I was basically done. Then I ran a real holdout and got…",
     "tags": [
@@ -13,7 +25,7 @@
   },
   {
     "title": "How I Chained Three Bugs to XSS an Intigriti CTF — IDOR + DOM Clobbering + DOMPurify 3.0.9 Bypass",
-    "link": "https://prateekpulastya.medium.com/how-i-chained-three-bugs-to-xss-an-intigriti-ctf-idor-dom-clobbering-dompurify-3-0-9-bypass-25b74fc7afc7",
+    "link": "https://infosecwriteups.com/how-i-chained-three-bugs-to-xss-an-intigriti-ctf-idor-dom-clobbering-dompurify-3-0-9-bypass-25b74fc7afc7",
     "date": "Mon, 25 May 2026 09:54:11 GMT",
     "desc": "Intigriti May 2026 XSS Challenge — full write-up I spent a few hours on the Intigriti May 2026 challenge and ended up alert(document.domain) firing in headless Chromium. No single bug did…",
     "tags": [
@@ -37,7 +49,7 @@
   },
   {
     "title": "How I Found a GraphQL Endpoint Leaking Millions",
-    "link": "https://prateekpulastya.medium.com/how-i-found-a-graphql-endpoint-leaking-millions-5cbfd55d994e",
+    "link": "https://infosecwriteups.com/how-i-found-a-graphql-endpoint-leaking-millions-5cbfd55d994e",
     "date": "Mon, 20 Apr 2026 05:29:43 GMT",
     "desc": "User Records Without Authentication Introduction This write-up covers a mass user enumeration vulnerability I discovered during a bug bounty engagement on a large e-commerce marketplace…",
     "tags": [
@@ -56,18 +68,6 @@
       "bug-bounty",
       "cybersecurity",
       "vulnerability"
-    ],
-    "readingMinutes": 6
-  },
-  {
-    "title": "TryHackMe Walkthrough — Input Manipulation & Prompt Injection",
-    "link": "https://prateekpulastya.medium.com/tryhackme-walkthrough-input-manipulation-prompt-injection-68795192eff8",
-    "date": "Wed, 25 Mar 2026 13:59:19 GMT",
-    "desc": "A hands-on walkthrough covering system prompt leakage, jailbreaking techniques, direct and indirect prompt injection, and live exploitation of an LLM-powered HR chatbot — mapped to OWASP…",
-    "tags": [
-      "llm",
-      "artificial-intelligence",
-      "tryhackme-walkthrough"
     ],
     "readingMinutes": 6
   }

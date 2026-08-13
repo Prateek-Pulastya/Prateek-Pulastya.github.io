@@ -42,6 +42,20 @@
     "pushedAt": "2026-07-25T19:25:31Z"
   },
   {
+    "name": "securefix",
+    "desc": "Six web vulnerabilities, each with a working exploit, a fix, a custom Semgrep rule, and a CI gate. Secure code review + detection-as-code in TypeScript.",
+    "url": "https://github.com/Prateek-Pulastya/securefix",
+    "stars": 0,
+    "language": "TypeScript",
+    "topics": [
+      "application-security",
+      "appsec",
+      "bug-bounty",
+      "devsecops"
+    ],
+    "pushedAt": "2026-08-12T19:39:55Z"
+  },
+  {
     "name": "security-compliance-academy",
     "desc": "No description provided.",
     "url": "https://github.com/Prateek-Pulastya/security-compliance-academy",
@@ -61,19 +75,5 @@
       "python"
     ],
     "pushedAt": "2026-07-25T19:44:49Z"
-  },
-  {
-    "name": "Enhancing-Authentication-and-Authorization-in-Cloud-Services-Using-Blockchain",
-    "desc": "MSc thesis — enhancing authentication and authorization in cloud services using blockchain.",
-    "url": "https://github.com/Prateek-Pulastya/Enhancing-Authentication-and-Authorization-in-Cloud-Services-Using-Blockchain",
-    "stars": 0,
-    "language": "HTML",
-    "topics": [
-      "authentication",
-      "blockchain",
-      "cloud-security",
-      "msc-thesis"
-    ],
-    "pushedAt": "2026-07-25T19:42:19Z"
   }
 ]

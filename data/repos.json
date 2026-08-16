@@ -42,6 +42,20 @@
     "pushedAt": "2026-07-25T19:25:31Z"
   },
   {
+    "name": "ATSGuard",
+    "desc": "Stops hidden prompt injection in resumes from hijacking AI/LLM applicant tracking systems. Python, defense-in-depth: 0% false positives, 98.8% recall.",
+    "url": "https://github.com/Prateek-Pulastya/ATSGuard",
+    "stars": 0,
+    "language": "Python",
+    "topics": [
+      "ai-safety",
+      "applicant-tracking-system",
+      "appsec",
+      "defensive-security"
+    ],
+    "pushedAt": "2026-08-16T16:14:47Z"
+  },
+  {
     "name": "security-compliance-academy",
     "desc": "No description provided.",
     "url": "https://github.com/Prateek-Pulastya/security-compliance-academy",
@@ -63,17 +77,5 @@
       "devsecops"
     ],
     "pushedAt": "2026-08-13T13:36:51Z"
-  },
-  {
-    "name": "TODO-APP-Using-Python",
-    "desc": "Simple command-line to-do list app in Python (2021).",
-    "url": "https://github.com/Prateek-Pulastya/TODO-APP-Using-Python",
-    "stars": 0,
-    "language": "CSS",
-    "topics": [
-      "beginner-project",
-      "python"
-    ],
-    "pushedAt": "2026-07-25T19:44:49Z"
   }
 ]

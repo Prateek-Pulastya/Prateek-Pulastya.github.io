@@ -42,6 +42,15 @@
     "pushedAt": "2026-07-25T19:25:31Z"
   },
   {
+    "name": "security-compliance-academy",
+    "desc": "No description provided.",
+    "url": "https://github.com/Prateek-Pulastya/security-compliance-academy",
+    "stars": 0,
+    "language": "TypeScript",
+    "topics": [],
+    "pushedAt": "2026-08-20T07:35:26Z"
+  },
+  {
     "name": "ATSGuard",
     "desc": "Stops hidden prompt injection in resumes from hijacking AI/LLM applicant tracking systems. Python, defense-in-depth: 0% false positives, 98.8% recall.",
     "url": "https://github.com/Prateek-Pulastya/ATSGuard",
@@ -54,15 +63,6 @@
       "defensive-security"
     ],
     "pushedAt": "2026-08-17T20:05:08Z"
-  },
-  {
-    "name": "security-compliance-academy",
-    "desc": "No description provided.",
-    "url": "https://github.com/Prateek-Pulastya/security-compliance-academy",
-    "stars": 0,
-    "language": "TypeScript",
-    "topics": [],
-    "pushedAt": "2026-08-16T10:56:31Z"
   },
   {
     "name": "securefix",

@@ -43,12 +43,17 @@
   },
   {
     "name": "security-compliance-academy",
-    "desc": "No description provided.",
+    "desc": "Free, cited control-to-framework crosswalk (ISO 27001 · NIST CSF · SOC 2 · CIS · GDPR) with a machine-readable dataset and hands-on labs.",
     "url": "https://github.com/Prateek-Pulastya/security-compliance-academy",
     "stars": 0,
     "language": "TypeScript",
-    "topics": [],
-    "pushedAt": "2026-08-20T07:35:26Z"
+    "topics": [
+      "appsec",
+      "cloud-security",
+      "compliance",
+      "control-mapping"
+    ],
+    "pushedAt": "2026-08-21T20:02:38Z"
   },
   {
     "name": "ATSGuard",

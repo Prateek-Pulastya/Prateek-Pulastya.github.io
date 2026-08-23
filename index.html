@@ -309,6 +309,20 @@ html[data-theme="dark"] .sev.high { background: #33220f; color: #e8a866; }
 .verify { font-family: var(--mono); font-size: .72rem; color: var(--accent); text-decoration: none; white-space: nowrap; }
 .verify:hover { text-decoration: underline; }
 
+/* ---------- skills gained (under each project & credential) ---------- */
+.skills-learned { margin-top: .9rem; padding-top: .72rem; border-top: 1px dashed var(--line-2); }
+.skills-learned .lbl {
+  font-family: var(--mono); font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); display: block; margin-bottom: .48rem;
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: .34rem; }
+.skill-tag {
+  font-size: .715rem; font-weight: 500; line-height: 1.3;
+  padding: .2rem .55rem; border-radius: 100px;
+  background: var(--accent-2); color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
 /* ---------- feed (blog / repos) ---------- */
 .feed-item { display: block; text-decoration: none; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 1.15rem 1.2rem; transition: border-color .15s, transform .15s; }
 .feed-item:hover { border-color: var(--accent); transform: translateY(-2px); }
@@ -380,7 +394,8 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem; }
       <div class="fact"><dt>Based in</dt><dd>Berlin, Germany</dd></div>
       <div class="fact"><dt>Languages</dt><dd>English (C1+) · German (A2) · Spanish (A2)</dd></div>
       <div class="fact"><dt>Focus</dt><dd>AI/LLM Security · AppSec · Product Security</dd></div>
-      <div class="fact"><dt>Experience</dt><dd>5+ yrs security, incl. 2 yrs security engineering</dd></div>
+      <div class="fact"><dt>Certified</dt><dd>AWS Security – Specialty · Solutions Architect · CLLMSP</dd></div>
+      <div class="fact"><dt>Experience</dt><dd>In cybersecurity since 2020 · independent research since 2025</dd></div>
       <div class="fact"><dt>Education</dt><dd>MSc Cybersecurity · MSc AI (in progress)</dd></div>
     </dl>
 
@@ -565,10 +580,72 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem; }
             misquoted downstream.
           </p>
         </div>
+
+        <div class="skills-learned">
+          <span class="lbl">Skills demonstrated</span>
+          <div class="skill-tags">
+            <span class="skill-tag">Adversarial ML evaluation</span>
+            <span class="skill-tag">Generalisation / held-out testing</span>
+            <span class="skill-tag">ONNX inference</span>
+            <span class="skill-tag">Latency-critical design</span>
+            <span class="skill-tag">Detection engineering</span>
+            <span class="skill-tag">Honest benchmarking</span>
+          </div>
+        </div>
       </div>
     </article>
 
     <div class="grid-3" style="margin-top:1.5rem">
+      <article class="card">
+        <p class="eyebrow">Project · AppSec · Detection-as-code</p>
+        <h3 style="font-size:1rem;margin:.45rem 0 .55rem">SecureFix</h3>
+        <p class="small" style="color:var(--ink-2)">
+          Six classic web vulnerabilities — SQLi, IDOR, SSRF, XSS, JWT-signature bypass, prototype
+          pollution — each taken full circle: a working exploit, the fix, a hand-written Semgrep rule,
+          and a CI gate that fails the build if it returns. The SAST gate goes 7 → 0 between the
+          vulnerable and fixed branches. Both sides of the desk: finder's report and defender's PR.
+        </p>
+        <div class="pill-row" style="margin-top:.9rem"><span class="pill">TypeScript</span><span class="pill">Semgrep</span><span class="pill">CI/CD gate</span></div>
+        <p style="margin-top:.9rem">
+          <a class="verify" href="https://prateek-pulastya.github.io/securefix/" rel="noopener">Live walkthrough →</a>
+          &nbsp;·&nbsp;
+          <a class="verify" href="https://github.com/Prateek-Pulastya/securefix" rel="noopener">Source →</a>
+        </p>
+        <div class="skills-learned">
+          <span class="lbl">Skills demonstrated</span>
+          <div class="skill-tags">
+            <span class="skill-tag">Secure code review</span>
+            <span class="skill-tag">Detection-as-code</span>
+            <span class="skill-tag">CI security gates</span>
+            <span class="skill-tag">Exploit development</span>
+            <span class="skill-tag">OWASP Top 10</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <p class="eyebrow">Project · AI security</p>
+        <h3 style="font-size:1rem;margin:.45rem 0 .55rem">ATSGuard</h3>
+        <p class="small" style="color:var(--ink-2)">
+          Stops indirect prompt injection — hidden white-on-white instructions in a résumé that hijack
+          an LLM-based applicant tracking system. A four-layer pipeline reads styling, not just text,
+          strips invisible Unicode and homoglyphs, and routes every file allow / flag / block.
+          0% false positives across 1,200 résumés; 98.8% in-sample recall — and 42.9% held-out,
+          reported honestly.
+        </p>
+        <div class="pill-row" style="margin-top:.9rem"><span class="pill">Python</span><span class="pill">OWASP LLM01</span><span class="pill">Prompt injection</span></div>
+        <p style="margin-top:.9rem"><a class="verify" href="https://github.com/Prateek-Pulastya/ATSGuard" rel="noopener">View source →</a></p>
+        <div class="skills-learned">
+          <span class="lbl">Skills demonstrated</span>
+          <div class="skill-tags">
+            <span class="skill-tag">Indirect prompt-injection defence</span>
+            <span class="skill-tag">Unicode / homoglyph normalisation</span>
+            <span class="skill-tag">Adversarial evaluation</span>
+            <span class="skill-tag">Held-out reporting</span>
+          </div>
+        </div>
+      </article>
+
       <article class="card">
         <p class="eyebrow">Project · ML security</p>
         <h3 style="font-size:1rem;margin:.45rem 0 .55rem">Explainable threat detection</h3>
@@ -579,6 +656,15 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem; }
         </p>
         <div class="pill-row" style="margin-top:.9rem"><span class="pill">Python</span><span class="pill">SHAP</span><span class="pill">CICIDS2017</span></div>
         <p style="margin-top:.9rem"><a class="verify" href="https://github.com/Prateek-Pulastya/AI-Powered-Threat-Detection-System-with-Explainability" rel="noopener">View source →</a></p>
+        <div class="skills-learned">
+          <span class="lbl">Skills demonstrated</span>
+          <div class="skill-tags">
+            <span class="skill-tag">Explainable AI (SHAP)</span>
+            <span class="skill-tag">Intrusion detection</span>
+            <span class="skill-tag">Feature attribution</span>
+            <span class="skill-tag">ML evaluation</span>
+          </div>
+        </div>
       </article>
 
       <article class="card">
@@ -592,6 +678,41 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem; }
         </p>
         <div class="pill-row" style="margin-top:.9rem"><span class="pill">MQTT</span><span class="pill">mTLS</span><span class="pill">STRIDE</span></div>
         <p style="margin-top:.9rem"><a class="verify" href="https://github.com/Prateek-Pulastya/Hydroficient-Externship" rel="noopener">View source →</a></p>
+        <div class="skills-learned">
+          <span class="lbl">Skills demonstrated</span>
+          <div class="skill-tags">
+            <span class="skill-tag">STRIDE threat modelling</span>
+            <span class="skill-tag">TLS / mTLS</span>
+            <span class="skill-tag">Message authentication (HMAC)</span>
+            <span class="skill-tag">Attack simulation</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <p class="eyebrow">Project · GRC</p>
+        <h3 style="font-size:1rem;margin:.45rem 0 .55rem">Security Compliance Academy</h3>
+        <p class="small" style="color:var(--ink-2)">
+          An open platform mapping technical controls to compliance frameworks — ISO 27001:2022,
+          NIST CSF 2.0, SOC 2, GDPR. The differentiator is a cited, machine-readable control crosswalk:
+          every mapping carries a version, a primary-source URL, and a confidence grade with a rationale,
+          published as a fetchable <code class="mono">/controls.json</code> and validated in CI.
+        </p>
+        <div class="pill-row" style="margin-top:.9rem"><span class="pill">Next.js</span><span class="pill">ISO 27001</span><span class="pill">NIST CSF · SOC 2</span></div>
+        <p style="margin-top:.9rem">
+          <a class="verify" href="https://prateek-pulastya.github.io/security-compliance-academy/" rel="noopener">Live site →</a>
+          &nbsp;·&nbsp;
+          <a class="verify" href="https://github.com/Prateek-Pulastya/security-compliance-academy" rel="noopener">Source →</a>
+        </p>
+        <div class="skills-learned">
+          <span class="lbl">Skills demonstrated</span>
+          <div class="skill-tags">
+            <span class="skill-tag">GRC</span>
+            <span class="skill-tag">Control-to-framework mapping</span>
+            <span class="skill-tag">ISO 27001 · SOC 2 · GDPR</span>
+            <span class="skill-tag">Data-schema design</span>
+          </div>
+        </div>
       </article>
 
       <article class="card">
@@ -604,6 +725,15 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem; }
         </p>
         <div class="pill-row" style="margin-top:.9rem"><span class="pill">LlamaIndex</span><span class="pill">RAG</span><span class="pill">PyMuPDF</span></div>
         <p style="margin-top:.9rem"><a class="verify" href="https://github.com/Prateek-Pulastya/Outamation-Externship" rel="noopener">View source →</a></p>
+        <div class="skills-learned">
+          <span class="lbl">Skills demonstrated</span>
+          <div class="skill-tags">
+            <span class="skill-tag">RAG tuning</span>
+            <span class="skill-tag">OCR pipelines</span>
+            <span class="skill-tag">LLM evaluation</span>
+            <span class="skill-tag">Retrieval optimisation</span>
+          </div>
+        </div>
       </article>
     </div>
   </div>
@@ -730,20 +860,6 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem; }
       </article>
 
       <article class="job">
-        <div class="when">Mar 2023 — Feb 2025</div>
-        <div>
-          <h3>Cyber Security Engineer</h3>
-          <p class="org">SK International Pvt. Ltd.</p>
-          <ul>
-            <li>Application and API security assessments with Burp Suite Professional, Nmap and Tenable Nessus against the OWASP Top 10, working with developers through remediation.</li>
-            <li>Embedded security into the SDLC via threat modelling, secure design review, dependency analysis and CI/CD security validation.</li>
-            <li>Engineered monitoring and incident-response workflows in Microsoft Sentinel and Defender for Endpoint, automating operations in Python and PowerShell.</li>
-            <li>Hardened AWS and Azure through IAM least-privilege, MFA, secure configuration baselines and continuous vulnerability management.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="job">
         <div class="when">Aug 2022 — Mar 2025<span class="loc">Dublin, Ireland</span></div>
         <div>
           <h3>Event Security Officer</h3>
@@ -817,9 +933,9 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem; }
       <h3>Application &amp; API security</h3>
       <div class="pill-row">
         <span class="pill on">OWASP Top 10</span><span class="pill on">Threat modelling (STRIDE)</span>
-        <span class="pill">Burp Suite Pro</span><span class="pill">Secure code review</span>
-        <span class="pill">Secure SDLC</span><span class="pill">API security</span>
-        <span class="pill">CI/CD security validation</span>
+        <span class="pill on">Detection-as-code (Semgrep)</span><span class="pill">Burp Suite Pro</span>
+        <span class="pill">Secure code review</span><span class="pill">Secure SDLC</span>
+        <span class="pill">API security</span><span class="pill">CI/CD security gates</span>
       </div>
     </div>
 
@@ -833,12 +949,13 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem; }
     </div>
 
     <div class="skill-group">
-      <h3>Cloud, detection &amp; infrastructure</h3>
+      <h3>Cloud, detection &amp; GRC</h3>
       <div class="pill-row">
-        <span class="pill">AWS · Azure · OCI</span><span class="pill">IAM least-privilege</span>
-        <span class="pill">Microsoft Sentinel</span><span class="pill">Defender for Endpoint</span>
-        <span class="pill">Splunk</span><span class="pill">Docker</span>
-        <span class="pill">Prometheus · Grafana</span><span class="pill">ISO 27001 · NIST CSF</span>
+        <span class="pill on">AWS (Security Specialty · SAA)</span><span class="pill">Azure · OCI</span>
+        <span class="pill">IAM least-privilege</span><span class="pill">Microsoft Sentinel</span>
+        <span class="pill">Defender for Endpoint</span><span class="pill">Splunk</span>
+        <span class="pill">Docker</span><span class="pill">Prometheus · Grafana</span>
+        <span class="pill">ISO 27001 · NIST CSF · SOC 2 · GDPR</span>
       </div>
     </div>
 
@@ -864,8 +981,53 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem; }
 
         <div class="cert">
           <div class="body">
+            <h3>AWS Certified Security — Specialty</h3>
+            <p class="iss">Amazon Web Services · Aug 2026 – Aug 2029 · ID 2917b25633b64577b4f24a213ff67c44</p>
+            <div class="skills-learned">
+              <span class="lbl">Skills gained</span>
+              <div class="skill-tags">
+                <span class="skill-tag">Cloud security architecture</span>
+                <span class="skill-tag">IAM &amp; data protection</span>
+                <span class="skill-tag">Threat detection &amp; logging</span>
+                <span class="skill-tag">Incident response</span>
+                <span class="skill-tag">Infrastructure security</span>
+              </div>
+            </div>
+          </div>
+          <a class="verify" href="https://aws.amazon.com/verification" rel="noopener">Verify →</a>
+        </div>
+
+        <div class="cert">
+          <div class="body">
+            <h3>AWS Certified Solutions Architect — Associate</h3>
+            <p class="iss">Amazon Web Services · Aug 2026 – Aug 2029 · ID 0130ce1480db446590875575e918000c</p>
+            <div class="skills-learned">
+              <span class="lbl">Skills gained</span>
+              <div class="skill-tags">
+                <span class="skill-tag">Cloud architecture design</span>
+                <span class="skill-tag">High availability &amp; resilience</span>
+                <span class="skill-tag">VPC networking</span>
+                <span class="skill-tag">Cost &amp; performance optimisation</span>
+              </div>
+            </div>
+          </div>
+          <a class="verify" href="https://aws.amazon.com/verification" rel="noopener">Verify →</a>
+        </div>
+
+        <div class="cert">
+          <div class="body">
             <h3>Certified LLM Security Professional (CLLMSP)</h3>
             <p class="iss">Red Team Leaders · issued June 2026</p>
+            <div class="skills-learned">
+              <span class="lbl">Skills gained</span>
+              <div class="skill-tags">
+                <span class="skill-tag">OWASP LLM Top 10</span>
+                <span class="skill-tag">Prompt injection</span>
+                <span class="skill-tag">MCP security</span>
+                <span class="skill-tag">Guardrail architecture</span>
+                <span class="skill-tag">NIST AI RMF</span>
+              </div>
+            </div>
           </div>
           <a class="verify" href="https://courses.redteamleaders.com/exam-completion/7fdd1971d57853c3" rel="noopener">Verify →</a>
         </div>
@@ -874,6 +1036,14 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem; }
           <div class="body">
             <h3>Fortinet Certified Associate in Cybersecurity</h3>
             <p class="iss">Fortinet · Oct 2025 – Oct 2027 · ID 7813549201PP</p>
+            <div class="skills-learned">
+              <span class="lbl">Skills gained</span>
+              <div class="skill-tags">
+                <span class="skill-tag">Network security</span>
+                <span class="skill-tag">Firewall fundamentals</span>
+                <span class="skill-tag">Threat landscape</span>
+              </div>
+            </div>
           </div>
           <a class="verify" href="https://training.fortinet.com/admin/tool/certificate/index.php" rel="noopener">Verify →</a>
         </div>
@@ -882,6 +1052,14 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem; }
           <div class="body">
             <h3>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate</h3>
             <p class="iss">Oracle · issued August 2025 · ID 102394776OCI25AICFA</p>
+            <div class="skills-learned">
+              <span class="lbl">Skills gained</span>
+              <div class="skill-tags">
+                <span class="skill-tag">AI / ML fundamentals</span>
+                <span class="skill-tag">OCI AI services</span>
+                <span class="skill-tag">Generative AI basics</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -889,6 +1067,13 @@ footer { border-top: 1px solid var(--line); padding-block: 2rem; }
           <div class="body">
             <h3>Certified Network Security Specialist (CNSS)</h3>
             <p class="iss">ICSI (International CyberSecurity Institute), UK · issued July 2020</p>
+            <div class="skills-learned">
+              <span class="lbl">Skills gained</span>
+              <div class="skill-tags">
+                <span class="skill-tag">Network security fundamentals</span>
+                <span class="skill-tag">Defensive controls</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

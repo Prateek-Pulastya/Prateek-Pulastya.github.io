@@ -1,5 +1,17 @@
 [
   {
+    "title": "I built a defense against resume prompt injection. Then I broke it myself.",
+    "link": "https://prateekpulastya.medium.com/i-built-a-defense-against-resume-prompt-injection-then-i-broke-it-myself-7d6f98ce33c6",
+    "date": "Sun, 23 Aug 2026 18:52:20 GMT",
+    "desc": "In 2024, people worked out a way to game AI resume screening. Hide a line of white, 2-point text in your resume. A recruiter can’t see it. The screening model reads every character anyway…",
+    "tags": [
+      "cybersecurity",
+      "at",
+      "prompt-injection"
+    ],
+    "readingMinutes": 4
+  },
+  {
     "title": "I built an app with six security bugs on purpose. The hard part wasn’t fixing them.",
     "link": "https://meetcyber.net/i-built-an-app-with-six-security-bugs-on-purpose-the-hard-part-wasnt-fixing-them-f259309c08c8",
     "date": "Thu, 13 Aug 2026 18:46:44 GMT",
@@ -58,17 +70,5 @@
       "bug-bounty"
     ],
     "readingMinutes": 4
-  },
-  {
-    "title": "Breaking Into a Major Email Platform With Two Vulnerabilities",
-    "link": "https://prateekpulastya.medium.com/breaking-into-a-major-email-platform-with-two-vulnerabilities-5deed8efbb81",
-    "date": "Sat, 18 Apr 2026 08:57:59 GMT",
-    "desc": "CORS Misconfiguration (Critical 9.3) + Subdomain Takeover (High 7.5) Introduction What Is This About? This is a technical write-up of two security vulnerabilities I found while doing bug…",
-    "tags": [
-      "bug-bounty",
-      "cybersecurity",
-      "vulnerability"
-    ],
-    "readingMinutes": 6
   }
 ]

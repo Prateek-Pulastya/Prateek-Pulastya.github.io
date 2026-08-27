@@ -42,6 +42,20 @@
     "pushedAt": "2026-07-25T19:25:31Z"
   },
   {
+    "name": "soc-detection-lab",
+    "desc": "Home SOC detection-engineering lab: Wazuh + Sysmon, ATT&CK techniques detonated with Atomic Red Team, detected with Sigma-authored rules, plus an evaluated AI-assisted triage layer (7/10 detected, gaps documented).",
+    "url": "https://github.com/Prateek-Pulastya/soc-detection-lab",
+    "stars": 0,
+    "language": "Python",
+    "topics": [
+      "atomic-red-team",
+      "blue-team",
+      "detection-engineering",
+      "mitre-attack"
+    ],
+    "pushedAt": "2026-08-27T16:04:13Z"
+  },
+  {
     "name": "security-compliance-academy",
     "desc": "Free, cited control-to-framework crosswalk (ISO 27001 · NIST CSF · SOC 2 · CIS · GDPR) with a machine-readable dataset and hands-on labs.",
     "url": "https://github.com/Prateek-Pulastya/security-compliance-academy",
@@ -68,19 +82,5 @@
       "defensive-security"
     ],
     "pushedAt": "2026-08-17T20:05:08Z"
-  },
-  {
-    "name": "securefix",
-    "desc": "Six web vulnerabilities, each with a working exploit, a fix, a custom Semgrep rule, and a CI gate. Secure code review + detection-as-code in TypeScript.",
-    "url": "https://github.com/Prateek-Pulastya/securefix",
-    "stars": 0,
-    "language": "TypeScript",
-    "topics": [
-      "application-security",
-      "appsec",
-      "bug-bounty",
-      "devsecops"
-    ],
-    "pushedAt": "2026-08-13T13:36:51Z"
   }
 ]

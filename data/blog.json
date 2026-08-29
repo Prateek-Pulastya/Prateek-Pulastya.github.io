@@ -1,5 +1,17 @@
 [
   {
+    "title": "What I Learned Reversing Embeddings for OWASP’s GenAI Red Team Lab Subtitle: A merged pull request…",
+    "link": "https://prateekpulastya.medium.com/what-i-learned-reversing-embeddings-for-owasps-genai-red-team-lab-subtitle-a-merged-pull-request-ec180ffb45d8",
+    "date": "Sat, 29 Aug 2026 14:55:43 GMT",
+    "desc": "What I Learned Reversing Embeddings for OWASP’s GenAI Red Team Lab Subtitle: A merged pull request, a threat model that had to change, and an attack that only sort of worked Three weeks ago…",
+    "tags": [
+      "red-teaming",
+      "penetration-testing",
+      "llm"
+    ],
+    "readingMinutes": 5
+  },
+  {
     "title": "I built a defense against resume prompt injection. Then I broke it myself.",
     "link": "https://prateekpulastya.medium.com/i-built-a-defense-against-resume-prompt-injection-then-i-broke-it-myself-7d6f98ce33c6",
     "date": "Sun, 23 Aug 2026 18:52:20 GMT",
@@ -58,17 +70,5 @@
       "ethical-hacking"
     ],
     "readingMinutes": 5
-  },
-  {
-    "title": "How I Found a GraphQL Endpoint Leaking Millions",
-    "link": "https://infosecwriteups.com/how-i-found-a-graphql-endpoint-leaking-millions-5cbfd55d994e",
-    "date": "Mon, 20 Apr 2026 05:29:43 GMT",
-    "desc": "User Records Without Authentication Introduction This write-up covers a mass user enumeration vulnerability I discovered during a bug bounty engagement on a large e-commerce marketplace…",
-    "tags": [
-      "data-leak-prevention",
-      "graphql",
-      "bug-bounty"
-    ],
-    "readingMinutes": 4
   }
 ]

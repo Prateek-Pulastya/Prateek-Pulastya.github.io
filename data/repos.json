@@ -42,6 +42,15 @@
     "pushedAt": "2026-07-25T19:25:31Z"
   },
   {
+    "name": "cloudfracture",
+    "desc": "Deliberately vulnerable AWS AI-agent security lab — attack, detect, remediate (Terraform + Sigma detections + AppSec CI)",
+    "url": "https://github.com/Prateek-Pulastya/cloudfracture",
+    "stars": 0,
+    "language": "Python",
+    "topics": [],
+    "pushedAt": "2026-09-02T12:58:34Z"
+  },
+  {
     "name": "soc-detection-lab",
     "desc": "Home SOC detection-engineering lab: Wazuh + Sysmon, ATT&CK techniques detonated with Atomic Red Team, detected with Sigma-authored rules, plus an evaluated AI-assisted triage layer (7/10 detected, gaps documented).",
     "url": "https://github.com/Prateek-Pulastya/soc-detection-lab",
@@ -68,19 +77,5 @@
       "control-mapping"
     ],
     "pushedAt": "2026-08-27T07:37:33Z"
-  },
-  {
-    "name": "ATSGuard",
-    "desc": "Stops hidden prompt injection in resumes from hijacking AI/LLM applicant tracking systems. Python, defense-in-depth: 0% false positives, 98.8% recall.",
-    "url": "https://github.com/Prateek-Pulastya/ATSGuard",
-    "stars": 0,
-    "language": "Python",
-    "topics": [
-      "ai-safety",
-      "applicant-tracking-system",
-      "appsec",
-      "defensive-security"
-    ],
-    "pushedAt": "2026-08-17T20:05:08Z"
   }
 ]

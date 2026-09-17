@@ -42,6 +42,15 @@
     "pushedAt": "2026-07-25T19:25:31Z"
   },
   {
+    "name": "cloudfracture",
+    "desc": "Deliberately vulnerable AWS AI-agent security lab — attack, detect, remediate (Terraform + Sigma detections + AppSec CI)",
+    "url": "https://github.com/Prateek-Pulastya/cloudfracture",
+    "stars": 0,
+    "language": "Python",
+    "topics": [],
+    "pushedAt": "2026-09-17T12:42:50Z"
+  },
+  {
     "name": "security-compliance-academy",
     "desc": "Free, cited control-to-framework crosswalk (ISO 27001 · NIST CSF · SOC 2 · CIS · GDPR) with a machine-readable dataset and hands-on labs.",
     "url": "https://github.com/Prateek-Pulastya/security-compliance-academy",
@@ -54,15 +63,6 @@
       "control-mapping"
     ],
     "pushedAt": "2026-09-17T07:36:04Z"
-  },
-  {
-    "name": "cloudfracture",
-    "desc": "Deliberately vulnerable AWS AI-agent security lab — attack, detect, remediate (Terraform + Sigma detections + AppSec CI)",
-    "url": "https://github.com/Prateek-Pulastya/cloudfracture",
-    "stars": 0,
-    "language": "Python",
-    "topics": [],
-    "pushedAt": "2026-09-02T12:58:34Z"
   },
   {
     "name": "soc-detection-lab",

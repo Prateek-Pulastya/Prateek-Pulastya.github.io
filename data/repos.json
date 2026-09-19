@@ -42,6 +42,15 @@
     "pushedAt": "2026-07-25T19:25:31Z"
   },
   {
+    "name": "Smart-Airport-Chatbot",
+    "desc": "Multi Modal Chatbots Assignment",
+    "url": "https://github.com/Prateek-Pulastya/Smart-Airport-Chatbot",
+    "stars": 0,
+    "language": "Jupyter Notebook",
+    "topics": [],
+    "pushedAt": "2026-09-19T08:04:54Z"
+  },
+  {
     "name": "cloudfracture",
     "desc": "Deliberately vulnerable AWS AI-agent security lab — attack, detect, remediate (Terraform + Sigma detections + AppSec CI)",
     "url": "https://github.com/Prateek-Pulastya/cloudfracture",
@@ -63,19 +72,5 @@
       "control-mapping"
     ],
     "pushedAt": "2026-09-17T07:36:04Z"
-  },
-  {
-    "name": "soc-detection-lab",
-    "desc": "Home SOC detection-engineering lab: Wazuh + Sysmon, ATT&CK techniques detonated with Atomic Red Team, detected with Sigma-authored rules, plus an evaluated AI-assisted triage layer (7/10 detected, gaps documented).",
-    "url": "https://github.com/Prateek-Pulastya/soc-detection-lab",
-    "stars": 0,
-    "language": "Python",
-    "topics": [
-      "atomic-red-team",
-      "blue-team",
-      "detection-engineering",
-      "mitre-attack"
-    ],
-    "pushedAt": "2026-08-27T16:04:13Z"
   }
 ]

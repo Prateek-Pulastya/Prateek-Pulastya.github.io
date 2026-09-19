@@ -1,5 +1,17 @@
 [
   {
+    "title": "I solved some OSINT challenges, and the metadata was dead every time",
+    "link": "https://infosecwriteups.com/i-solved-some-osint-challenges-and-the-metadata-was-dead-every-time-cbfa8a2d7c58",
+    "date": "Sat, 19 Sep 2026 13:17:34 GMT",
+    "desc": "EXIF stripped, reverse image search useless, the first bit-plane of a “hidden” file pure noise. Here’s the one move that worked instead, six times running. Six challenges into the Maltego…",
+    "tags": [
+      "osint",
+      "digital-forensics",
+      "cybersecurity"
+    ],
+    "readingMinutes": 6
+  },
+  {
     "title": "What I Learned Reversing Embeddings for OWASP’s GenAI Red Team Lab Subtitle: A merged pull request…",
     "link": "https://prateekpulastya.medium.com/what-i-learned-reversing-embeddings-for-owasps-genai-red-team-lab-subtitle-a-merged-pull-request-ec180ffb45d8",
     "date": "Sat, 29 Aug 2026 14:55:43 GMT",
@@ -58,17 +70,5 @@
       "ctf-writeup"
     ],
     "readingMinutes": 4
-  },
-  {
-    "title": "How an Unrestricted API Key in HTML Source Can Cost a Company $20,000 a Week",
-    "link": "https://prateekpulastya.medium.com/how-an-unrestricted-api-key-in-html-source-can-cost-a-company-20-000-a-week-bcb79d777488",
-    "date": "Thu, 30 Apr 2026 15:54:03 GMT",
-    "desc": "A bug bounty case study: methodology, evidence, and the duplicate verdict that taught me the most. I found two Google Maps Platform API keys hardcoded into the public HTML and JavaScript…",
-    "tags": [
-      "google",
-      "bug-bounty",
-      "ethical-hacking"
-    ],
-    "readingMinutes": 5
   }
 ]

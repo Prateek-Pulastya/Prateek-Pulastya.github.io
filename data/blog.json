@@ -1,7 +1,19 @@
 [
   {
+    "title": "How I reversed a crypto wallet-drainer without running a single byte of it",
+    "link": "https://prateekpulastya.medium.com/how-i-reversed-a-crypto-wallet-drainer-without-running-a-single-byte-of-it-fc404cee50bb",
+    "date": "Wed, 23 Sep 2026 11:40:21 GMT",
+    "desc": "A Holmes CTF 2026 sample hid its decryption key on the Ethereum blockchain and buried its stealer in obfuscated Lua. Here is the fully static path from installer to both flags — no VM, no…",
+    "tags": [
+      "ctf-writeup",
+      "cybersecurity",
+      "ctf"
+    ],
+    "readingMinutes": 7
+  },
+  {
     "title": "I solved some OSINT challenges, and the metadata was dead every time",
-    "link": "https://infosecwriteups.com/i-solved-some-osint-challenges-and-the-metadata-was-dead-every-time-cbfa8a2d7c58",
+    "link": "https://prateekpulastya.medium.com/i-solved-some-osint-challenges-and-the-metadata-was-dead-every-time-cbfa8a2d7c58",
     "date": "Sat, 19 Sep 2026 13:17:34 GMT",
     "desc": "EXIF stripped, reverse image search useless, the first bit-plane of a “hidden” file pure noise. Here’s the one move that worked instead, six times running. Six challenges into the Maltego…",
     "tags": [
@@ -58,17 +70,5 @@
       "artificial-intelligence"
     ],
     "readingMinutes": 7
-  },
-  {
-    "title": "How I Chained Three Bugs to XSS an Intigriti CTF — IDOR + DOM Clobbering + DOMPurify 3.0.9 Bypass",
-    "link": "https://infosecwriteups.com/how-i-chained-three-bugs-to-xss-an-intigriti-ctf-idor-dom-clobbering-dompurify-3-0-9-bypass-25b74fc7afc7",
-    "date": "Mon, 25 May 2026 09:54:11 GMT",
-    "desc": "Intigriti May 2026 XSS Challenge — full write-up I spent a few hours on the Intigriti May 2026 challenge and ended up alert(document.domain) firing in headless Chromium. No single bug did…",
-    "tags": [
-      "bug-bounty",
-      "intigriti",
-      "ctf-writeup"
-    ],
-    "readingMinutes": 4
   }
 ]

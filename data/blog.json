@@ -1,5 +1,17 @@
 [
   {
+    "title": "The spyware wasn't the breach. Windows Search was.",
+    "link": "https://prateekpulastya.medium.com/the-spyware-wasnt-the-breach-windows-search-was-809368abeeb5",
+    "date": "Thu, 24 Sep 2026 10:40:22 GMT",
+    "desc": "A fake employee dropped a USB, hijacked a webcam, and exfiltrated 172 MB. The credentials that actually mattered leaked from a PDF nobody ever opened. The loud part of this case is a movie…",
+    "tags": [
+      "hackthebox",
+      "spyware",
+      "sherlock"
+    ],
+    "readingMinutes": 6
+  },
+  {
     "title": "How I reversed a crypto wallet-drainer without running a single byte of it",
     "link": "https://prateekpulastya.medium.com/how-i-reversed-a-crypto-wallet-drainer-without-running-a-single-byte-of-it-fc404cee50bb",
     "date": "Wed, 23 Sep 2026 11:40:21 GMT",
@@ -58,17 +70,5 @@
       "secure-coding"
     ],
     "readingMinutes": 5
-  },
-  {
-    "title": "I built a prompt injection detector and then spent three months proving it didn’t work",
-    "link": "https://blog.securitybreak.io/i-built-a-prompt-injection-detector-and-then-spent-three-months-proving-it-didnt-work-91955e5410c9",
-    "date": "Mon, 03 Aug 2026 08:33:29 GMT",
-    "desc": "The first number looked great. 1.000 recall, zero false positives. Every attack blocked, every legitimate prompt passed through. I was basically done. Then I ran a real holdout and got…",
-    "tags": [
-      "cybersecurity",
-      "guardrail",
-      "artificial-intelligence"
-    ],
-    "readingMinutes": 7
   }
 ]

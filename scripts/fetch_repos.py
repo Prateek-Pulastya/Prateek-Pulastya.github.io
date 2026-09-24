@@ -22,15 +22,20 @@ MAX_REPOS = 6
 
 PINNED = [
     "Guardrail-As-A-Service-V2",
+    "cloudfracture",
+    "soc-detection-lab",
     "AI-Powered-Threat-Detection-System-with-Explainability",
+    "security-compliance-academy",
     "Hydroficient-Externship",
 ]
 
-# Profile scaffolding and the site itself say nothing about engineering ability.
+# Profile scaffolding and the site itself say nothing about engineering ability;
+# Smart-Airport-Chatbot is a graded course assignment, not security work.
 EXCLUDE = {
     "Prateek-Pulastya",
     "Prateek-Pulastya.github.io",
     "GitHubGraduation-2021",
+    "Smart-Airport-Chatbot",
 }
 
 

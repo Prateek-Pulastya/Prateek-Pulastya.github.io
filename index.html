@@ -355,7 +355,7 @@ html.anim .reveal.in { opacity: 1; transform: none; }
   .reveal { opacity: 1 !important; transform: none !important; }
   a { text-decoration: none; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .68rem; color: #555; word-break: break-all; }
-  .demo, .lens, .kbd-hint, .cmdk { display: none !important; }
+  .demo, .lens, .kbd-hint, .cmdk, .cmdk-fab { display: none !important; }
 }
 
 /* ============ interactive: benchmark honesty lens (B) ============ */
@@ -407,6 +407,12 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
 .cmdk-item[aria-selected="true"], .cmdk-item:hover { background: var(--accent-2); }
 .cmdk-item[aria-selected="true"] .ci-label { color: var(--accent); }
 .cmdk-empty { padding: 1.1rem; font-family: var(--mono); font-size: .82rem; color: var(--muted); }
+/* mobile-only floating trigger for the palette (the ⌘K nav hint is hidden < 900px) */
+.cmdk-fab { display: none; }
+@media (max-width: 900px) {
+  .cmdk-fab { display: inline-flex; align-items: center; justify-content: center; position: fixed; right: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); z-index: 900; width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); border: 0; box-shadow: var(--shadow); font-family: var(--mono); font-size: 1.05rem; font-weight: 700; letter-spacing: -.02em; cursor: pointer; transition: transform .12s cubic-bezier(.16,1,.3,1); }
+  .cmdk-fab:active { transform: scale(.94); }
+}
 </style>
 </head>
 <body>
@@ -696,6 +702,53 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
     </article>
 
     <div class="grid-projects" style="margin-top:1.5rem">
+      <article class="card reveal">
+        <p class="eyebrow">project · cloud security · purple team</p>
+        <h3 style="font-size:1.05rem;margin:.5rem 0 .55rem">CloudFracture</h3>
+        <p class="small" style="color:var(--ink-2)">
+          A deliberately vulnerable LLM-agent workload on AWS, built as code, then compromised across
+          four identity-based attack paths — from the agent's execution role to data exfiltration and
+          prompt-store poisoning. Each attack gets a tested Sigma detection; the IAM is remediated to
+          least-privilege and the attacks proven to then fail; the whole thing ships through CI with
+          SAST, SCA, secret and IaC scanning, and an SBOM. Every claim has evidence.
+        </p>
+        <div class="pill-row" style="margin-top:.95rem"><span class="pill">AWS</span><span class="pill">Terraform</span><span class="pill">Sigma</span><span class="pill">AppSec CI</span></div>
+        <p style="margin-top:.95rem"><a class="verify" href="https://github.com/Prateek-Pulastya/cloudfracture" rel="noopener">View source →</a></p>
+        <div class="skills-learned">
+          <span class="lbl">Skills demonstrated</span>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS IAM attack paths</span>
+            <span class="skill-tag">Infrastructure as code (Terraform)</span>
+            <span class="skill-tag">Detection-as-code (Sigma)</span>
+            <span class="skill-tag">Least-privilege remediation</span>
+            <span class="skill-tag">AppSec CI (SAST · SCA · SBOM)</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <p class="eyebrow">project · blue team · detection engineering</p>
+        <h3 style="font-size:1.05rem;margin:.5rem 0 .55rem">DetectForge — SOC detection lab</h3>
+        <p class="small" style="color:var(--ink-2)">
+          The blue-team mirror of offensive work: stand up a Wazuh SIEM, detonate MITRE ATT&amp;CK
+          techniques with Atomic Red Team, and turn each attack into a tested, ATT&amp;CK-mapped Sigma
+          detection with a documented false-positive profile. 7 / 10 techniques detected on live
+          detonation across six tactics; the three gaps (T1003.001, T1055, T1021.001) are listed, not hidden.
+        </p>
+        <div class="pill-row" style="margin-top:.95rem"><span class="pill">Wazuh</span><span class="pill">Sysmon</span><span class="pill">Sigma</span><span class="pill">MITRE ATT&amp;CK</span></div>
+        <p style="margin-top:.95rem"><a class="verify" href="https://github.com/Prateek-Pulastya/soc-detection-lab" rel="noopener">View source →</a></p>
+        <div class="skills-learned">
+          <span class="lbl">Skills demonstrated</span>
+          <div class="skill-tags">
+            <span class="skill-tag">Detection engineering</span>
+            <span class="skill-tag">Sigma rule authoring</span>
+            <span class="skill-tag">MITRE ATT&amp;CK / Atomic Red Team</span>
+            <span class="skill-tag">SIEM (Wazuh)</span>
+            <span class="skill-tag">Honest evaluation (7/10, gaps documented)</span>
+          </div>
+        </div>
+      </article>
+
       <article class="card reveal">
         <p class="eyebrow">project · AppSec · detection-as-code</p>
         <h3 style="font-size:1.05rem;margin:.5rem 0 .55rem">SecureFix</h3>
@@ -1273,6 +1326,8 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
   </div>
 </footer>
 
+<button class="cmdk-fab" id="cmdkFab" type="button" aria-haspopup="dialog" aria-label="Open command menu">&gt;_</button>
+
 <div class="cmdk" id="cmdk" role="dialog" aria-modal="true" aria-label="Command menu">
   <div class="cmdk-panel">
     <input class="cmdk-input" id="cmdkInput" type="text" role="combobox" aria-expanded="true" aria-controls="cmdkList" aria-autocomplete="list" placeholder="Jump to a section, open a link…" autocomplete="off" spellcheck="false" />
@@ -1606,6 +1661,8 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
     input.addEventListener("input", function () { filtered = matches(input.value); active = 0; draw(); });
     modal.addEventListener("mousedown", function (e) { if (e.target === modal) close(); });
     if (btn) btn.addEventListener("click", open);
+    var fab = document.getElementById("cmdkFab");
+    if (fab) fab.addEventListener("click", open);
     document.addEventListener("keydown", function (e) {
       var combo = (e.key === "k" || e.key === "K") && (e.metaKey || e.ctrlKey);
       var slash = e.key === "/" && !/^(input|textarea|select)$/i.test(e.target.tagName || "") && !e.target.isContentEditable;

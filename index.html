@@ -1442,7 +1442,7 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
     function fmt(v, d) { return v.toFixed(d); }
     function animateNum(from, to, digits) {
       if (raf) cancelAnimationFrame(raf);
-      if (reduce) { numEl.textContent = fmt(to, digits); return; }
+      if (reduce || document.hidden) { numEl.textContent = fmt(to, digits); return; }
       var start = 0, dur = 420;
       function tick(t) {
         if (!start) start = t;

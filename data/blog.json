@@ -1,5 +1,17 @@
 [
   {
+    "title": "I Found SQL Injection Hiding Behind Base64 Encoding in an Intigriti CTF",
+    "link": "https://prateekpulastya.medium.com/i-found-sql-injection-hiding-behind-base64-encoding-in-an-intigriti-ctf-3df65f38f4ab",
+    "date": "Fri, 25 Sep 2026 08:08:06 GMT",
+    "desc": "The sanitizer looked fine. The HTML output was clean. The database was wide open. The app had one job: show you animal pictures. It failed at a second job I didn’t ask it about — keeping…",
+    "tags": [
+      "web-security",
+      "cybersecurity",
+      "sql-injection"
+    ],
+    "readingMinutes": 4
+  },
+  {
     "title": "The spyware wasn't the breach. Windows Search was.",
     "link": "https://prateekpulastya.medium.com/the-spyware-wasnt-the-breach-windows-search-was-809368abeeb5",
     "date": "Thu, 24 Sep 2026 10:40:22 GMT",
@@ -58,17 +70,5 @@
       "prompt-injection"
     ],
     "readingMinutes": 4
-  },
-  {
-    "title": "I built an app with six security bugs on purpose. The hard part wasn’t fixing them.",
-    "link": "https://meetcyber.net/i-built-an-app-with-six-security-bugs-on-purpose-the-hard-part-wasnt-fixing-them-f259309c08c8",
-    "date": "Thu, 13 Aug 2026 18:46:44 GMT",
-    "desc": "I break into things for a living, or at least for sport. Most of my security work points one direction: find the bug, prove it, write it up. So I wanted to build something that pointed the…",
-    "tags": [
-      "cloud-security",
-      "bug-bounty-tips",
-      "secure-coding"
-    ],
-    "readingMinutes": 5
   }
 ]

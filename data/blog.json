@@ -1,7 +1,7 @@
 [
   {
     "title": "I Found SQL Injection Hiding Behind Base64 Encoding in an Intigriti CTF",
-    "link": "https://prateekpulastya.medium.com/i-found-sql-injection-hiding-behind-base64-encoding-in-an-intigriti-ctf-3df65f38f4ab",
+    "link": "https://infosecwriteups.com/i-found-sql-injection-hiding-behind-base64-encoding-in-an-intigriti-ctf-3df65f38f4ab",
     "date": "Fri, 25 Sep 2026 08:08:06 GMT",
     "desc": "The sanitizer looked fine. The HTML output was clean. The database was wide open. The app had one job: show you animal pictures. It failed at a second job I didn’t ask it about — keeping…",
     "tags": [
@@ -37,7 +37,7 @@
   },
   {
     "title": "I solved some OSINT challenges, and the metadata was dead every time",
-    "link": "https://prateekpulastya.medium.com/i-solved-some-osint-challenges-and-the-metadata-was-dead-every-time-cbfa8a2d7c58",
+    "link": "https://osintteam.blog/i-solved-some-osint-challenges-and-the-metadata-was-dead-every-time-cbfa8a2d7c58",
     "date": "Sat, 19 Sep 2026 13:17:34 GMT",
     "desc": "EXIF stripped, reverse image search useless, the first bit-plane of a “hidden” file pure noise. Here’s the one move that worked instead, six times running. Six challenges into the Maltego…",
     "tags": [

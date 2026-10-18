@@ -1,5 +1,17 @@
 [
   {
+    "title": "A drone fell out of the sky, and its own flight recorder was encrypted against me",
+    "link": "https://prateekpulastya.medium.com/a-drone-fell-out-of-the-sky-and-its-own-flight-recorder-was-encrypted-against-me-3aed4e128943",
+    "date": "Sun, 18 Oct 2026 17:46:27 GMT",
+    "desc": "Reversing a custom AES-GCM scheme baked into a PX4 autopilot — and nearly destroying the only copy of the evidence to do it. This is the one that turned a single injected packet into a…",
+    "tags": [
+      "cybersecurity",
+      "hackthebox",
+      "ctf"
+    ],
+    "readingMinutes": 7
+  },
+  {
     "title": "I Found SQL Injection Hiding Behind Base64 Encoding in an Intigriti CTF",
     "link": "https://infosecwriteups.com/i-found-sql-injection-hiding-behind-base64-encoding-in-an-intigriti-ctf-3df65f38f4ab",
     "date": "Fri, 25 Sep 2026 08:08:06 GMT",
@@ -58,17 +70,5 @@
       "llm"
     ],
     "readingMinutes": 5
-  },
-  {
-    "title": "I built a defense against resume prompt injection. Then I broke it myself.",
-    "link": "https://prateekpulastya.medium.com/i-built-a-defense-against-resume-prompt-injection-then-i-broke-it-myself-7d6f98ce33c6",
-    "date": "Sun, 23 Aug 2026 18:52:20 GMT",
-    "desc": "In 2024, people worked out a way to game AI resume screening. Hide a line of white, 2-point text in your resume. A recruiter can’t see it. The screening model reads every character anyway…",
-    "tags": [
-      "cybersecurity",
-      "at",
-      "prompt-injection"
-    ],
-    "readingMinutes": 4
   }
 ]

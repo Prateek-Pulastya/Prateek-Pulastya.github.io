@@ -436,6 +436,9 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
 @media (max-width: 560px) { .hero-split { grid-template-columns: 1fr; } .split-arrow { transform: rotate(90deg); justify-self: center; } }
 .receipt { font-family: var(--mono); font-size: .76rem; color: var(--muted); margin-top: .9rem; }
 .receipt strong { color: var(--defend); font-weight: 500; }
+/* ===== redesign (P2): vulnerability-research = attacker craft (red-accented left edge) ===== */
+.finding--attack { border-left-width: 2px; border-left-color: color-mix(in srgb, var(--attack) 60%, var(--line)); }
+.finding--attack:hover { border-left-color: var(--attack); }
 </style>
 </head>
 <body>
@@ -980,7 +983,7 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
     </p>
 
     <div class="grid-2">
-      <article class="finding reveal">
+      <article class="finding finding--attack reveal">
         <div class="meta"><span class="sev crit">CVSS 9.9</span><span class="status">CWE-94 · via huntr</span></div>
         <h3>Sandbox escape in <span class="mono">smolagents</span></h3>
         <p>
@@ -990,7 +993,7 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
         </p>
       </article>
 
-      <article class="finding reveal">
+      <article class="finding finding--attack reveal">
         <div class="meta"><span class="sev high">High</span><span class="status">Detection bypass · via Intigriti</span></div>
         <h3>Path-traversal bypass in Aikido <span class="mono">firewall-java</span></h3>
         <p>
@@ -999,7 +1002,7 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
         </p>
       </article>
 
-      <article class="finding reveal">
+      <article class="finding finding--attack reveal">
         <div class="meta"><span class="sev crit">Critical</span><span class="status">Closed: duplicate (valid)</span></div>
         <h3>CORS origin reflection → account takeover</h3>
         <p>
@@ -1011,7 +1014,7 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
         </p>
       </article>
 
-      <article class="finding reveal">
+      <article class="finding finding--attack reveal">
         <div class="meta"><span class="sev crit">Critical</span><span class="status">Closed: duplicate (confirmed valid)</span></div>
         <h3>Unauthenticated GraphQL user enumeration — 57M records</h3>
         <p>
@@ -1023,7 +1026,7 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
         </p>
       </article>
 
-      <article class="finding reveal">
+      <article class="finding finding--attack reveal">
         <div class="meta"><span class="sev high">High</span><span class="status">Triaged duplicate · P4</span></div>
         <h3>Unrestricted Google Maps API keys in page source</h3>
         <p>
@@ -1034,7 +1037,7 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
         </p>
       </article>
 
-      <article class="finding reveal">
+      <article class="finding finding--attack reveal">
         <div class="meta"><span class="sev info">Informative</span><span class="status">Closed: theoretical exploitability</span></div>
         <h3>Dangling Route53 delegation → subdomain takeover</h3>
         <p>

@@ -439,6 +439,25 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
 /* ===== redesign (P2): vulnerability-research = attacker craft (red-accented left edge) ===== */
 .finding--attack { border-left-width: 2px; border-left-color: color-mix(in srgb, var(--attack) 60%, var(--line)); }
 .finding--attack:hover { border-left-color: var(--attack); }
+/* ===== redesign (P3): scroll-driven explainer (shared by all 3 flagships) ===== */
+.explainer { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 1.1rem 1.25rem 1.2rem; }
+.explainer-cap { display: flex; gap: .6rem; align-items: baseline; margin-bottom: .9rem; flex-wrap: wrap; }
+.explainer-eyebrow { font-family: var(--mono); font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.step-caption { font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+.pipe { display: grid; gap: 0; position: relative; }
+.pipe::before { content: ""; position: absolute; left: 6px; top: 14px; bottom: 14px; width: 2px; background: var(--line); }
+.explainer .step { display: grid; grid-template-columns: 14px 1fr; gap: .8rem; padding: .5rem 0; align-items: start; }
+.explainer .step > .node { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--line-2); background: var(--surface); margin-top: .15rem; z-index: 1; }
+.explainer .st-tag { font-family: var(--mono); font-size: .76rem; font-weight: 500; color: var(--ink); }
+.explainer .st-tag.att { color: var(--attack); }
+.explainer .st-tag.def { color: var(--defend); }
+.explainer .st-sub { font-family: var(--mono); font-size: .68rem; color: var(--muted); display: block; margin-top: .15rem; line-height: 1.5; }
+.explainer .st-receipt { font-family: var(--mono); font-size: .68rem; color: var(--defend); display: block; margin-top: .25rem; }
+.explainer .st-sub code { color: var(--ink-2); }
+html.anim .explainer .step > .node { transition: border-color .3s ease, background .3s ease, box-shadow .3s ease; }
+.explainer .step.is-on > .node { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
+.explainer .step.is-on:has(.st-tag.att) > .node { border-color: var(--attack); background: var(--attack); box-shadow: 0 0 0 3px color-mix(in srgb, var(--attack) 22%, transparent); }
+.explainer .step.is-on:has(.st-tag.def) > .node { border-color: var(--defend); background: var(--defend); }
 </style>
 </head>
 <body>
@@ -588,6 +607,19 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
       </div>
 
       <div class="feature-body">
+        <figure class="explainer" id="gr-explainer" data-steps="5" aria-label="How GuardRail processes a prompt">
+          <figcaption class="explainer-cap">
+            <span class="explainer-eyebrow">how it works</span>
+            <span class="step-caption">A prompt enters the two-tier filter.</span>
+          </figcaption>
+          <div class="pipe">
+            <div class="step" data-step="0"><span class="node" aria-hidden="true"></span><div><span class="st-tag att">payload · untrusted</span><span class="st-sub"><code>1gn0r3 prev10us 1nstruct10ns</code></span></div></div>
+            <div class="step" data-step="1"><span class="node" aria-hidden="true"></span><div><span class="st-tag">Tier 1 · deterministic</span><span class="st-sub">normalise, then Aho-Corasick + regex scan · p50 0.14 ms</span></div></div>
+            <div class="step" data-step="2"><span class="node" aria-hidden="true"></span><div><span class="st-tag">de-leet + strip pass</span><span class="st-sub"><code>1gn0r3</code> → <code>ignore</code>; separators removed</span></div></div>
+            <div class="step" data-step="3"><span class="node" aria-hidden="true"></span><div><span class="st-tag">Tier 2 · DeBERTa</span><span class="st-sub">scores it, monitor-only — never blocks</span></div></div>
+            <div class="step" data-step="4"><span class="node" aria-hidden="true"></span><div><span class="st-tag def">verdict</span><span class="st-sub">BLOCK at Tier 1, or PASS → Tier 2</span><span class="st-receipt">held-out 0.7895 · 4 external benchmarks</span></div></div>
+          </div>
+        </figure>
         <div class="callout">
           <div class="t">The number I lead with is the weaker one</div>
           <p>
@@ -1774,6 +1806,39 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
       requestAnimationFrame(function () { tick = false; fn(); });
     }, { passive: true });
   };
+})();
+</script>
+
+<script>
+/* Explainer controllers — run after the motion layer above is defined.
+   Fail-safe: content is complete/static by default; when motion is off we light every
+   step and show the final caption, so the diagram reads fully without any scrolling. */
+(function () {
+  "use strict";
+  function wire(id, caps) {
+    var fig = document.getElementById(id); if (!fig) return;
+    var steps = [].slice.call(fig.querySelectorAll(".step"));
+    var cap = fig.querySelector(".step-caption");
+    function light(n) {
+      steps.forEach(function (s, i) { s.classList.toggle("is-on", i <= n); });
+      if (cap && caps[n]) cap.textContent = caps[n];
+    }
+    if (!window.MOTION_OK) {
+      steps.forEach(function (s) { s.classList.add("is-on"); });
+      if (cap) cap.textContent = caps[caps.length - 1];
+      return;
+    }
+    light(0);
+    window.armOnEnter(fig, function () { light(0); });
+    window.onScroll(function () { light(Math.round(window.scrollProgress(fig) * (steps.length - 1))); });
+  }
+  wire("gr-explainer", [
+    "A prompt enters the two-tier filter.",
+    "Tier 1 normalises, then scans with Aho-Corasick + regex.",
+    "A de-leet pass strips separators — 1gn0r3 becomes ignore.",
+    "Tier 2 (DeBERTa) scores it, monitor-only — it never blocks.",
+    "Verdict: blocked at Tier 1, or passed to Tier 2. Reported held-out 0.7895."
+  ]);
 })();
 </script>
 </body>

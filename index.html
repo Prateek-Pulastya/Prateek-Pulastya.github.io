@@ -818,6 +818,18 @@ html.anim .explainer .step > .node { transition: border-color .3s ease, backgrou
           SAST, SCA, secret and IaC scanning, and an SBOM. Every claim has evidence.
         </p>
         <div class="pill-row" style="margin-top:.95rem"><span class="pill">AWS</span><span class="pill">Terraform</span><span class="pill">Sigma</span><span class="pill">AppSec CI</span></div>
+        <figure class="explainer" id="cf-explainer" data-steps="4" style="margin-top:1rem" aria-label="How CloudFracture closes an attack path">
+          <figcaption class="explainer-cap">
+            <span class="explainer-eyebrow">how it works</span>
+            <span class="step-caption">An identity-based attack path is exploited.</span>
+          </figcaption>
+          <div class="pipe">
+            <div class="step" data-step="0"><span class="node" aria-hidden="true"></span><div><span class="st-tag att">IAM attack path</span><span class="st-sub">agent execution role → data exfiltration · prompt-store poisoning</span></div></div>
+            <div class="step" data-step="1"><span class="node" aria-hidden="true"></span><div><span class="st-tag">Sigma detection fires</span><span class="st-sub">tested detection-as-code, one per attack</span></div></div>
+            <div class="step" data-step="2"><span class="node" aria-hidden="true"></span><div><span class="st-tag">remediate</span><span class="st-sub">IAM rewritten to least-privilege</span></div></div>
+            <div class="step" data-step="3"><span class="node" aria-hidden="true"></span><div><span class="st-tag def">attack now fails</span><span class="st-sub">re-run proves the close</span><span class="st-receipt">shipped via AppSec CI · SAST · SCA · SBOM</span></div></div>
+          </div>
+        </figure>
         <p style="margin-top:.95rem"><a class="verify" href="https://github.com/Prateek-Pulastya/cloudfracture" rel="noopener">View source →</a></p>
         <div class="skills-learned">
           <span class="lbl">Skills demonstrated</span>
@@ -1858,6 +1870,12 @@ html.anim .explainer .step > .node { transition: border-color .3s ease, backgrou
     "It normalises: strips invisible Unicode, folds homoglyphs, undoes leetspeak.",
     "What's left is scored and routed: allow, flag, or block.",
     "Verdict: the injection is blocked before the model sees it. 0% FP; held-out 42.9%, reported honestly."
+  ]);
+  wire("cf-explainer", [
+    "An identity-based attack path is exploited.",
+    "A tested Sigma detection fires on the attack.",
+    "The IAM is remediated to least-privilege.",
+    "Re-run: the attack now fails. Shipped through AppSec CI (SAST, SCA, SBOM)."
   ]);
 })();
 </script>

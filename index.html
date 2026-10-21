@@ -702,6 +702,38 @@ tr.spotlight td { outline: 2px solid var(--accent); outline-offset: -2px; }
     </article>
 
     <div class="grid-projects" style="margin-top:1.5rem">
+      <!-- AI Red-Team Workbench portfolio card. HELD until milestone M1 (walking skeleton) is real.
+           The repo is pre-alpha (it does not scan anything yet), so this must not go live claiming results.
+           It is held inert inside a <template> element (not rendered) rather than inside an HTML comment,
+           because the card uses CSS custom properties whose names contain a double hyphen, which HTML
+           comments disallow. TO PUBLISH AT M1: delete the opening <template id="..."> tag and its matching
+           closing tag, leaving the <article> as the first card in this grid. -->
+      <template id="card-ai-redteam-workbench">
+      <article class="card reveal">
+        <p class="eyebrow">project · AI security · tooling</p>
+        <h3 style="font-size:1.05rem;margin:.5rem 0 .55rem">AI Red-Team Workbench</h3>
+        <p class="small" style="color:var(--ink-2)">
+          Open-source security testing for AI applications and their APIs — LLM, RAG and agent attack
+          paths plus API authorization, each proven with server-side evidence rather than model opinion.
+          Findings are oracle-scored, recorded in a hash-chained evidence log, and turned into regression
+          tests so a fixed bug fails the build if it returns. The scanner refuses any endpoint outside its
+          configured authorization scope and never infers permission from reachability.
+        </p>
+        <div class="pill-row" style="margin-top:.95rem"><span class="pill">Python</span><span class="pill">LLM / RAG / agents</span><span class="pill">API security</span><span class="pill">CI regression</span></div>
+        <p style="margin-top:.95rem"><a class="verify" href="https://github.com/Prateek-Pulastya/ai-redteam-workbench" rel="noopener">View source →</a></p>
+        <div class="skills-learned">
+          <span class="lbl">Skills demonstrated</span>
+          <div class="skill-tags">
+            <span class="skill-tag">AI/LLM red teaming</span>
+            <span class="skill-tag">Evidence-based impact (server-side oracles)</span>
+            <span class="skill-tag">Authorization-scope enforcement</span>
+            <span class="skill-tag">Detection-as-regression / CI gating</span>
+            <span class="skill-tag">Security tooling design</span>
+          </div>
+        </div>
+      </article>
+      </template>
+
       <article class="card reveal">
         <p class="eyebrow">project · cloud security · purple team</p>
         <h3 style="font-size:1.05rem;margin:.5rem 0 .55rem">CloudFracture</h3>

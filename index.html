@@ -495,7 +495,7 @@ html.anim .reveal.in { opacity: 1; transform: none; }
         <div class="syn-cell syn-out">
           <span class="syn-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4-3 7-7 8-4-1-7-4-7-8V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg> Control holds</span>
           <code class="syn-val">TIER1-BLOCK · never reaches the model</code>
-          <span class="syn-note">measured, reproducible, running in a real service</span>
+          <span class="syn-note">measured locally with docker compose, reproducible from the repo</span>
         </div>
       </div>
     </div>
@@ -567,7 +567,7 @@ html.anim .reveal.in { opacity: 1; transform: none; }
         <span class="flag">flagship</span>
       </div>
       <h3>GuardRail-as-a-Service</h3>
-      <p>A filter that sits in front of a production LLM and decides, per request, whether the prompt is safe to forward. Tier&nbsp;1 is a deterministic Aho-Corasick and regex matcher that handles the common case in under 0.1&nbsp;ms. Tier&nbsp;2 is a DeBERTa-v3 classifier that only ever sees what Tier&nbsp;1 passes. The interesting part is not the speed; it is that I can tell you exactly how well it works, including where it doesn't.</p>
+      <p>A filter designed to sit in front of an LLM and decide, per request, whether the prompt is safe to forward. Tier&nbsp;1 is a deterministic Aho-Corasick and regex matcher that handles the common case in under 0.1&nbsp;ms. Tier&nbsp;2 is a DeBERTa-v3 classifier that only ever sees what Tier&nbsp;1 passes. The interesting part is not the speed; it is that I can tell you exactly how well it works, including where it doesn't.</p>
       <div class="meta-line">
         <span>Python</span><span>ONNX</span><span>Aho-Corasick</span><span>DeBERTa-v3</span><span>Docker</span><span>Prometheus / Grafana</span><span>Semgrep · Bandit · Safety in CI</span>
       </div>
@@ -640,7 +640,7 @@ html.anim .reveal.in { opacity: 1; transform: none; }
       <div class="block demo" id="demo">
         <div class="demo-head">
           <h4>Run Tier&nbsp;1 in your browser</h4>
-          <p class="demo-note">A faithful reimplementation of the Tier&nbsp;1 logic: normalise (keeping <code>| _ -</code>), then a de-leeted, separator-stripped second pass. It runs entirely client-side; nothing leaves your browser. The production service adds the monitor-only DeBERTa-v3 Tier&nbsp;2; this is the deterministic layer only.</p>
+          <p class="demo-note">A faithful reimplementation of the Tier&nbsp;1 logic: normalise (keeping <code>| _ -</code>), then a de-leeted, separator-stripped second pass. It runs entirely client-side; nothing leaves your browser. The full service adds the monitor-only DeBERTa-v3 Tier&nbsp;2; this is the deterministic layer only.</p>
         </div>
         <div class="demo-body">
           <div>

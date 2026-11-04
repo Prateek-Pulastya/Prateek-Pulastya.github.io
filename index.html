@@ -640,7 +640,7 @@ html.anim .reveal.in { opacity: 1; transform: none; }
       <div class="block demo" id="demo">
         <div class="demo-head">
           <h4>Run Tier&nbsp;1 in your browser</h4>
-          <p class="demo-note">A faithful reimplementation of the Tier&nbsp;1 logic: normalise (keeping <code>| _ -</code>), then a de-leeted, separator-stripped second pass. It runs entirely client-side; nothing leaves your browser. The full service adds the monitor-only DeBERTa-v3 Tier&nbsp;2; this is the deterministic layer only.</p>
+          <p class="demo-note">A 25-rule sample of the Tier&nbsp;1 logic: normalise (keeping <code>| _ -</code>), then a de-leeted, separator-stripped second pass. It runs entirely client-side; nothing leaves your browser. The full service adds the monitor-only DeBERTa-v3 Tier&nbsp;2; this is the deterministic layer only.</p>
         </div>
         <div class="demo-body">
           <div>
@@ -690,7 +690,7 @@ html.anim .reveal.in { opacity: 1; transform: none; }
     <article class="entry reveal">
       <div class="entry-head"><span class="entry-kind">AI security · Python</span></div>
       <h3>ATSGuard</h3>
-      <p>Catches indirect prompt injection in résumés: the white-on-white instruction hidden in a CV to hijack an LLM-based applicant tracking system. A four-layer pipeline reads the styling, not just the text, strips invisible Unicode and homoglyphs, and routes each file allow / flag / block. It holds 0% false positives across 1,200 résumés. In-sample recall is 98.8%; on a held-out split it drops to 42.9%, which is the figure I report.</p>
+      <p>Catches indirect prompt injection in résumés: the white-on-white instruction hidden in a CV to hijack an LLM-based applicant tracking system. A four-layer pipeline reads the styling, not just the text, strips invisible Unicode and homoglyphs, and routes each file allow / flag / block. It holds 0% false positives across 1,200 synthetic résumés. In-sample recall is 98.8%; on a separate 28-case set it drops to 42.9%, which is the figure I report.</p>
       <div class="meta-line"><span>Python</span><span>OWASP LLM01</span><span>Prompt injection</span></div>
       <div class="block explainer" id="ats-explainer" data-steps="5">
         <div class="block-h">Screening a résumé</div>
@@ -700,7 +700,7 @@ html.anim .reveal.in { opacity: 1; transform: none; }
           <div class="step" data-step="1"><span class="node" aria-hidden="true"></span><div><span class="st-tag">read the styling</span><span class="st-sub">font size, colour, hidden runs, not just text</span></div></div>
           <div class="step" data-step="2"><span class="node" aria-hidden="true"></span><div><span class="st-tag">normalise</span><span class="st-sub">strip invisible Unicode · fold homoglyphs · de-leet</span></div></div>
           <div class="step" data-step="3"><span class="node" aria-hidden="true"></span><div><span class="st-tag">detect + route</span><span class="st-sub">allow / flag / block</span></div></div>
-          <div class="step" data-step="4"><span class="node" aria-hidden="true"></span><div><span class="st-tag def">verdict</span><span class="st-sub">injection blocked before the model sees it</span><span class="st-receipt">0% FP across 1,200 · held-out 42.9%</span></div></div>
+          <div class="step" data-step="4"><span class="node" aria-hidden="true"></span><div><span class="st-tag def">verdict</span><span class="st-sub">injection blocked before the model sees it</span><span class="st-receipt">0% FP across 1,200 synthetic · held-out 42.9%</span></div></div>
         </div>
       </div>
       <div class="xref"><a href="https://github.com/Prateek-Pulastya/ATSGuard" rel="noopener">Repository →</a></div>

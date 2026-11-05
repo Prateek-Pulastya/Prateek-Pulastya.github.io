@@ -240,6 +240,7 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
 .skills dd { margin: 0; max-width: 72ch; }
 .row--solo { border: var(--rule-bar) solid var(--color-rule); margin-bottom: var(--space-xl); background: var(--color-paper); }
 .creds { background: var(--color-paper); }
+.creds + .row--solo { margin: var(--space-xl) 0 0; }
 .creds td:first-child { font-weight: 700; }
 @media (max-width: 60rem) {
   .rows--find .row summary, .rows--time .row summary { grid-template-columns: minmax(0, 1fr); }
@@ -248,6 +249,78 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
   .creds tr { border-top: var(--rule-hair) solid var(--color-rule); padding-block: var(--space-sm); }
   .creds td { border: 0; padding-block: var(--space-3xs); }
   .creds caption { display: block; padding: var(--space-xs) var(--space-md); border-bottom: var(--rule-hair) solid var(--color-rule); }
+}
+.feeds { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-2xl); align-items: start; }
+.feeds h2 { font-size: var(--text-2xl); margin-bottom: var(--space-lg); }
+.feed { list-style: none; margin: 0; padding: 0; border: var(--rule-bar) solid var(--color-rule); }
+.feed li + li { border-top: var(--rule-hair) solid var(--color-rule); }
+.feed a { display: grid; gap: var(--space-3xs); padding: var(--space-sm) var(--space-md); color: inherit; text-decoration: none; }
+.feed .t { font-size: var(--text-md); }
+.feed small { font-size: var(--text-sm); color: var(--color-muted); }
+.feed a:hover small { color: inherit; }
+
+.close { background: var(--color-ink); color: var(--color-paper); padding-block: var(--section-gap-s); }
+.close h2 { font-size: clamp(3rem, 9vw, 8rem); max-width: none; margin-bottom: var(--space-xl); }
+.close a { color: inherit; }
+.close a:hover { color: var(--color-accent-ink); }
+.close :focus-visible { outline-color: var(--color-accent); }
+.close__links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-xl); font-weight: 700; overflow-wrap: anywhere; }
+.foot { padding-block: var(--space-lg); }
+.foot__in { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-lg); }
+.foot a { white-space: nowrap; }
+
+.t-modal {
+  transform-origin: center;
+  transform: scale(var(--modal-scale));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--modal-open-dur) var(--modal-ease),
+    opacity   var(--modal-open-dur) var(--modal-ease);
+  will-change: transform, opacity;
+}
+.t-modal.is-open {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+.t-modal.is-closing {
+  transform: scale(var(--modal-scale-close));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--modal-close-dur) var(--modal-ease),
+    opacity   var(--modal-close-dur) var(--modal-ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  .t-modal { transition: none !important; }
+}
+
+.cmdk { width: min(36rem, calc(100% - var(--space-xl))); margin: 12dvh auto auto; padding: 0; border: var(--rule-bar) solid var(--color-rule); border-radius: 0; background: var(--color-paper); color: var(--color-ink); }
+.cmdk::backdrop { background: color-mix(in oklab, var(--color-ink) 45%, transparent); }
+.cmdk__input { display: block; width: 100%; min-height: 52px; padding: 0 var(--space-md); border: 0; border-bottom: var(--rule-bar) solid var(--color-rule); border-radius: 0; background: var(--color-paper); color: var(--color-ink); }
+.cmdk__input:focus-visible { outline-offset: -5px; }
+.cmdk__input::placeholder { color: var(--color-muted); }
+.cmdk__list { list-style: none; margin: 0; padding: 0; max-height: min(52dvh, 24rem); overflow-y: auto; }
+.cmdk__item { display: flex; justify-content: space-between; gap: var(--space-md); min-height: 44px; align-items: center; padding: var(--space-2xs) var(--space-md); cursor: pointer; }
+.cmdk__item small { color: var(--color-muted); font-size: var(--text-sm); }
+.cmdk__item[aria-selected="true"], .cmdk__item:hover { background: var(--color-accent); color: var(--color-accent-ink); }
+.cmdk__item[aria-selected="true"] small, .cmdk__item:hover small { color: inherit; }
+.cmdk__none { padding: var(--space-md); color: var(--color-muted); }
+
+@media print {
+  .bar, .skip, .cmdk, .filter, .t-tabs, .foot { display: none !important; }
+  #top { min-height: 0; }
+  .row summary::after { content: none; }
+  details > .more, details::details-content { display: block !important; content-visibility: visible !important; }
+  .close { background: none; color: var(--color-ink); padding-block: var(--space-lg); }
+  .band { background: none; }
+  .section, .section--wide { padding-block: var(--space-lg); }
+  .row, tr { break-inside: avoid; }
+  a[href^="http"]::after { content: " <" attr(href) ">"; font-size: var(--text-xs); overflow-wrap: anywhere; font-weight: 400; }
+}
+@media (max-width: 60rem) {
+  .feeds { grid-template-columns: minmax(0, 1fr); }
 }
 </style>
 </head>
@@ -311,7 +384,7 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
           <p class="visually-hidden" id="lensLive" aria-live="polite">Tier 1 recall 0.7895, held-out split</p>
         </div>
         <table>
-          <caption>271 samples, 190 attack and 81 benign, across 10 attack classes. Local docker compose, CPU. No public instance is deployed. Latency p50 0.14 ms, p95 26.21 ms, p99 32.11 ms.</caption>
+          <caption>271 samples, 190 attack and 81 benign, across 10 attack classes. Local docker compose, CPU. No public instance is deployed.</caption>
           <thead><tr><th scope="col">Evaluation</th><th scope="col" class="num">Tier 1 recall</th><th scope="col" class="num">False positives</th></tr></thead>
           <tbody>
             <tr data-lens-row="insample"><td>My own corpus (in-sample)</td><td class="num">1.000</td><td class="num">0.000</td></tr>
@@ -348,7 +421,7 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
       </details>
       <details class="row">
         <summary><span class="t">How Tier 1 scans</span><span class="d">Two passes, then Tier 2 fails open.</span></summary>
-        <div class="more"><p>Normalised text first, keeping <code>| _ -</code> so markers like <code>&lt;|im_start|&gt;</code> still match. Then a de-leeted, separator-stripped pass, which catches <code>1gn0r3 prev10us 1nstruct10ns</code>. If Tier 2 errors, the request is allowed. Tier 1 alone runs at p50 0.09 ms.</p></div>
+        <div class="more"><p>Normalised text first, keeping <code>| _ -</code> so markers like <code>&lt;|im_start|&gt;</code> still match. Then a de-leeted, separator-stripped pass, which catches <code>1gn0r3 prev10us 1nstruct10ns</code>. If Tier 2 errors, the request is allowed.</p><p>Latency p50 0.14 ms, p95 26.21 ms, p99 32.11 ms. Tier 1 alone p50 0.09 ms.</p></div>
       </details>
       <details class="row">
         <summary><span class="t">Against Llama-Guard-3-8B</span><span class="d">Not a fair win, and why.</span></summary>
@@ -436,12 +509,10 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
         <div class="more"><ul><li>Modular pipelines over 200+ page mortgage documents, for extraction, classification and search.</li><li>Delivered a report on the model trade-offs and a demo UI.</li></ul></div></details>
       <details class="row"><summary><span class="when">Aug 2022 to Mar 2025</span><span class="t">Event security officer</span><span class="d">Sword Security Group, Dublin</span></summary>
         <div class="more"><ul><li>Access control, crowd management and incident response at 10,000+ capacity venues, over 2.5 years.</li><li>Coordinated multi-team operations during peak periods.</li></ul></div></details>
-      <details class="row"><summary><span class="when">Jun 2021 to Jul 2021</span><span class="t">Student intern, cyber security</span><span class="d">Gurugram Police, India</span></summary>
-        <div class="more"><ul><li>Supported live cybercrime investigations with Wireshark and Splunk.</li><li>Helped draft GDPR-aligned data-classification and evidence-handling procedures.</li><li>Ran phishing and social-engineering awareness training for staff.</li></ul></div></details>
       <details class="row"><summary><span class="when">Feb 2021 to Jun 2021</span><span class="t">Security analyst (penetration tester)</span><span class="d">Kratikal Tech, Delhi</span></summary>
         <div class="more"><ul><li>Enterprise penetration testing for clients including GMR and Nykaa, finding 70+ high-risk vulnerabilities.</li><li>Remediation reports mapped to the OWASP Top 10, with prioritised fixes ahead of production.</li><li>Supported ISO 27001 and NIST CSF assessments through control mapping.</li></ul></div></details>
-      <details class="row"><summary><span class="when">Aug 2020 to Oct 2020</span><span class="t">Cyber security intern</span><span class="d">Ethical Edufabrica, India</span></summary>
-        <div class="more"><ul><li>Manual penetration testing with Burp Suite, Nessus and Nmap in simulated environments.</li><li>Ransomware-defence strategies and incident-response playbooks for controlled scenarios.</li></ul></div></details>
+      <details class="row"><summary><span class="when">2020 to 2021</span><span class="t">Two student internships</span><span class="d">Gurugram Police, Ethical Edufabrica</span></summary>
+        <div class="more"><p>Jun 2021 to Jul 2021. Student intern, cyber security, Gurugram Police, India.</p><ul><li>Supported live cybercrime investigations with Wireshark and Splunk.</li><li>Helped draft GDPR-aligned data-classification and evidence-handling procedures.</li><li>Ran phishing and social-engineering awareness training for staff.</li></ul><p>Aug 2020 to Oct 2020. Cyber security intern, Ethical Edufabrica, India.</p><ul><li>Manual penetration testing with Burp Suite, Nessus and Nmap in simulated environments.</li><li>Ransomware-defence strategies and incident-response playbooks for controlled scenarios.</li></ul></div></details>
     </div>
   </div>
 </section>
@@ -470,19 +541,71 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
         <tr><td>AWS Certified Security, Specialty</td><td>Amazon Web Services, Aug 2026 to Aug 2029, ID …f67c44</td><td><a href="https://aws.amazon.com/verification" rel="noopener">Verify</a></td></tr>
         <tr><td>AWS Certified Solutions Architect, Associate</td><td>Amazon Web Services, Aug 2026 to Aug 2029, ID …18000c</td><td><a href="https://aws.amazon.com/verification" rel="noopener">Verify</a></td></tr>
         <tr><td>Certified LLM Security Professional (CLLMSP)</td><td>Red Team Leaders, June 2026</td><td><a href="https://courses.redteamleaders.com/exam-completion/7fdd1971d57853c3" rel="noopener">Verify</a></td></tr>
-        <tr><td>Fortinet Certified Associate in Cybersecurity</td><td>Fortinet, Oct 2025 to Oct 2027, ID 7813549201PP</td><td><a href="https://training.fortinet.com/admin/tool/certificate/index.php" rel="noopener">Verify</a></td></tr>
         <tr><td>OCI 2025 Certified AI Foundations Associate</td><td>Oracle, August 2025, ID 102394776OCI25AICFA</td><td></td></tr>
-        <tr><td>Certified Network Security Specialist (CNSS)</td><td>ICSI, UK, July 2020</td><td></td></tr>
-        <tr><td>Top Performer, Hydroficient IoT Cyber Defense Externship</td><td>Extern, April 2026, top 10% of participants</td><td></td></tr>
-        <tr><td>Completer, Outamation AI Document Insights Externship</td><td>Extern, February 2026</td><td></td></tr>
         <tr><td>MSc Artificial Intelligence</td><td>Berlin School of Business and Innovation, Oct 2025 to Apr 2027, in progress</td><td></td></tr>
-        <tr><td>MSc Cyber Security</td><td>National College of Ireland, Jan 2022 to Feb 2023. Thesis on authentication and authorization in cloud services using blockchain</td><td></td></tr>
+        <tr><td>MSc Cyber Security</td><td>National College of Ireland, Jan 2022 to Feb 2023</td><td></td></tr>
         <tr><td>BTech Information Technology</td><td>Panipat Institute of Engineering and Technology, 2017 to 2021</td><td></td></tr>
       </tbody>
     </table>
+    <details class="row row--solo" id="credentials-more">
+      <summary><span class="t">Other certificates</span><span class="d">Fortinet, CNSS, two externships, my MSc thesis.</span></summary>
+      <div class="more">
+        <table class="creds"><tbody>
+          <tr><td>Fortinet Certified Associate in Cybersecurity</td><td>Fortinet, Oct 2025 to Oct 2027, ID 7813549201PP</td><td><a href="https://training.fortinet.com/admin/tool/certificate/index.php" rel="noopener">Verify</a></td></tr>
+          <tr><td>Certified Network Security Specialist (CNSS)</td><td>ICSI, UK, July 2020</td><td></td></tr>
+          <tr><td>Top Performer, Hydroficient IoT Cyber Defense Externship</td><td>Extern, April 2026, top 10% of participants</td><td></td></tr>
+          <tr><td>Completer, Outamation AI Document Insights Externship</td><td>Extern, February 2026</td><td></td></tr>
+        </tbody></table>
+        <p>MSc Cyber Security thesis: authentication and authorization in cloud services using blockchain.</p>
+      </div>
+    </details>
+  </div>
+</section>
+<section class="section" id="writing">
+  <div class="container">
+    <div class="feeds">
+      <div>
+        <h2>What I’ve written</h2>
+        <ul class="feed" id="blogFeed"><li><a href="https://prateekpulastya.medium.com" rel="noopener"><span class="t">Write-ups on Medium</span></a></li></ul>
+      </div>
+      <div id="repos">
+        <h2>Recently pushed</h2>
+        <ul class="feed" id="repoFeed"><li><a href="https://github.com/Prateek-Pulastya" rel="noopener"><span class="t">Repositories on GitHub</span></a></li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="close" id="contact">
+  <div class="container">
+    <h2><a href="mailto:prateekpulastya220@gmail.com">Email me</a></h2>
+    <ul class="close__links">
+      <li><a href="mailto:prateekpulastya220@gmail.com">prateekpulastya220@gmail.com</a></li>
+      <li><a href="https://www.linkedin.com/in/prateek-pulastya22" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/Prateek-Pulastya" rel="noopener">GitHub</a></li>
+      <li><a href="https://prateekpulastya.medium.com" rel="noopener">Medium</a></li>
+      <li>Berlin, Germany</li>
+    </ul>
   </div>
 </section>
 </main>
+<footer class="foot">
+  <div class="container foot__in">
+    <a href="#top">Back to top</a>
+    <a href="#work">Work</a>
+    <a href="#research">Research</a>
+    <a href="#history">History</a>
+    <a href="#skills">Skills</a>
+    <a href="#credentials">Certificates</a>
+    <a href="#writing">Write-ups</a>
+  </div>
+</footer>
+
+<dialog class="cmdk t-modal" id="cmdk" aria-label="Search this page">
+  <input class="cmdk__input" id="cmdkInput" name="search" type="text" role="combobox" aria-expanded="true" aria-controls="cmdkList" aria-autocomplete="list" aria-label="Search this page" placeholder="Search this page" autocomplete="off" spellcheck="false">
+  <ul class="cmdk__list" id="cmdkList" role="listbox" aria-label="Results"></ul>
+</dialog>
+
 <script>
 (function () {
   "use strict";
@@ -561,6 +684,154 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
     input.addEventListener("input", render);
     render();
   })();
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+
+  /* Feeds. The static fallback stays unless the JSON gives at least one safe row. */
+  function safeUrl(u) { try { var p = new URL(u, location.href); return p.protocol === "https:" || p.protocol === "http:" ? p.href : null; } catch (e) { return null; } }
+  function shortDate(v) { var d = new Date(v); return isNaN(d) ? "" : d.toLocaleDateString("en-GB", { month: "short", year: "numeric" }); }
+  function feed(url, id, row) {
+    fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (items) {
+      if (!Array.isArray(items)) return;
+      var rows = items.map(row).filter(Boolean);
+      if (!rows.length) return;
+      var mount = document.getElementById(id);
+      mount.textContent = "";
+      rows.slice(0, 3).forEach(function (li) { mount.appendChild(li); });
+    }).catch(function () {});
+  }
+  function item(href, title, meta) {
+    var u = safeUrl(href);
+    if (!u || !title) return null;
+    var li = el("li"), a = el("a");
+    a.href = u; a.rel = "noopener";
+    a.appendChild(el("span", "t", title));
+    if (meta) a.appendChild(el("small", null, meta));
+    li.appendChild(a);
+    return li;
+  }
+  feed("data/blog.json", "blogFeed", function (p) { return item(p.link, p.title, shortDate(p.date)); });
+  feed("data/repos.json", "repoFeed", function (r) {
+    var when = shortDate(r.pushedAt), lang = r.language && r.language !== "N/A" ? r.language : "";
+    return item(r.url, r.name && r.name.replace(/-/g, " "), [lang, when && "pushed " + when].filter(Boolean).join(", "));
+  });
+
+  /* Deep links open their row. */
+  function openFromHash() {
+    var id = location.hash.slice(1), t = id && document.getElementById(id);
+    if (t && t.tagName === "DETAILS") { t.open = true; t.scrollIntoView({ block: "start" }); }
+  }
+  window.addEventListener("hashchange", openFromHash);
+  openFromHash();
+
+  /* Print: open every row, then put them back. */
+  var wasOpen = null;
+  window.addEventListener("beforeprint", function () {
+    var all = [].slice.call(document.querySelectorAll("details"));
+    wasOpen = all.map(function (d) { return d.open; });
+    all.forEach(function (d) { d.open = true; });
+  });
+  window.addEventListener("afterprint", function () {
+    if (!wasOpen) return;
+    [].slice.call(document.querySelectorAll("details")).forEach(function (d, i) { d.open = wasOpen[i]; });
+    wasOpen = null;
+  });
+
+  /* Search, using the transitions.dev modal open and close. */
+  var modal = document.getElementById("cmdk"), input = document.getElementById("cmdkInput"), list = document.getElementById("cmdkList"), btn = document.getElementById("cmdkBtn");
+  var closeMs = 150, last = null, active = 0, shown = [];
+  function go(sel) {
+    var t = document.querySelector(sel);
+    if (!t) return;
+    if (t.tagName === "DETAILS") t.open = true;
+    t.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }
+  function link(u) { window.open(u, "_blank", "noopener"); }
+  var ITEMS = [
+    { label: "GuardRail results", kind: "section", keys: "benchmark recall held-out evaluation", run: function () { go("#guardrail"); } },
+    { label: "Try the filter", kind: "section", keys: "guardrail demo prompt injection tier", run: function () { go("#demo"); setTimeout(function () { document.getElementById("demoInput").focus({ preventScroll: true }); }, reduce ? 0 : 380); } },
+    { label: "The rest of the work", kind: "section", keys: "projects", run: function () { go("#work"); } },
+    { label: "ATSGuard", kind: "project", keys: "resume prompt injection", run: function () { go("#atsguard"); } },
+    { label: "CloudFracture", kind: "project", keys: "aws iam terraform sigma", run: function () { go("#cloudfracture"); } },
+    { label: "DetectForge", kind: "project", keys: "soc wazuh detection sigma", run: function () { go("#detectforge"); } },
+    { label: "SecureFix", kind: "project", keys: "semgrep appsec owasp", run: function () { go("#securefix"); } },
+    { label: "Findings", kind: "section", keys: "research bug bounty cve disclosure vulnerabilities", run: function () { go("#research"); } },
+    { label: "How I got here", kind: "section", keys: "history experience jobs", run: function () { go("#history"); } },
+    { label: "Skills", kind: "section", keys: "stack tools", run: function () { go("#skills"); } },
+    { label: "Certificates", kind: "section", keys: "credentials education degrees aws", run: function () { go("#credentials"); } },
+    { label: "What I’ve written", kind: "section", keys: "blog medium write-ups", run: function () { go("#writing"); } },
+    { label: "GitHub", kind: "link", keys: "code source repositories", run: function () { link("https://github.com/Prateek-Pulastya"); } },
+    { label: "LinkedIn", kind: "link", keys: "profile", run: function () { link("https://www.linkedin.com/in/prateek-pulastya22"); } },
+    { label: "Medium", kind: "link", keys: "blog", run: function () { link("https://prateekpulastya.medium.com"); } },
+    { label: "Email me", kind: "link", keys: "mail contact hire", run: function () { location.href = "mailto:prateekpulastya220@gmail.com"; } }
+  ];
+  function match(q) {
+    q = q.trim().toLowerCase();
+    return ITEMS.filter(function (c) { return !q || (c.label + " " + (c.keys || "") + " " + c.kind).toLowerCase().indexOf(q) !== -1; });
+  }
+  function draw() {
+    list.textContent = "";
+    input.removeAttribute("aria-activedescendant");
+    if (!shown.length) { list.appendChild(el("li", "cmdk__none", "Nothing on this page matches.")); return; }
+    shown.forEach(function (c, i) {
+      var li = el("li", "cmdk__item");
+      li.id = "cmdk-opt-" + i;
+      li.setAttribute("role", "option");
+      li.setAttribute("aria-selected", String(i === active));
+      li.appendChild(el("span", null, c.label));
+      li.appendChild(el("small", null, c.kind));
+      li.addEventListener("click", function () { choose(i); });
+      list.appendChild(li);
+    });
+    input.setAttribute("aria-activedescendant", "cmdk-opt-" + active);
+  }
+  function sync() {
+    [].slice.call(list.children).forEach(function (li, i) { li.setAttribute("aria-selected", String(i === active)); });
+    var cur = list.children[active];
+    if (cur) cur.scrollIntoView({ block: "nearest" });
+    input.setAttribute("aria-activedescendant", "cmdk-opt-" + active);
+  }
+  function openIt() {
+    if (modal.open) return;
+    last = document.activeElement;
+    input.value = ""; shown = match(""); active = 0; draw();
+    modal.classList.remove("is-closing");
+    modal.showModal();
+    void modal.offsetWidth;
+    modal.classList.add("is-open");
+    input.focus();
+  }
+  function closeIt(after) {
+    if (!modal.open) return;
+    modal.classList.remove("is-open");
+    modal.classList.add("is-closing");
+    setTimeout(function () {
+      modal.classList.remove("is-closing");
+      modal.close();
+      if (last && last.focus) last.focus({ preventScroll: !!after });
+      if (after) after();
+    }, reduce ? 0 : closeMs);
+  }
+  function choose(i) { var c = shown[i]; if (c) closeIt(c.run); }
+  input.addEventListener("input", function () { shown = match(input.value); active = 0; draw(); });
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowDown") { e.preventDefault(); if (shown.length) { active = (active + 1) % shown.length; sync(); } }
+    else if (e.key === "ArrowUp") { e.preventDefault(); if (shown.length) { active = (active - 1 + shown.length) % shown.length; sync(); } }
+    else if (e.key === "Enter") { e.preventDefault(); choose(active); }
+  });
+  modal.addEventListener("cancel", function (e) { e.preventDefault(); closeIt(); });
+  modal.addEventListener("mousedown", function (e) { if (e.target === modal) closeIt(); });
+  btn.addEventListener("click", openIt);
+  document.addEventListener("keydown", function (e) {
+    var combo = (e.key === "k" || e.key === "K") && (e.metaKey || e.ctrlKey);
+    var slash = e.key === "/" && !/^(input|textarea|select)$/i.test(e.target.tagName || "") && !e.target.isContentEditable;
+    if (combo || slash) { e.preventDefault(); if (modal.open) closeIt(); else openIt(); }
+  });
 })();
 </script>
 </body>

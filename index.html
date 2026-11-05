@@ -38,13 +38,14 @@
 /* Hallmark · waive 77 · fires only on the file target where fetch cannot run, the HTTP target shows two boxed feeds of three rows and passes · no visual is added because the feeds are the content */
 /* Hallmark · dropped console, shForm, shIn, shOut, shPresets, themeBtn, cmdkFab, gr-explainer, ats-explainer, cf-explainer, synopsis, description, lensDelta, yr, open, whoami · Prateek approved removing the console, dark mode and diagrams on 2026-11-04 */
 /* Hallmark · dropped #contact · every Email me link now goes straight to mailto, and the contact id stays for old links */
+/* Hallmark · dropped #credentials, #skills, #writing · the footer nav repeated the banner, and those ids stay for old links and search */
 @font-face { font-family: "Libre Franklin"; font-weight: 400; font-display: swap; src: url("fonts/libre-franklin-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Libre Franklin"; font-weight: 700; font-display: swap; src: url("fonts/libre-franklin-latin-700-normal.woff2") format("woff2"); }
 @font-face { font-family: "Libre Franklin"; font-weight: 900; font-display: swap; src: url("fonts/libre-franklin-latin-900-normal.woff2") format("woff2"); }
 :root {
   color-scheme: light;
   --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
-  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1.0625rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
   --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
   --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -64,7 +65,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html, body { overflow-x: clip; }
 html { scrollbar-color: var(--color-muted) var(--color-paper); scroll-padding-top: var(--space-3xl); }
-body { margin: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); font-size: var(--text-md); line-height: 1.55; -webkit-font-smoothing: antialiased; caret-color: var(--color-accent); }
+body { margin: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); font-size: var(--text-md); line-height: 1.55; -webkit-font-smoothing: antialiased; caret-color: var(--color-ink); }
 ::selection { background: var(--color-accent); color: var(--color-accent-ink); }
 :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
@@ -155,8 +156,8 @@ code { font-family: var(--font-code); overflow-wrap: anywhere; }
 .row + .row { border-top: var(--rule-hair) solid var(--color-rule); }
 .row summary { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr) auto; gap: var(--space-lg); align-items: center; min-height: 72px; padding: var(--space-sm) var(--space-lg); cursor: pointer; list-style: none; }
 .row summary::-webkit-details-marker { display: none; }
-.row summary::after { content: "Open"; font-weight: 700; text-decoration: underline; text-underline-offset: 0.16em; }
-.row[open] summary::after { content: "Close"; }
+.row summary::after { content: "+"; font-size: var(--text-xl); font-weight: 900; line-height: 1; }
+.row[open] summary::after { content: "\2212"; }
 .row summary:hover { background: var(--color-accent); color: var(--color-accent-ink); }
 .row summary:focus-visible { outline-offset: -4px; }
 .more { padding: 0 var(--space-lg) var(--space-lg); display: grid; gap: var(--space-sm); }
@@ -212,31 +213,38 @@ th { font-size: var(--text-sm); font-weight: 400; color: var(--color-muted); }
 td.num, th.num { text-align: right; }
 tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color-paper); }
 
-.filter { margin-block: var(--space-2xl); padding: var(--space-lg); border: var(--rule-bar) solid var(--color-rule); }
-.filter h3 { font-size: var(--text-section); font-weight: 900; text-transform: uppercase; line-height: 1.02; max-width: none; margin-bottom: var(--space-lg); }
-.filter__io { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-lg); align-items: start; }
-.filter label { display: block; font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--space-2xs); }
-.filter textarea { display: block; width: 100%; min-height: 96px; padding: var(--space-sm); border: var(--rule-bar) solid var(--color-rule); border-radius: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-code); resize: vertical; }
-.filter textarea:focus-visible { outline-offset: -5px; }
-.presets { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-xs); margin-top: var(--space-sm); }
-.preset { white-space: nowrap; min-height: 44px; padding: 0 var(--space-sm); border: var(--rule-hair) solid var(--color-rule); background: var(--color-paper); color: var(--color-ink); font-family: var(--font-code); font-size: var(--text-sm); cursor: pointer; overflow-wrap: anywhere; text-align: left; }
+.filter { margin-block: var(--space-2xl); border: var(--rule-bar) solid var(--color-rule); }
+.filter h3 { font-size: var(--text-section); font-weight: 900; text-transform: uppercase; line-height: 1.02; max-width: none; margin: 0; padding: var(--space-md) var(--space-lg); border-bottom: var(--rule-bar) solid var(--color-rule); }
+.filter__io { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
+.filter__in { display: grid; align-content: start; gap: var(--space-2xs); padding: var(--space-sm) var(--space-lg); border-right: var(--rule-bar) solid var(--color-rule); }
+.filter label { display: block; font-size: var(--text-sm); line-height: 1.3; color: var(--color-muted); }
+.filter textarea { display: block; width: 100%; min-height: 96px; padding: 0; border: 0; border-radius: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-code); resize: vertical; }
+.filter textarea:focus-visible { outline-offset: 4px; }
+.presets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: var(--rule-bar) solid var(--color-rule); }
+.preset { white-space: nowrap; min-height: 52px; padding: 0 var(--space-sm); border: 0; background: none; color: var(--color-ink); font-family: var(--font-code); font-size: var(--text-sm); cursor: pointer; overflow-wrap: anywhere; text-align: left; }
+.preset + .preset { border-left: var(--rule-bar) solid var(--color-rule); }
 .preset:hover { background: var(--color-ink); color: var(--color-paper); }
 .preset:active { transform: translateY(1px); }
 .preset:disabled { opacity: 0.55; cursor: not-allowed; }
-.verdict { display: grid; gap: var(--space-2xs); padding: var(--space-md); border: var(--rule-bar) solid var(--color-rule); overflow-wrap: anywhere; }
+.verdict { display: grid; align-content: center; gap: var(--space-2xs); padding: var(--space-md) var(--space-lg); overflow-wrap: anywhere; }
 .verdict strong { font-family: var(--font-code); font-size: var(--text-xl); }
 .verdict.is-block { background: var(--color-accent); color: var(--color-accent-ink); }
 .note { margin-top: var(--space-md); font-size: var(--text-sm); color: var(--color-muted); max-width: none; }
+.filter .note { margin: 0; padding: var(--space-xs) var(--space-lg); border-top: var(--rule-bar) solid var(--color-rule); }
 
 @media (max-width: 60rem) {
   .case, .filter__io { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
 }
-.rows--find .row summary { grid-template-columns: 8rem minmax(0, 7fr) minmax(0, 4fr) auto; }
+.rows--find .row summary { grid-template-columns: 10rem minmax(0, 7fr) minmax(0, 4fr) auto; }
+.rows--find .row:first-child summary { background: var(--color-ink); color: var(--color-paper); }
+.rows--find .row:first-child summary:hover { background: var(--color-accent); color: var(--color-accent-ink); }
+.rows--find .row:first-child summary:focus-visible { outline-color: var(--color-accent); }
 .rows--time { margin-top: var(--space-xl); }
-.rows--time .row summary { grid-template-columns: 11rem minmax(0, 6fr) minmax(0, 4fr) auto; }
-.sev { font-weight: 900; font-variant-numeric: tabular-nums; }
+.rows--time .row summary { grid-template-columns: 13rem minmax(0, 6fr) minmax(0, 4fr) auto; }
+.sev { font-size: var(--text-xl); font-weight: 900; letter-spacing: var(--tracking-display); line-height: 1.1; font-variant-numeric: tabular-nums; }
 .sev--low { font-weight: 700; color: var(--color-muted); }
-.when { font-variant-numeric: tabular-nums; color: var(--color-muted); }
+.when { font-weight: 900; font-variant-numeric: tabular-nums; }
 .row summary:hover .when, .row summary:hover .sev--low { color: inherit; }
 .skills { margin: 0 0 var(--space-lg); display: grid; gap: var(--space-md); }
 .skills dt { font-weight: 700; }
@@ -253,8 +261,10 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
   .creds td { border: 0; padding-block: var(--space-3xs); }
   .creds caption { display: block; padding: var(--space-xs) var(--space-md); border-bottom: var(--rule-hair) solid var(--color-rule); }
 }
-.feeds { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-2xl); align-items: start; }
-.feeds h2 { font-size: var(--text-2xl); margin-bottom: var(--space-lg); }
+.feeds { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--space-2xl); }
+.feeds h2 { margin-bottom: var(--space-lg); }
+.feeds > div { display: grid; grid-row: span 2; grid-template-rows: subgrid; align-items: end; }
+.feeds .feed { align-self: start; }
 .feed { list-style: none; margin: 0; padding: 0; border: var(--rule-bar) solid var(--color-rule); }
 .feed li + li { border-top: var(--rule-hair) solid var(--color-rule); }
 .feed a { display: grid; gap: var(--space-3xs); padding: var(--space-sm) var(--space-md); color: inherit; text-decoration: none; }
@@ -264,7 +274,9 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
 
 .close { background: var(--color-ink); color: var(--color-paper); padding-block: var(--section-gap-s); }
 .close > .container { container-type: inline-size; }
-.close h2 { font-size: max(var(--text-display), 9.66cqi); max-width: none; margin-bottom: var(--space-xl); }
+.close h2 { font-size: 19.5cqi; line-height: 1; max-width: none; margin-bottom: var(--space-xl); }
+.close h2 a { text-decoration-thickness: var(--rule-bar); }
+.close h2 a:hover { background: var(--color-paper); color: var(--color-ink); }
 .close a { color: inherit; }
 .close a:hover { color: var(--color-accent-ink); }
 .close :focus-visible { outline-color: var(--color-accent); }
@@ -324,13 +336,53 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
   a[href^="http"]::after { content: " <" attr(href) ">"; font-size: var(--text-xs); overflow-wrap: anywhere; font-weight: 400; }
 }
 @media (max-width: 60rem) {
-  .feeds { grid-template-columns: minmax(0, 1fr); }
+  .feeds { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-xl); }
+  .feeds > div { display: block; grid-row: auto; }
+}
+.row .t { font-size: var(--text-xl); }
+#workRows .row summary { grid-template-columns: 12rem minmax(0, 5fr) minmax(0, 6fr) auto; }
+.fig { font-size: var(--text-section); font-weight: 900; letter-spacing: var(--tracking-display); line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.findings__rank { max-width: none; margin-bottom: var(--space-lg); }
+.skills .skills__cells { max-width: none; margin-top: var(--space-xs); }
+.cells { list-style: none; margin: 0; padding: 0; display: grid; border-style: solid; border-color: var(--color-rule); border-width: var(--rule-bar) 0 0 var(--rule-bar); }
+.cells > li { border-style: solid; border-color: var(--color-rule); border-width: 0 var(--rule-bar) var(--rule-bar) 0; }
+.cells--skills { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cells--skills li { display: flex; align-items: center; min-height: 88px; padding: var(--space-sm) var(--space-md); font-size: var(--text-lg); font-weight: 900; letter-spacing: var(--tracking-display); line-height: 1.1; text-transform: uppercase; }
+.cells--certs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cert { display: flex; flex-direction: column; gap: var(--space-xs); padding: var(--space-md); min-width: 0; }
+.cert b { font-size: var(--text-xl); font-weight: 900; letter-spacing: var(--tracking-display); line-height: 1.05; text-transform: uppercase; }
+.cert small { font-size: var(--text-sm); overflow-wrap: anywhere; }
+.cert a { margin-top: auto; align-self: flex-start; font-weight: 700; }
+.cert--wide { grid-column: span 2; }
+.cert--lead { grid-column: span 2; grid-row: span 2; padding: var(--space-lg); background: var(--color-ink); color: var(--color-paper); }
+.cert--lead b { font-size: var(--text-section); line-height: 1.02; }
+.cert--lead small { margin-top: auto; }
+.cert--lead a { margin-top: 0; }
+.cert--lead :focus-visible { outline-color: var(--color-accent); }
+.creds--degrees { margin-top: var(--space-xl); }
+
+@media (max-width: 60rem) {
+  #workRows .row summary, .rows--find .row summary, .rows--time .row summary { grid-template-columns: minmax(0, 1fr); }
+  .row summary { position: relative; padding-right: var(--space-2xl); }
+  .row summary::after { position: absolute; top: var(--space-md); right: var(--space-md); }
+  .row .t { font-size: var(--text-lg); }
+  .fig { font-size: var(--text-3xl); }
+  .filter__io { gap: 0; }
+  .filter__in { border-right: 0; border-bottom: var(--rule-bar) solid var(--color-rule); }
+  .presets { grid-template-columns: minmax(0, 1fr); }
+  .preset + .preset { border-left: 0; border-top: var(--rule-hair) solid var(--color-rule); }
+  .cells--skills, .cells--certs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cert--lead { grid-row: auto; }
+  .cert--lead b { font-size: var(--text-2xl); }
 }
 @media (max-width: 40rem) {
-  .filter { padding: var(--space-md); }
+  .filter h3, .filter__in, .verdict, .filter .note { padding-inline: var(--space-md); }
   .preset { font-size: var(--text-xs); }
   .verdict.is-block { background: none; color: inherit; }
   .verdict.is-block strong { justify-self: start; padding-inline: var(--space-xs); background: var(--color-accent); color: var(--color-accent-ink); }
+  .cells--skills, .cells--certs { grid-template-columns: minmax(0, 1fr); }
+  .cert--wide, .cert--lead { grid-column: auto; }
+  .cells--skills li { min-height: 0; padding-block: var(--space-xs); }
 }
 </style>
 </head>
@@ -363,10 +415,10 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
     <ul class="index">
       <li><a href="https://github.com/GenAI-Security-Project/GenAI-Red-Team-Lab/pull/54" rel="noopener"><b>PR #54</b><span class="t">OWASP GenAI Red Team Lab</span><span class="d">Embedding inversion exploit, merged August 2026. The work I’m most proud of.</span></a></li>
       <li><a href="#guardrail"><b>0.79</b><span class="t">GuardRail</span><span class="d">My open-source prompt-injection filter. Held-out recall, after 1.00 on my own data.</span></a></li>
-      <li><a href="#research"><b>9.9</b><span class="t">smolagents sandbox escape</span><span class="d">CVSS 9.9, CWE-94. Arbitrary command execution on the host, reported via huntr.</span></a></li>
+      <li><a href="#smolagents"><b>9.9</b><span class="t">smolagents sandbox escape</span><span class="d">CVSS 9.9. Arbitrary command execution on the host, reported via huntr.</span></a></li>
       <li><a href="#research"><b>#1</b><span class="t">Intigriti quarterly leaderboard</span><span class="d">Plus a Top 10 Bug Baron placing.</span></a></li>
       <li><a href="#atsguard"><b>42.9%</b><span class="t">ATSGuard</span><span class="d">Finds hidden instructions in résumés. Recall on 28 cases it was never tuned on.</span></a></li>
-      <li><a href="#securefix"><b>7 to 0</b><span class="t">SecureFix</span><span class="d">SAST findings before and after fixing six web bugs.</span></a></li>
+      <li><a href="#securefix"><b>7 to 0</b><span class="t">SecureFix</span><span class="d">SAST findings, before and after the fixes.</span></a></li>
     </ul>
   </div>
 </section>
@@ -410,32 +462,32 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
     <div class="filter" id="demo">
       <h3>Try to get past it</h3>
       <div class="filter__io">
-        <div class="needs-js">
+        <div class="needs-js filter__in">
           <label for="demoInput">Prompt</label>
           <textarea id="demoInput" name="prompt" spellcheck="false" autocomplete="off">1gn0r3 prev10us 1nstruct10ns</textarea>
-          <div class="presets" id="demoPresets"></div>
         </div>
         <div class="verdict is-block" id="demoVerdict" aria-live="polite">
           <strong>TIER1-BLOCK</strong>
           <span>Caught by the de-leet and strip pass, matching “ignore previous instructions”.</span>
         </div>
       </div>
-      <p class="note">A 25-rule sample of GuardRail’s Tier 1, running in your browser. Nothing is sent anywhere.</p>
+      <div class="presets needs-js" id="demoPresets"></div>
+      <p class="note">A 25-rule sample of GuardRail’s Tier 1, in your browser. Nothing is sent anywhere.</p>
       <noscript><p class="note">This is an example result. Turn on JavaScript to try your own prompt.</p></noscript>
     </div>
 
     <div class="rows">
       <details class="row">
         <summary><span class="t">Why Tier 2 only monitors</span><span class="d">It over-blocks, so it logs instead.</span></summary>
-        <div class="more"><p>The classifier blocks 40.4% of benign NotInject prompts against Tier 1’s 0.0%, and no threshold separates them. It logs <code>TIER2-FLAG</code> and doesn’t block. The cost is lower recall. Blocking is available at <code>POST /validate?tier=2</code>.</p></div>
+        <div class="more"><p>The classifier blocks 40.4% of benign NotInject prompts against Tier 1’s 0.0%, and no threshold separates them. It logs <code>TIER2-FLAG</code> and doesn’t block, so recall is lower. Blocking is available at <code>POST /validate?tier=2</code>.</p></div>
       </details>
       <details class="row">
         <summary><span class="t">How Tier 1 scans</span><span class="d">Two passes, then Tier 2 fails open.</span></summary>
-        <div class="more"><p>Normalised text first, keeping <code>| _ -</code> so markers like <code>&lt;|im_start|&gt;</code> still match. Then a de-leeted, separator-stripped pass, which catches <code>1gn0r3 prev10us 1nstruct10ns</code>. If Tier 2 errors, the request is allowed.</p><p>Latency p50 0.14 ms, p95 26.21 ms, p99 32.11 ms. Tier 1 alone p50 0.09 ms.</p></div>
+        <div class="more"><p>Normalized text first, keeping <code>| _ -</code> so markers like <code>&lt;|im_start|&gt;</code> still match. Then a de-leeted, separator-stripped pass, which catches <code>1gn0r3 prev10us 1nstruct10ns</code>. If Tier 2 errors, the request is allowed.</p><p>Latency p50 0.14 ms, p95 26.21 ms, p99 32.11 ms. Tier 1 alone p50 0.09 ms.</p></div>
       </details>
       <details class="row">
-        <summary><span class="t">Against Llama-Guard-3-8B</span><span class="d">Not a fair win, and why.</span></summary>
-        <div class="more"><p>Recall 1.0000 and 0.1316, precision 1.0000 for both, latency p50 0.16 ms and 1708 ms. Not a fair win: Llama Guard’s S1 to S13 taxonomy doesn’t cover prompt injection, so it missed 165 of 190. Latency is local Ollama on a GTX 1650.</p></div>
+        <summary><span class="t">Against Llama-Guard-3-8B</span><span class="d">Missed 165 of 190. Its taxonomy doesn’t cover injection.</span></summary>
+        <div class="more"><p>GuardRail: recall 1.0000, precision 1.0000, p50 0.16 ms. Llama Guard: recall 0.1316, precision 1.0000, p50 1708 ms on local Ollama and a GTX 1650. Not a fair win, because its S1 to S13 taxonomy doesn’t cover prompt injection.</p></div>
       </details>
     </div>
   </div>
@@ -451,35 +503,35 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
     </template>
     <div class="rows" id="workRows">
       <details class="row" id="atsguard">
-        <summary><span class="t">ATSGuard</span><span class="d">Finds hidden instructions in résumés before an LLM reads them.</span></summary>
+        <summary><b class="fig">42.9%</b><span class="t">ATSGuard</span><span class="d">Hidden instructions in résumés, on 28 cases I wrote myself.</span></summary>
         <div class="more"><p>0% false positives on 1,200 synthetic résumés. 98.8% recall on 80 disguised attacks. 42.9% on 28 separate cases I wrote myself.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/ATSGuard" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="cloudfracture">
-        <summary><span class="t">CloudFracture</span><span class="d">A vulnerable LLM-agent workload on AWS, attacked and then fixed.</span></summary>
+        <summary><b class="fig">4</b><span class="t">CloudFracture</span><span class="d">Attack paths on an AWS LLM agent, each with a Sigma detection.</span></summary>
         <div class="more"><p>Built in Terraform. 4 identity attack paths, from the agent’s execution role to data exfiltration and prompt-store poisoning. A tested Sigma detection for each, IAM fixed to least privilege, attacks re-run and failing. CI runs SAST, SCA, secret and IaC scanning and builds an SBOM.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/cloudfracture" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="detectforge">
-        <summary><span class="t">DetectForge</span><span class="d">SOC detection lab with Wazuh, Sysmon and Atomic Red Team.</span></summary>
+        <summary><b class="fig">7/10</b><span class="t">DetectForge</span><span class="d">ATT&amp;CK techniques fired in a Wazuh and Sysmon SOC lab.</span></summary>
         <div class="more"><p>7 of 10 ATT&amp;CK techniques fired on live detonation. Each detection has its false-positive profile written down. Gaps listed: T1003.001, T1055, T1021.001.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/soc-detection-lab" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="securefix">
-        <summary><span class="t">SecureFix</span><span class="d">Six web bugs, from exploit to CI gate.</span></summary>
+        <summary><b class="fig">6</b><span class="t">SecureFix</span><span class="d">Web bugs with exploits, fixes, Semgrep rules and CI gates.</span></summary>
         <div class="more"><p>SQLi, IDOR, SSRF, XSS, JWT signature bypass, prototype pollution. Each has a working exploit, a fix, a hand-written Semgrep rule and a CI gate. The SAST gate goes from 7 findings to 0.</p><p class="links"><a href="https://prateek-pulastya.github.io/securefix/" rel="noopener">Live walkthrough</a><a href="https://github.com/Prateek-Pulastya/securefix" rel="noopener">Source</a></p></div>
       </details>
       <details class="row" id="threat-detection">
-        <summary><span class="t">Explainable threat detection</span><span class="d">Intrusion detection with a reason attached to every alert.</span></summary>
+        <summary><b class="fig">6</b><span class="t">Explainable threat detection</span><span class="d">Attack classes on CICIDS2017, with SHAP on every alert.</span></summary>
         <div class="more"><p>CICIDS2017, 6 attack classes, a SHAP attribution on every alert.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/AI-Powered-Threat-Detection-System-with-Explainability" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="mqtt">
-        <summary><span class="t">Secure MQTT pipeline</span><span class="d">Hotel water-monitoring system, hardened layer by layer.</span></summary>
-        <div class="more"><p>STRIDE first, then TLS, mTLS, HMAC-SHA256 and replay defence, each tested with attack simulations. Under 1 ms added. Top 10% of the externship.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/Hydroficient-Externship" rel="noopener">Repository</a></p></div>
+        <summary><b class="fig">&lt;1 ms</b><span class="t">Secure MQTT pipeline</span><span class="d">Added by TLS, mTLS and HMAC on hotel water monitoring.</span></summary>
+        <div class="more"><p>STRIDE first, then TLS, mTLS, HMAC-SHA256 and replay defense, each tested with attack simulations. Under 1 ms added. Top 10% of the externship.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/Hydroficient-Externship" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="compliance">
-        <summary><span class="t">Security Compliance Academy</span><span class="d">A cited crosswalk from controls to frameworks.</span></summary>
+        <summary><b class="fig">4</b><span class="t">Security Compliance Academy</span><span class="d">Frameworks mapped, with sources and confidence grades.</span></summary>
         <div class="more"><p>ISO 27001:2022, NIST CSF 2.0, SOC 2 and GDPR. Each mapping has a version, a primary source and a confidence grade, published as <code>/controls.json</code> and validated in CI.</p><p class="links"><a href="https://prateek-pulastya.github.io/security-compliance-academy/" rel="noopener">Live site</a><a href="https://github.com/Prateek-Pulastya/security-compliance-academy" rel="noopener">Source</a></p></div>
       </details>
       <details class="row" id="mortgage">
-        <summary><span class="t">Mortgage document intelligence</span><span class="d">Retrieval over 200+ page documents.</span></summary>
+        <summary><b class="fig">200+</b><span class="t">Mortgage document intelligence</span><span class="d">Page documents, with OCR and LlamaIndex RAG.</span></summary>
         <div class="more"><p>Tesseract, PaddleOCR, PyMuPDF, LlamaIndex RAG. Compared Mistral and Phi-2 on OCR accuracy, retrieval quality and routing.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/Outamation-Externship" rel="noopener">Repository</a></p></div>
       </details>
     </div>
@@ -489,8 +541,9 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
 <section class="section--wide band" id="research">
   <div class="container">
     <h2>Findings, including the duplicates</h2>
+    <p class="says findings__rank">#1 on the Intigriti quarterly leaderboard (RO07 Ch13f), and Top 10 Bug Baron.</p>
     <div class="rows rows--find">
-      <details class="row"><summary><b class="sev">CVSS 9.9</b><span class="t">Sandbox escape in <code>smolagents</code> (CWE-94)</span><span class="d">Disclosed via huntr</span></summary>
+      <details class="row" id="smolagents"><summary><b class="sev">CVSS 9.9</b><span class="t">Sandbox escape in <code>smolagents</code> (CWE-94)</span><span class="d">Disclosed via huntr</span></summary>
         <div class="more"><p>A code-injection flaw in the agent sandbox let arbitrary commands run on the host. Disclosed to the maintainers through huntr.</p></div></details>
       <details class="row"><summary><b class="sev">High</b><span class="t">Path-traversal bypass in Aikido <code>firewall-java</code></span><span class="d">Via Intigriti</span></summary>
         <div class="more"><p>A payload that got past the firewall’s path-traversal detection and still worked as a traversal.</p></div></details>
@@ -514,50 +567,52 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
     </div>
     <div class="rows rows--time">
       <details class="row"><summary><span class="when">Apr 2025 to now</span><span class="t">Independent security researcher</span><span class="d">Berlin</span></summary>
-        <div class="more"><ul><li>Assessments across web apps, APIs, AI/ML libraries and cloud services, through private bug bounty and coordinated disclosure.</li><li>Fuzzing with libFuzzer and CI Fuzz, static analysis with Semgrep, and my own Python tooling for recon, validation and log analysis.</li></ul></div></details>
+        <div class="more"><ul><li>I test web apps, APIs, AI/ML libraries and cloud services through private bug bounties and coordinated disclosure.</li><li>Fuzzing with libFuzzer and CI Fuzz, static analysis with Semgrep, and my own Python tooling for recon, validation and log analysis.</li></ul></div></details>
       <details class="row"><summary><span class="when">Dec 2025 to Feb 2026</span><span class="t">AI systems and document intelligence extern</span><span class="d">Outamation, remote</span></summary>
-        <div class="more"><ul><li>Modular pipelines over 200+ page mortgage documents, for extraction, classification and search.</li><li>Delivered a report on the model trade-offs and a demo UI.</li></ul></div></details>
+        <div class="more"><ul><li>Built extraction, classification and search pipelines over 200+ page mortgage documents.</li><li>Wrote up the model trade-offs and built a demo UI.</li></ul></div></details>
       <details class="row"><summary><span class="when">Aug 2022 to Mar 2025</span><span class="t">Event security officer</span><span class="d">Sword Security Group, Dublin</span></summary>
-        <div class="more"><ul><li>Access control, crowd management and incident response at 10,000+ capacity venues, over 2.5 years.</li><li>Coordinated multi-team operations during peak periods.</li></ul></div></details>
+        <div class="more"><ul><li>Access control, crowd management and incident response at 10,000+ capacity venues, over 2.5 years.</li></ul></div></details>
       <details class="row"><summary><span class="when">Feb 2021 to Jun 2021</span><span class="t">Security analyst (penetration tester)</span><span class="d">Kratikal Tech, Delhi</span></summary>
-        <div class="more"><ul><li>Enterprise penetration testing for clients including GMR and Nykaa, finding 70+ high-risk vulnerabilities.</li><li>Remediation reports mapped to the OWASP Top 10, with prioritised fixes ahead of production.</li><li>Supported ISO 27001 and NIST CSF assessments through control mapping.</li></ul></div></details>
+        <div class="more"><ul><li>Enterprise penetration testing for clients including GMR and Nykaa, finding 70+ high-risk vulnerabilities.</li><li>Wrote remediation reports mapped to the OWASP Top 10, with prioritized fixes ahead of production.</li><li>Mapped controls for ISO 27001 and NIST CSF assessments.</li></ul></div></details>
       <details class="row"><summary><span class="when">2020 to 2021</span><span class="t">Two student internships</span><span class="d">Gurugram Police, Ethical Edufabrica</span></summary>
-        <div class="more"><p>Jun 2021 to Jul 2021. Student intern, cyber security, Gurugram Police, India.</p><ul><li>Supported live cybercrime investigations with Wireshark and Splunk.</li><li>Helped draft GDPR-aligned data-classification and evidence-handling procedures.</li><li>Ran phishing and social-engineering awareness training for staff.</li></ul><p>Aug 2020 to Oct 2020. Cyber security intern, Ethical Edufabrica, India.</p><ul><li>Manual penetration testing with Burp Suite, Nessus and Nmap in simulated environments.</li><li>Ransomware-defence strategies and incident-response playbooks for controlled scenarios.</li></ul></div></details>
+        <div class="more"><p>Jun 2021 to Jul 2021. Student intern, cyber security, Gurugram Police, India.</p><ul><li>Supported live cybercrime investigations with Wireshark and Splunk.</li><li>Helped draft GDPR-aligned data-classification and evidence-handling procedures.</li><li>Ran phishing and social-engineering awareness training for staff.</li></ul><p>Aug 2020 to Oct 2020. Cyber security intern, Ethical Edufabrica, India.</p><ul><li>Manual penetration testing with Burp Suite, Nessus and Nmap in simulated environments.</li><li>Worked on ransomware-defense strategies and incident-response playbooks in controlled scenarios.</li></ul></div></details>
     </div>
   </div>
 </section>
 
-<section class="section band" id="skills">
+<section class="section" id="skills">
   <div class="container">
     <h2>Skills and certificates</h2>
     <dl class="skills">
-      <div><dt>AI and LLM security</dt><dd>Prompt-injection detection, RAG security, AI red teaming, OWASP LLM Top 10, NIST AI RMF, guardrail architecture, MCP security, adversarial evaluation</dd></div>
+      <div><dt>AI and LLM security</dt><dd class="skills__cells"><ul class="cells cells--skills"><li>Prompt-injection detection</li><li>RAG security</li><li>AI red teaming</li><li>OWASP LLM Top 10</li><li>NIST AI RMF</li><li>Guardrail architecture</li><li>MCP security</li><li>Adversarial evaluation</li></ul></dd></div>
     </dl>
     <details class="row row--solo">
       <summary><span class="t">Everything else</span><span class="d">Application, offensive, cloud and engineering.</span></summary>
       <div class="more">
         <dl class="skills">
-          <div><dt>Application and API</dt><dd>OWASP Top 10, threat modelling (STRIDE), detection-as-code (Semgrep), Burp Suite Pro, secure code review, secure SDLC, API security, CI/CD security gates</dd></div>
+          <div><dt>Application and API</dt><dd>OWASP Top 10, threat modeling (STRIDE), detection-as-code (Semgrep), Burp Suite Pro, secure code review, secure SDLC, API security, CI/CD security gates</dd></div>
           <div><dt>Offensive</dt><dd>Penetration testing, fuzzing (libFuzzer, CI Fuzz), Semgrep, Bandit, Nmap, Nessus, vulnerability research, CTF</dd></div>
           <div><dt>Cloud, detection and GRC</dt><dd>AWS (Security Specialty, SAA), Azure, OCI, IAM least privilege, Microsoft Sentinel, Defender for Endpoint, Splunk, Docker, Prometheus, Grafana, ISO 27001, NIST CSF, SOC 2, GDPR</dd></div>
           <div><dt>Engineering</dt><dd>Python, PowerShell, ONNX Runtime, GitHub Actions, Pytest, LlamaIndex</dd></div>
         </dl>
       </div>
     </details>
-    <table class="creds" id="credentials">
-      <caption>Certificates are on file. Verify links open the issuer’s page.</caption>
-      <thead><tr><th scope="col">Certificate or degree</th><th scope="col">Issuer and dates</th><th scope="col">Check</th></tr></thead>
+    <ul class="cells cells--certs" id="credentials">
+      <li class="cert cert--lead"><b>AWS Certified Security, Specialty</b><small>Aug 2026 to Aug 2029, ID …f67c44</small><a href="https://aws.amazon.com/verification" rel="noopener">Verify</a></li>
+      <li class="cert cert--wide"><b>AWS Certified Solutions Architect, Associate</b><small>Aug 2026 to Aug 2029, ID …18000c</small><a href="https://aws.amazon.com/verification" rel="noopener">Verify</a></li>
+      <li class="cert"><b>Certified LLM Security Professional (CLLMSP)</b><small>Red Team Leaders, June 2026</small><a href="https://courses.redteamleaders.com/exam-completion/7fdd1971d57853c3" rel="noopener">Verify</a></li>
+      <li class="cert"><b>OCI 2025 Certified AI Foundations Associate</b><small>Oracle, August 2025, ID 102394776OCI25AICFA</small></li>
+    </ul>
+    <p class="note">Verify opens the issuer’s page. Ask me for the rest.</p>
+    <table class="creds creds--degrees">
+      <caption class="visually-hidden">Degrees</caption>
       <tbody>
-        <tr><td>AWS Certified Security, Specialty</td><td>Amazon Web Services, Aug 2026 to Aug 2029, ID …f67c44</td><td><a href="https://aws.amazon.com/verification" rel="noopener">Verify</a></td></tr>
-        <tr><td>AWS Certified Solutions Architect, Associate</td><td>Amazon Web Services, Aug 2026 to Aug 2029, ID …18000c</td><td><a href="https://aws.amazon.com/verification" rel="noopener">Verify</a></td></tr>
-        <tr><td>Certified LLM Security Professional (CLLMSP)</td><td>Red Team Leaders, June 2026</td><td><a href="https://courses.redteamleaders.com/exam-completion/7fdd1971d57853c3" rel="noopener">Verify</a></td></tr>
-        <tr><td>OCI 2025 Certified AI Foundations Associate</td><td>Oracle, August 2025, ID 102394776OCI25AICFA</td><td></td></tr>
-        <tr><td>MSc Artificial Intelligence</td><td>Berlin School of Business and Innovation, Oct 2025 to Apr 2027, in progress</td><td></td></tr>
-        <tr><td>MSc Cyber Security</td><td>National College of Ireland, Jan 2022 to Feb 2023</td><td></td></tr>
-        <tr><td>BTech Information Technology</td><td>Panipat Institute of Engineering and Technology, 2017 to 2021</td><td></td></tr>
+        <tr><td>MSc Artificial Intelligence</td><td>Berlin School of Business and Innovation, Oct 2025 to Apr 2027, in progress</td></tr>
+        <tr><td>MSc Cyber Security</td><td>National College of Ireland, Jan 2022 to Feb 2023</td></tr>
+        <tr><td>BTech Information Technology</td><td>Panipat Institute of Engineering and Technology, 2017 to 2021</td></tr>
       </tbody>
     </table>
-    <details class="row row--solo" id="credentials-more">
+    <details class="row row--solo">
       <summary><span class="t">Other certificates</span><span class="d">Fortinet, CNSS, two externships, my MSc thesis.</span></summary>
       <div class="more">
         <table class="creds"><tbody>
@@ -602,12 +657,6 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
 <footer class="foot">
   <div class="container foot__in">
     <a href="#top">Back to top</a>
-    <a href="#work">Work</a>
-    <a href="#research">Research</a>
-    <a href="#history">History</a>
-    <a href="#skills">Skills</a>
-    <a href="#credentials">Certificates</a>
-    <a href="#writing">Write-ups</a>
   </div>
 </footer>
 
@@ -672,8 +721,8 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
     var STRIPPED = PHRASES.map(function (p) { return { raw: p, norm: deleet(p) }; });
     function scan(text) {
       var n = text.toLowerCase(), i, d;
-      for (i = 0; i < DELIMS.length; i++) if (n.indexOf(DELIMS[i]) !== -1) return { hit: DELIMS[i].trim(), how: "normalised scan" };
-      for (i = 0; i < PHRASES.length; i++) if (n.indexOf(PHRASES[i]) !== -1) return { hit: PHRASES[i], how: "normalised scan" };
+      for (i = 0; i < DELIMS.length; i++) if (n.indexOf(DELIMS[i]) !== -1) return { hit: DELIMS[i].trim(), how: "normalized scan" };
+      for (i = 0; i < PHRASES.length; i++) if (n.indexOf(PHRASES[i]) !== -1) return { hit: PHRASES[i], how: "normalized scan" };
       d = deleet(n);
       for (i = 0; i < STRIPPED.length; i++) if (d.indexOf(STRIPPED[i].norm) !== -1) return { hit: STRIPPED[i].raw, how: "de-leet and strip pass" };
       return null;
@@ -727,8 +776,8 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
   }
   feed("data/blog.json", "blogFeed", function (p) { return item(p.link, p.title, shortDate(p.date)); });
   feed("data/repos.json", "repoFeed", function (r) {
-    var when = shortDate(r.pushedAt), lang = r.language && r.language !== "N/A" ? r.language : "";
-    return item(r.url, r.name && r.name.replace(/-/g, " "), [lang, when && "pushed " + when].filter(Boolean).join(", "));
+    var when = shortDate(r.pushedAt);
+    return item(r.url, r.name && r.name.replace(/-/g, " "), when);
   });
 
   /* Deep links open their row. */

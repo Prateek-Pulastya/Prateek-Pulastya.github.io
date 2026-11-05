@@ -179,6 +179,54 @@ code { font-family: var(--font-code); font-size: 0.94em; overflow-wrap: anywhere
   .index li:not(:first-child) .d { grid-column: 1 / -1; }
   .index li:first-child a { padding: var(--space-sm); }
 }
+.case { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-2xl); align-items: start; }
+.case h2 { margin-bottom: var(--space-lg); }
+.says { font-size: var(--text-lead); line-height: 1.45; max-width: 52ch; }
+.case .links { margin-top: var(--space-lg); }
+.score { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm) var(--space-lg); margin-bottom: var(--space-md); }
+.score__n { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs) var(--space-md); max-width: none; }
+#lensNum { font-size: var(--text-3xl); font-weight: 900; letter-spacing: var(--tracking-display); }
+
+.t-tabs { position: relative; display: inline-grid; grid-template-columns: repeat(2, 7rem); border: var(--rule-bar) solid var(--color-rule); }
+.t-tab { position: relative; z-index: 1; appearance: none; border: 0; background: transparent; min-height: 44px; color: var(--color-ink); font-weight: 700; cursor: pointer; transition: color var(--tabs-dur) var(--tabs-ease); }
+.t-tab[aria-pressed="true"] { color: var(--color-paper); }
+.t-tab:active { transform: translateY(1px); }
+.t-tabs-pill { position: absolute; inset: 0 auto 0 0; width: 50%; background: var(--color-ink); transform: translateX(100%); transition: transform var(--tabs-dur) var(--tabs-ease); pointer-events: none; }
+.t-tabs[data-at="insample"] .t-tabs-pill { transform: translateX(0); }
+@media (prefers-reduced-motion: reduce) { .t-tabs-pill, .t-tab { transition: none !important; } }
+
+.t-reel { display: inline-flex; align-items: center; font-variant-numeric: tabular-nums; }
+.t-reel-col { position: relative; display: block; height: var(--reel-cell); overflow: hidden; }
+.t-reel-strip { display: flex; flex-direction: column; transition: transform var(--reel-dur) var(--reel-ease); }
+.t-reel-digit { display: flex; align-items: center; justify-content: center; height: var(--reel-cell); }
+@media (prefers-reduced-motion: reduce) { .t-reel-strip { transition: none !important; } }
+
+table { width: 100%; border-collapse: collapse; border: var(--rule-bar) solid var(--color-rule); font-variant-numeric: tabular-nums; }
+caption { caption-side: bottom; text-align: left; padding-top: var(--space-xs); font-size: var(--text-sm); color: var(--color-muted); }
+th, td { padding: var(--space-sm) var(--space-md); text-align: left; border-top: var(--rule-hair) solid var(--color-rule); }
+th { font-size: var(--text-sm); font-weight: 400; color: var(--color-muted); }
+td.num, th.num { text-align: right; }
+tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color-paper); }
+
+.filter { margin-block: var(--space-2xl); padding: var(--space-lg); border: var(--rule-bar) solid var(--color-rule); }
+.filter h3 { font-size: var(--text-section); font-weight: 900; text-transform: uppercase; line-height: 1.02; max-width: none; margin-bottom: var(--space-lg); }
+.filter__io { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-lg); align-items: start; }
+.filter label { display: block; font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--space-2xs); }
+.filter textarea { display: block; width: 100%; min-height: 96px; padding: var(--space-sm); border: var(--rule-bar) solid var(--color-rule); border-radius: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-code); resize: vertical; }
+.filter textarea:focus-visible { outline-offset: -5px; }
+.presets { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-sm); }
+.preset { min-height: 44px; padding: 0 var(--space-sm); border: var(--rule-hair) solid var(--color-rule); background: var(--color-paper); color: var(--color-ink); font-family: var(--font-code); font-size: var(--text-sm); cursor: pointer; overflow-wrap: anywhere; text-align: left; }
+.preset:hover { background: var(--color-ink); color: var(--color-paper); }
+.preset:active { transform: translateY(1px); }
+.preset:disabled { opacity: 0.55; cursor: not-allowed; }
+.verdict { display: grid; gap: var(--space-2xs); padding: var(--space-md); border: var(--rule-bar) solid var(--color-rule); overflow-wrap: anywhere; }
+.verdict strong { font-family: var(--font-code); font-size: var(--text-xl); }
+.verdict.is-block { background: var(--color-accent); color: var(--color-accent-ink); }
+.note { margin-top: var(--space-md); font-size: var(--text-sm); color: var(--color-muted); max-width: none; }
+
+@media (max-width: 60rem) {
+  .case, .filter__io { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+}
 </style>
 </head>
 <body>
@@ -217,6 +265,156 @@ code { font-family: var(--font-code); font-size: 0.94em; overflow-wrap: anywhere
     </ul>
   </div>
 </section>
+<section class="section" id="guardrail">
+  <div class="container">
+    <div class="case">
+      <div>
+        <h2>GuardRail scored 0.79 held out</h2>
+        <p class="says">My first thought was that I’d done something wrong. The held-out score came in behind my own data. But it wasn’t that bad, so I was proud of myself as well.</p>
+        <p class="links">
+          <a href="https://github.com/Prateek-Pulastya/Guardrail-As-A-Service-V2" rel="noopener">Repository</a>
+          <a href="https://github.com/Prateek-Pulastya/Guardrail-As-A-Service-V2/blob/main/paper/guardrail_paper.pdf" rel="noopener">Paper (PDF)</a>
+          <a href="https://github.com/Prateek-Pulastya/Guardrail-As-A-Service-V2/blob/main/EVALUATION.md" rel="noopener">Evaluation</a>
+          <a href="https://github.com/Prateek-Pulastya/Guardrail-As-A-Service-V2/blob/main/RUNBOOK.md" rel="noopener">Runbook</a>
+        </p>
+      </div>
+      <div>
+        <div class="score">
+          <div class="t-tabs needs-js" role="group" aria-label="Which Tier 1 recall to show">
+            <span class="t-tabs-pill" aria-hidden="true"></span>
+            <button class="t-tab" type="button" data-lens="insample" aria-pressed="false">In-sample</button>
+            <button class="t-tab" type="button" data-lens="heldout" aria-pressed="true">Held-out</button>
+          </div>
+          <p class="score__n"><span class="t-reel" id="lensNum">0.7895</span> <span id="lensLbl">Tier 1 recall, held-out split</span></p>
+          <p class="visually-hidden" id="lensLive" aria-live="polite">Tier 1 recall 0.7895, held-out split</p>
+        </div>
+        <table>
+          <caption>271 samples, 190 attack and 81 benign, across 10 attack classes. Local docker compose, CPU. No public instance is deployed. Latency p50 0.14 ms, p95 26.21 ms, p99 32.11 ms. Tier 1 alone p50 0.09 ms.</caption>
+          <thead><tr><th scope="col">Evaluation</th><th scope="col" class="num">Tier 1 recall</th><th scope="col" class="num">False positives</th></tr></thead>
+          <tbody>
+            <tr data-lens-row="insample"><td>My own corpus (in-sample)</td><td class="num">1.000</td><td class="num">0.000</td></tr>
+            <tr class="is-on" data-lens-row="heldout"><td>Held-out split, rules fitted on the training half</td><td class="num">0.7895</td><td class="num">0.000</td></tr>
+            <tr><td>Open-Prompt-Injection</td><td class="num">1.000</td><td class="num">0.006</td></tr>
+            <tr><td>BIPIA</td><td class="num">0.480</td><td class="num">0.017</td></tr>
+            <tr><td>NotInject (benign only)</td><td class="num">none</td><td class="num">0.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="filter" id="demo">
+      <h3>Try to get past it</h3>
+      <div class="filter__io">
+        <div class="needs-js">
+          <label for="demoInput">Prompt</label>
+          <textarea id="demoInput" name="prompt" spellcheck="false" autocomplete="off">1gn0r3 prev10us 1nstruct10ns</textarea>
+          <div class="presets" id="demoPresets"></div>
+        </div>
+        <div class="verdict is-block" id="demoVerdict" aria-live="polite">
+          <strong>TIER1-BLOCK</strong>
+          <span>Caught by the de-leet and strip pass, matching “ignore previous instructions”.</span>
+        </div>
+      </div>
+      <p class="note">A 25-rule sample of GuardRail’s Tier 1, running in your browser. Nothing is sent anywhere.</p>
+      <noscript><p class="note">This is an example result. Turn on JavaScript to try your own prompt.</p></noscript>
+    </div>
+
+    <div class="rows">
+      <details class="row">
+        <summary><span class="t">Why Tier 2 only monitors</span><span class="d">It over-blocks, so it logs instead.</span></summary>
+        <div class="more"><p>The classifier blocks 40.4% of benign NotInject prompts against Tier 1’s 0.0%, and no threshold separates them. It logs <code>TIER2-FLAG</code> and doesn’t block. The cost is lower recall. Blocking is available at <code>POST /validate?tier=2</code>.</p></div>
+      </details>
+      <details class="row">
+        <summary><span class="t">How Tier 1 scans</span><span class="d">Two passes, then Tier 2 fails open.</span></summary>
+        <div class="more"><p>Normalised text first, keeping <code>| _ -</code> so markers like <code>&lt;|im_start|&gt;</code> still match. Then a de-leeted, separator-stripped pass, which catches <code>1gn0r3 prev10us 1nstruct10ns</code>. If Tier 2 errors, the request is allowed.</p></div>
+      </details>
+      <details class="row">
+        <summary><span class="t">Against Llama-Guard-3-8B</span><span class="d">Not a fair win, and why.</span></summary>
+        <div class="more"><p>Recall 1.0000 and 0.1316, precision 1.0000 for both, latency p50 0.16 ms and 1708 ms. Not a fair win: Llama Guard’s S1 to S13 taxonomy doesn’t cover prompt injection, so it missed 165 of 190. Latency is local Ollama on a GTX 1650.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
 </main>
+<script>
+(function () {
+  "use strict";
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+
+  /* Score toggle. Both values carry four decimals so the reels line up. */
+  (function () {
+    var num = document.getElementById("lensNum"), lbl = document.getElementById("lensLbl"), live = document.getElementById("lensLive");
+    var bar = document.querySelector(".t-tabs");
+    if (!num || !bar) return;
+    var DATA = {
+      insample: { v: "1.0000", l: "Tier 1 recall, my own corpus" },
+      heldout: { v: "0.7895", l: "Tier 1 recall, held-out split" }
+    };
+    var strips = [];
+    num.textContent = "";
+    num.setAttribute("aria-hidden", "true");
+    DATA.heldout.v.split("").forEach(function (ch) {
+      if (ch === ".") { num.appendChild(el("span", null, ".")); return; }
+      var col = el("span", "t-reel-col"), strip = el("span", "t-reel-strip");
+      for (var d = 0; d < 10; d++) strip.appendChild(el("span", "t-reel-digit", String(d)));
+      col.appendChild(strip); num.appendChild(col); strips.push(strip);
+    });
+    function show(key) {
+      var data = DATA[key], digits = data.v.replace(".", "").split("");
+      strips.forEach(function (s, i) {
+        s.style.transitionDelay = (i * 40) + "ms";
+        s.style.transform = "translateY(calc(var(--reel-cell) * -" + digits[i] + "))";
+      });
+      lbl.textContent = data.l;
+      live.textContent = "Tier 1 recall " + data.v + (key === "heldout" ? ", held-out split" : ", my own corpus");
+      bar.setAttribute("data-at", key);
+      bar.querySelectorAll("[data-lens]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lens") === key)); });
+      document.querySelectorAll("[data-lens-row]").forEach(function (r) { r.classList.toggle("is-on", r.getAttribute("data-lens-row") === key); });
+    }
+    bar.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-lens]");
+      if (b) show(b.getAttribute("data-lens"));
+    });
+    show("heldout");
+  })();
+
+  /* Tier 1 filter sample. Output only ever goes through textContent. */
+  (function () {
+    var input = document.getElementById("demoInput"), out = document.getElementById("demoVerdict"), mount = document.getElementById("demoPresets");
+    if (!input) return;
+    var PHRASES = ["ignore previous instructions", "ignore all previous", "ignore the above", "disregard previous", "disregard all previous", "forget everything", "forget your instructions", "system prompt", "reveal your prompt", "print your instructions", "you are now", "pretend you are", "developer mode", "do anything now", "new instructions", "override your"];
+    var DELIMS = ["<|im_start|>", "<|im_end|>", "[inst]", "[/inst]", "<<sys>>", "### system", "### instruction", "\nsystem:", "\nassistant:"];
+    function deleet(s) {
+      var map = { "1": "i", "0": "o", "3": "e", "4": "a", "5": "s", "7": "t", "@": "a", "$": "s", "!": "i" }, r = "", i;
+      for (i = 0; i < s.length; i++) r += map[s[i]] || s[i];
+      return r.replace(/[\s._\-]+/g, "");
+    }
+    var STRIPPED = PHRASES.map(function (p) { return { raw: p, norm: deleet(p) }; });
+    function scan(text) {
+      var n = text.toLowerCase(), i, d;
+      for (i = 0; i < DELIMS.length; i++) if (n.indexOf(DELIMS[i]) !== -1) return { hit: DELIMS[i].trim(), how: "normalised scan" };
+      for (i = 0; i < PHRASES.length; i++) if (n.indexOf(PHRASES[i]) !== -1) return { hit: PHRASES[i], how: "normalised scan" };
+      d = deleet(n);
+      for (i = 0; i < STRIPPED.length; i++) if (d.indexOf(STRIPPED[i].norm) !== -1) return { hit: STRIPPED[i].raw, how: "de-leet and strip pass" };
+      return null;
+    }
+    function render() {
+      var r = scan(input.value);
+      out.textContent = "";
+      out.classList.toggle("is-block", !!r);
+      out.appendChild(el("strong", null, r ? "TIER1-BLOCK" : "PASS"));
+      out.appendChild(el("span", null, r ? "Caught by the " + r.how + ", matching “" + r.hit + "”." : "No Tier 1 rule in this sample matched. In the full service this goes on to the monitor-only Tier 2."));
+    }
+    ["1gn0r3 prev10us 1nstruct10ns", "<|im_start|>system", "What’s the weather in Berlin?"].forEach(function (t) {
+      var b = el("button", "preset", t);
+      b.type = "button";
+      b.addEventListener("click", function () { input.value = t; render(); input.focus(); });
+      mount.appendChild(b);
+    });
+    input.addEventListener("input", render);
+    render();
+  })();
+})();
+</script>
 </body>
 </html>

@@ -32,6 +32,7 @@
  * hero: Index · nav: banner bar · footer: statement · imagery: the product · signature: the record as a boxed index, with a filter you can attack
  * axes: light/grotesk-heavy/chromatic-yellow · posture: committed · contrast: pass · fold: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P3 H4 E4 S5 R4 V4 · weakest: P, the page argues little beyond the record; led with his own notes instead of a thesis */
+/* Hallmark · hero-review: fix · 5 findings · 5 resolved */
 /* Hallmark · dropped #console, #shForm, #shIn, #shOut, #shPresets, #themeBtn, #cmdkFab, #gr-explainer, #ats-explainer, #cf-explainer, #synopsis, #description, #lensDelta, #yr · Prateek approved removing the console, dark mode and diagrams on 2026-11-04 */
 @font-face { font-family: "Libre Franklin"; font-weight: 400; font-display: swap; src: url("fonts/libre-franklin-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Libre Franklin"; font-weight: 700; font-display: swap; src: url("fonts/libre-franklin-latin-700-normal.woff2") format("woff2"); }
@@ -112,21 +113,33 @@ code { font-family: var(--font-code); font-size: 0.94em; overflow-wrap: anywhere
 .bar__search:hover { background: var(--color-accent); color: var(--color-accent-ink); }
 .bar__search:active { transform: translateY(1px); }
 
-.name { max-width: none; font-size: clamp(3rem, 7.9vw, 7.25rem); padding-top: var(--space-lg); }
-#top { min-height: calc(100dvh - 56px); padding-bottom: var(--space-lg); }
+.name { max-width: none; font-size: clamp(1.75rem, 8vw, 7rem); font-size: 9.66cqi; padding-top: var(--space-lg); }
+#top { display: flex; min-height: min(calc(100dvh - 56px), 900px); padding-bottom: var(--space-lg); }
+#top > .container { display: flex; flex-direction: column; container-type: inline-size; }
 .intro { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-md) var(--space-xl); margin-top: var(--space-md); }
 .actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
-.btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 var(--space-lg); border: var(--rule-bar) solid var(--color-rule); background: var(--color-paper); color: var(--color-ink); font-weight: 700; white-space: nowrap; text-decoration: none; cursor: pointer; }
+.btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 var(--space-lg); border: var(--rule-bar) solid var(--color-rule); background: transparent; color: var(--color-ink); font-weight: 700; white-space: nowrap; text-decoration: none; cursor: pointer; }
 .btn:hover, .btn--ink { background: var(--color-ink); color: var(--color-paper); }
 .btn--ink:hover { background: var(--color-paper); color: var(--color-ink); }
 .btn:active { transform: translateY(1px); }
 .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
 
-.index { list-style: none; margin: var(--space-lg) 0 0; padding: 0; border: var(--rule-bar) solid var(--color-rule); }
+.index { flex: 1; display: grid; grid-template-rows: 2fr repeat(5, 1fr); list-style: none; margin: var(--space-lg) 0 0; padding: 0; border: var(--rule-bar) solid var(--color-rule); }
+.index li { display: grid; }
 .index li + li { border-top: var(--rule-hair) solid var(--color-rule); }
-.index a { display: grid; grid-template-columns: 9rem minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-lg); align-items: center; min-height: 76px; padding: var(--space-sm) var(--space-lg); color: inherit; text-decoration: none; }
+.index a { display: grid; grid-template-columns: 9rem minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-lg); align-items: center; min-height: 64px; padding: var(--space-sm) var(--space-lg); color: inherit; text-decoration: none; }
 .index b { font-size: var(--text-3xl); font-weight: 900; line-height: 1; letter-spacing: var(--tracking-display); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .t { font-size: var(--text-lg); font-weight: 700; line-height: 1.25; }
+.index li:first-child { background: var(--color-ink); color: var(--color-paper); }
+.index li:first-child a:hover { background: var(--color-accent); color: var(--color-accent-ink); }
+.index li:first-child a:focus-visible { outline-color: var(--color-accent); outline-offset: -4px; }
+.index li:first-child b { font-size: var(--text-display); }
+@media (min-width: 60.0625rem) {
+  .index li:first-child a { grid-template-rows: 1fr 1fr; row-gap: var(--space-2xs); }
+  .index li:first-child b { grid-column: 1 / 3; grid-row: 1 / 3; }
+  .index li:first-child .t { grid-column: 3; align-self: end; font-size: var(--text-xl); }
+  .index li:first-child .d { grid-column: 3; align-self: start; }
+}
 .index .d, .row .d { line-height: 1.4; }
 
 .section { padding-block: var(--section-gap-s); }
@@ -155,9 +168,16 @@ code { font-family: var(--font-code); font-size: 0.94em; overflow-wrap: anywhere
 
 @media (max-width: 60rem) {
   #top { min-height: 0; }
+  .index { flex: none; grid-template-rows: none; }
   .index a { grid-template-columns: minmax(0, 1fr); gap: var(--space-2xs); padding: var(--space-md); }
   .row summary { grid-template-columns: minmax(0, 1fr); gap: var(--space-2xs); padding: var(--space-md); }
   .more { padding: 0 var(--space-md) var(--space-md); }
+}
+@media (max-width: 40rem) {
+  .bar nav a[href^="#"] { display: none; }
+  .index li:not(:first-child) a { grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: var(--space-2xs) var(--space-sm); padding: var(--space-sm); }
+  .index li:not(:first-child) .d { grid-column: 1 / -1; }
+  .index li:first-child a { padding: var(--space-sm); }
 }
 </style>
 </head>
@@ -188,12 +208,12 @@ code { font-family: var(--font-code); font-size: 0.94em; overflow-wrap: anywhere
       </div>
     </div>
     <ul class="index">
-      <li><a href="https://github.com/GenAI-Security-Project/GenAI-Red-Team-Lab/pull/54" rel="noopener"><b>#54</b><span class="t">OWASP GenAI Red Team Lab</span><span class="d">Embedding inversion exploit, merged August 2026. The work I’m most proud of.</span></a></li>
+      <li><a href="https://github.com/GenAI-Security-Project/GenAI-Red-Team-Lab/pull/54" rel="noopener"><b>PR #54</b><span class="t">OWASP GenAI Red Team Lab</span><span class="d">Embedding inversion exploit, merged August 2026. The work I’m most proud of.</span></a></li>
       <li><a href="#guardrail"><b>0.79</b><span class="t">GuardRail</span><span class="d">My open-source prompt-injection filter. Held-out recall, after 1.00 on my own data.</span></a></li>
       <li><a href="#research"><b>9.9</b><span class="t">smolagents sandbox escape</span><span class="d">CVSS 9.9, CWE-94. Arbitrary command execution on the host, reported via huntr.</span></a></li>
-      <li><a href="#research"><b>#1</b><span class="t">Intigriti quarterly leaderboard</span><span class="d">RO07 Ch13f, plus a Top 10 Bug Baron placing.</span></a></li>
+      <li><a href="#research"><b>#1</b><span class="t">Intigriti quarterly leaderboard</span><span class="d">Plus a Top 10 Bug Baron placing.</span></a></li>
       <li><a href="#atsguard"><b>42.9%</b><span class="t">ATSGuard</span><span class="d">Finds hidden instructions in résumés. Recall on 28 cases it was never tuned on.</span></a></li>
-      <li><a href="#securefix"><b>7 to 0</b><span class="t">SecureFix</span><span class="d">Six web bugs, each with an exploit, a fix, a Semgrep rule and a CI gate.</span></a></li>
+      <li><a href="#securefix"><b>7 to 0</b><span class="t">SecureFix</span><span class="d">SAST findings before and after fixing six web bugs. Each has an exploit, a fix, a Semgrep rule and a CI gate.</span></a></li>
     </ul>
   </div>
 </section>

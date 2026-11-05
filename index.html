@@ -179,10 +179,6 @@ code { font-family: var(--font-code); overflow-wrap: anywhere; }
 }
 @media (max-width: 40rem) {
   .bar nav a[href^="#"] { display: none; }
-  .filter { padding: var(--space-md); }
-  .preset { font-size: var(--text-xs); }
-  .verdict.is-block { background: none; color: inherit; }
-  .verdict.is-block strong { justify-self: start; padding-inline: var(--space-xs); background: var(--color-accent); color: var(--color-accent-ink); }
   .index li:not(:first-child) a { grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: var(--space-2xs) var(--space-sm); padding: var(--space-sm); }
   .index li:not(:first-child) .d { grid-column: 1 / -1; }
   .index li:first-child a { padding: var(--space-sm); }
@@ -242,7 +238,6 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
 .sev--low { font-weight: 700; color: var(--color-muted); }
 .when { font-variant-numeric: tabular-nums; color: var(--color-muted); }
 .row summary:hover .when, .row summary:hover .sev--low { color: inherit; }
-.t code { font-size: 0.9em; }
 .skills { margin: 0 0 var(--space-lg); display: grid; gap: var(--space-md); }
 .skills dt { font-weight: 700; }
 .skills dd { margin: 0; max-width: 72ch; }
@@ -330,6 +325,12 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
 }
 @media (max-width: 60rem) {
   .feeds { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 40rem) {
+  .filter { padding: var(--space-md); }
+  .preset { font-size: var(--text-xs); }
+  .verdict.is-block { background: none; color: inherit; }
+  .verdict.is-block strong { justify-self: start; padding-inline: var(--space-xs); background: var(--color-accent); color: var(--color-accent-ink); }
 }
 </style>
 </head>

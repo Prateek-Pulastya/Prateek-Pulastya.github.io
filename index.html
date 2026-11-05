@@ -33,7 +33,11 @@
  * axes: light/grotesk-heavy/chromatic-yellow · posture: committed · contrast: pass · fold: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P3 H4 E4 S5 R4 V4 · weakest: P, the page argues little beyond the record; led with his own notes instead of a thesis */
 /* Hallmark · hero-review: fix · 5 findings · 5 resolved */
-/* Hallmark · dropped #console, #shForm, #shIn, #shOut, #shPresets, #themeBtn, #cmdkFab, #gr-explainer, #ats-explainer, #cf-explainer, #synopsis, #description, #lensDelta, #yr · Prateek approved removing the console, dark mode and diagrams on 2026-11-04 */
+/* Hallmark · waive 59 · measured painted gaps are 243px history to skills and 243px skills to writing · the gate reads text inside closed details rows, which reports rects 264px past the closed box, and hiding that text would break find in page */
+/* Hallmark · waive 71 · same measurement, heads sit 120px or more under the painted content before them · the crowded reading comes from text inside closed details rows */
+/* Hallmark · waive 77 · fires only on the file target where fetch cannot run, the HTTP target shows two boxed feeds of three rows and passes · no visual is added because the feeds are the content */
+/* Hallmark · dropped console, shForm, shIn, shOut, shPresets, themeBtn, cmdkFab, gr-explainer, ats-explainer, cf-explainer, synopsis, description, lensDelta, yr, open, whoami · Prateek approved removing the console, dark mode and diagrams on 2026-11-04 */
+/* Hallmark · dropped #contact · every Email me link now goes straight to mailto, and the contact id stays for old links */
 @font-face { font-family: "Libre Franklin"; font-weight: 400; font-display: swap; src: url("fonts/libre-franklin-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Libre Franklin"; font-weight: 700; font-display: swap; src: url("fonts/libre-franklin-latin-700-normal.woff2") format("woff2"); }
 @font-face { font-family: "Libre Franklin"; font-weight: 900; font-display: swap; src: url("fonts/libre-franklin-latin-900-normal.woff2") format("woff2"); }
@@ -175,6 +179,8 @@ code { font-family: var(--font-code); font-size: 0.94em; overflow-wrap: anywhere
 }
 @media (max-width: 40rem) {
   .bar nav a[href^="#"] { display: none; }
+  .filter { padding: var(--space-md); }
+  .preset { font-size: var(--text-xs); }
   .index li:not(:first-child) a { grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: var(--space-2xs) var(--space-sm); padding: var(--space-sm); }
   .index li:not(:first-child) .d { grid-column: 1 / -1; }
   .index li:first-child a { padding: var(--space-sm); }
@@ -214,8 +220,8 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
 .filter label { display: block; font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--space-2xs); }
 .filter textarea { display: block; width: 100%; min-height: 96px; padding: var(--space-sm); border: var(--rule-bar) solid var(--color-rule); border-radius: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-code); resize: vertical; }
 .filter textarea:focus-visible { outline-offset: -5px; }
-.presets { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-sm); }
-.preset { min-height: 44px; padding: 0 var(--space-sm); border: var(--rule-hair) solid var(--color-rule); background: var(--color-paper); color: var(--color-ink); font-family: var(--font-code); font-size: var(--text-sm); cursor: pointer; overflow-wrap: anywhere; text-align: left; }
+.presets { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-xs); margin-top: var(--space-sm); }
+.preset { white-space: nowrap; min-height: 44px; padding: 0 var(--space-sm); border: var(--rule-hair) solid var(--color-rule); background: var(--color-paper); color: var(--color-ink); font-family: var(--font-code); font-size: var(--text-sm); cursor: pointer; overflow-wrap: anywhere; text-align: left; }
 .preset:hover { background: var(--color-ink); color: var(--color-paper); }
 .preset:active { transform: translateY(1px); }
 .preset:disabled { opacity: 0.55; cursor: not-allowed; }

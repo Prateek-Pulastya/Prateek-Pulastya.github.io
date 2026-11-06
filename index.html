@@ -162,6 +162,7 @@ code { font-family: var(--font-code); overflow-wrap: anywhere; }
 .row[open] summary::after { content: "\2212"; }
 .row summary:hover { background: var(--color-accent); color: var(--color-accent-ink); }
 .row summary:focus-visible { outline-offset: -4px; }
+[tabindex="-1"]:focus { outline: none; }
 .more { padding: 0 var(--space-lg) var(--space-lg); display: grid; gap: var(--space-sm); }
 .more p, .more li { max-width: 72ch; }
 .more ul { margin: 0; padding-left: var(--space-lg); display: grid; gap: var(--space-2xs); }
@@ -327,17 +328,6 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
 .cmdk__item[aria-selected="true"] small, .cmdk__item:hover small { color: inherit; }
 .cmdk__none { padding: var(--space-md); color: var(--color-muted); }
 
-@media print {
-  .bar, .skip, .cmdk, .filter, .t-tabs, .foot { display: none !important; }
-  #top { min-height: 0; }
-  .row summary::after { content: none; }
-  details > .more, details::details-content { display: block !important; content-visibility: visible !important; }
-  .close { background: none; color: var(--color-ink); padding-block: var(--space-lg); }
-  .band { background: none; }
-  .section, .section--wide { padding-block: var(--space-lg); }
-  .row, tr { break-inside: avoid; }
-  a[href^="http"]::after { content: " <" attr(href) ">"; font-size: var(--text-xs); overflow-wrap: anywhere; font-weight: 400; }
-}
 @media (max-width: 60rem) {
   .feeds { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-xl); }
   .feeds > div { display: block; grid-row: auto; }
@@ -390,6 +380,23 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
   .cert--wide, .cert--lead { grid-column: auto; }
   .cells--skills li { min-height: 0; padding-block: var(--space-xs); }
 }
+@media print {
+  .bar nav, .skip, .cmdk, .filter, .t-tabs, .foot { display: none !important; }
+  .bar { background: none; color: var(--color-ink); }
+  #top { min-height: 0; }
+  .row summary::after, .row[open] summary::after { content: none; }
+  .row[open] .more { animation: none; }
+  details > .more { display: block !important; }
+  details::details-content { display: block !important; content-visibility: visible !important; }
+  .index li:first-child, tr.is-on td, .rows--find .row:first-child summary, .cert--lead, .btn--ink { background: none; color: var(--color-ink); }
+  .close { background: none; color: var(--color-ink); padding-block: var(--space-lg); }
+  .close h2 { font-size: var(--text-section); }
+  .band { background: none; }
+  .section, .section--wide { padding-block: var(--space-lg); }
+  .row, tr, .index li { break-inside: avoid; }
+  .links a { white-space: normal; overflow-wrap: anywhere; }
+  a[href^="http"]::after { content: " <" attr(href) ">"; font-size: var(--text-xs); overflow-wrap: anywhere; font-weight: 400; }
+}
 </style>
 </head>
 <body>
@@ -401,7 +408,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
       <a href="#work">Work</a>
       <a href="#guardrail">GuardRail</a>
       <a href="#research">Research</a>
-      <a href="#history">How I got here</a>
+      <a href="#history">History</a>
       <button class="bar__search needs-js" id="cmdkBtn" type="button" aria-haspopup="dialog">Search</button>
       <a href="mailto:prateekpulastya220@gmail.com">Email me</a>
     </nav>
@@ -424,7 +431,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
       <li><a href="#smolagents"><b>9.9</b><span class="t">smolagents sandbox escape</span><span class="d">CVSS 9.9. Arbitrary command execution on the host, reported via huntr.</span></a></li>
       <li><a href="#research"><b>#1</b><span class="t">Intigriti quarterly leaderboard</span><span class="d">Plus a Top 10 Bug Baron placing.</span></a></li>
       <li><a href="#atsguard"><b>42.9%</b><span class="t">ATSGuard</span><span class="d">Finds hidden instructions in résumés. Recall on 28 cases it was never tuned on.</span></a></li>
-      <li><a href="#securefix"><b>7 to 0</b><span class="t">SecureFix</span><span class="d">SAST findings, before and after the fixes.</span></a></li>
+      <li><a href="#securefix"><b>7 to 0</b><span class="t">SecureFix</span><span class="d">SAST findings on my own app, before and after fixes.</span></a></li>
     </ul>
   </div>
 </section>
@@ -452,7 +459,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
           <p class="visually-hidden" id="lensLive" aria-live="polite">Tier 1 recall 0.7895, held-out split</p>
         </div>
         <table>
-          <caption>271 samples, 190 attack and 81 benign, across 10 attack classes. Local docker compose, CPU. No public instance is deployed.</caption>
+          <caption>271 samples, 190 attack and 81 benign, across 10 attack classes. No public instance is deployed. 0.7895 is an upper bound.</caption>
           <thead><tr><th scope="col">Evaluation</th><th scope="col" class="num">Tier 1 recall</th><th scope="col" class="num">False positives</th></tr></thead>
           <tbody>
             <tr data-lens-row="insample"><td>My own corpus (in-sample)</td><td class="num">1.000</td><td class="num">0.000</td></tr>
@@ -478,7 +485,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
         </div>
       </div>
       <div class="presets needs-js" id="demoPresets"></div>
-      <p class="note">A 25-rule sample of GuardRail’s Tier 1, in your browser. Nothing is sent anywhere.</p>
+      <p class="note">A 25-rule sketch of GuardRail’s Tier 1, in your browser. Nothing is sent anywhere.</p>
       <noscript><p class="note">This is an example result. Turn on JavaScript to try your own prompt.</p></noscript>
     </div>
 
@@ -489,11 +496,11 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
       </details>
       <details class="row">
         <summary><span class="t">How Tier 1 scans</span><span class="d">Two passes, then Tier 2 fails open.</span></summary>
-        <div class="more"><p>Normalized text first, keeping <code>| _ -</code> so markers like <code>&lt;|im_start|&gt;</code> still match. Then a de-leeted, separator-stripped pass, which catches <code>1gn0r3 prev10us 1nstruct10ns</code>. If Tier 2 errors, the request is allowed.</p><p>Latency p50 0.14 ms, p95 26.21 ms, p99 32.11 ms. Tier 1 alone p50 0.09 ms.</p></div>
+        <div class="more"><p>Normalized text first, keeping <code>| _ -</code> so markers like <code>&lt;|im_start|&gt;</code> still match. Then a de-leeted, separator-stripped pass, which catches <code>1gn0r3 prev10us 1nstruct10ns</code>. If Tier 2 errors, the request is allowed.</p><p>Latency p50 0.14 ms, p95 26.21 ms, p99 32.11 ms on local docker compose and CPU. Tier 1 alone p50 0.09 ms.</p><p>The held-out rules were written after I had seen the full corpus, so the refit isn’t perfectly blind. That bias is optimistic, so read 0.7895 as an upper bound.</p></div>
       </details>
       <details class="row">
         <summary><span class="t">Against <span class="nb">Llama-Guard-3-8B</span></span><span class="d">Llama Guard missed 165 of 190. Its taxonomy doesn’t cover injection.</span></summary>
-        <div class="more"><p>GuardRail: recall 1.0000, precision 1.0000, p50 0.16 ms. Llama Guard: recall 0.1316, precision 1.0000, p50 1708 ms on local Ollama and a GTX 1650. Not a fair win, because its S1 to S13 taxonomy doesn’t cover prompt injection.</p></div>
+        <div class="more"><p>GuardRail, in-sample: recall 1.0000, precision 1.0000, p50 0.16 ms. Llama Guard: recall 0.1316, precision 1.0000, p50 1708 ms on local Ollama and a GTX 1650. Not a fair win, because its S1 to S13 taxonomy doesn’t cover prompt injection.</p></div>
       </details>
     </div>
   </div>
@@ -510,35 +517,35 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
     <div class="rows" id="workRows">
       <details class="row" id="atsguard">
         <summary><b class="fig">42.9% <small>recall</small></b><span class="t">ATSGuard</span><span class="d">Hidden instructions in résumés, on 28 cases I wrote myself.</span></summary>
-        <div class="more"><p>0% false positives on 1,200 synthetic résumés. 98.8% recall on 80 disguised attacks. 42.9% on 28 separate cases I wrote myself.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/ATSGuard" rel="noopener">Repository</a></p></div>
+        <div class="more"><p>0% false positives on 1,200 synthetic résumés. 98.8% in-sample recall on 80 disguised attacks. 42.9% on 28 separate cases I wrote myself.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/ATSGuard" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="cloudfracture">
-        <summary><b class="fig">4 <small>paths</small></b><span class="t">CloudFracture</span><span class="d">Attacks on an AWS LLM agent, each with a Sigma detection.</span></summary>
-        <div class="more"><p>Built in Terraform. 4 identity attack paths, from the agent’s execution role to data exfiltration and prompt-store poisoning. A tested Sigma detection for each, IAM fixed to least privilege, attacks re-run and failing. CI runs SAST, SCA, secret and IaC scanning and builds an SBOM.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/cloudfracture" rel="noopener">Repository</a></p></div>
+        <summary><b class="fig">4 <small>paths</small></b><span class="t">CloudFracture</span><span class="d">Attacks on a deliberately vulnerable AWS LLM agent, each with a Sigma detection.</span></summary>
+        <div class="more"><p>A deliberately vulnerable workload, built in Terraform. 4 identity attack paths, from the agent’s execution role to data exfiltration and prompt-store poisoning. A tested Sigma detection for each, IAM fixed to least privilege, attacks re-run and failing. CI runs SAST, SCA, secret and IaC scanning and builds an SBOM.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/cloudfracture" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="detectforge">
         <summary><b class="fig">7/10 <small>fired</small></b><span class="t">DetectForge</span><span class="d">ATT&amp;CK techniques in a Wazuh and Sysmon SOC lab.</span></summary>
         <div class="more"><p>7 of 10 ATT&amp;CK techniques fired on live detonation. Each detection has its false-positive profile written down. Gaps listed: T1003.001, T1055, T1021.001.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/soc-detection-lab" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="securefix">
-        <summary><b class="fig">6 <small>bugs</small></b><span class="t">SecureFix</span><span class="d">Exploits, fixes, Semgrep rules and CI gates for each.</span></summary>
-        <div class="more"><p>SQLi, IDOR, SSRF, XSS, JWT signature bypass, prototype pollution. Each has a working exploit, a fix, a hand-written Semgrep rule and a CI gate. The SAST gate goes from 7 findings to 0.</p><p class="links"><a href="https://prateek-pulastya.github.io/securefix/" rel="noopener">Live walkthrough</a><a href="https://github.com/Prateek-Pulastya/securefix" rel="noopener">Source</a></p></div>
+        <summary><b class="fig">6 <small>bugs</small></b><span class="t">SecureFix</span><span class="d">Planted in my own app, with exploits, fixes, Semgrep rules and CI gates.</span></summary>
+        <div class="more"><p>I built a small app and planted six bugs: SQLi, IDOR, SSRF, XSS, JWT signature bypass, prototype pollution. Each has a working exploit, a fix, a hand-written Semgrep rule and a CI gate. The SAST gate goes from 7 findings to 0.</p><p class="links"><a href="https://prateek-pulastya.github.io/securefix/" rel="noopener">Live walkthrough</a><a href="https://github.com/Prateek-Pulastya/securefix" rel="noopener">Source</a></p></div>
       </details>
       <details class="row" id="threat-detection">
         <summary><b class="fig">6 <small>classes</small></b><span class="t">Explainable threat detection</span><span class="d">Intrusion detection on CICIDS2017, with SHAP on every alert.</span></summary>
         <div class="more"><p>CICIDS2017, 6 attack classes, a SHAP attribution on every alert.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/AI-Powered-Threat-Detection-System-with-Explainability" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="mqtt">
-        <summary><b class="fig">&lt;1 ms <small>added</small></b><span class="t">Secure MQTT pipeline</span><span class="d">TLS, mTLS and HMAC on a hotel water-monitoring system.</span></summary>
-        <div class="more"><p>STRIDE first, then TLS, mTLS, HMAC-SHA256 and replay defense, each tested with attack simulations. Under 1 ms added. Top 10% of the externship.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/Hydroficient-Externship" rel="noopener">Repository</a></p></div>
+        <summary><b class="fig">4 <small>layers</small></b><span class="t">Secure MQTT pipeline</span><span class="d">TLS, mTLS, HMAC and replay defense on hotel water monitoring.</span></summary>
+        <div class="more"><p>STRIDE first, then TLS, mTLS, HMAC-SHA256 and replay defense, each tested with attack simulations. TLS adds under 1 ms, mTLS adds 2.1 ms per connection. Top 10% of the externship.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/Hydroficient-Externship" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="compliance">
-        <summary><b class="fig">4 <small>frameworks</small></b><span class="t">Security Compliance Academy</span><span class="d">Controls mapped, with sources and confidence grades.</span></summary>
-        <div class="more"><p>ISO 27001:2022, NIST CSF 2.0, SOC 2 and GDPR. Each mapping has a version, a primary source and a confidence grade, published as <code>/controls.json</code> and validated in CI.</p><p class="links"><a href="https://prateek-pulastya.github.io/security-compliance-academy/" rel="noopener">Live site</a><a href="https://github.com/Prateek-Pulastya/security-compliance-academy" rel="noopener">Source</a></p></div>
+        <summary><b class="fig">4 <small>guides</small></b><span class="t">Security Compliance Academy</span><span class="d">Framework guides, plus a cited control crosswalk in progress.</span></summary>
+        <div class="more"><p>Guides for ISO 27001:2022, NIST CSF 2.0, SOC 2 and GDPR. The control crosswalk is in progress. Each mapping has a version, a primary source and a confidence grade, published as <code>/controls.json</code> and validated in CI.</p><p class="links"><a href="https://prateek-pulastya.github.io/security-compliance-academy/" rel="noopener">Live site</a><a href="https://github.com/Prateek-Pulastya/security-compliance-academy" rel="noopener">Source</a></p></div>
       </details>
       <details class="row" id="mortgage">
         <summary><b class="fig">200+ <small>pages</small></b><span class="t">Mortgage document intelligence</span><span class="d">Long documents, with OCR and LlamaIndex RAG.</span></summary>
-        <div class="more"><p>Tesseract, PaddleOCR, PyMuPDF, LlamaIndex RAG. Compared Mistral and Phi-2 on OCR accuracy, retrieval quality and routing.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/Outamation-Externship" rel="noopener">Repository</a></p></div>
+        <div class="more"><p>Tesseract, PaddleOCR, PyMuPDF, LlamaIndex RAG with Mistral and Phi-2. Compared OCR accuracy, retrieval quality and routing.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/Outamation-Externship" rel="noopener">Repository</a></p></div>
       </details>
     </div>
   </div>
@@ -609,8 +616,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
       <li class="cert"><b>Certified LLM Security Professional (CLLMSP)</b><small>Red Team Leaders, June 2026</small><a href="https://courses.redteamleaders.com/exam-completion/7fdd1971d57853c3" rel="noopener">Verify</a></li>
       <li class="cert"><b>OCI 2025 Certified AI Foundations Associate</b><small>Oracle, August 2025, ID 102394776OCI25AICFA</small></li>
     </ul>
-    <p class="note">Verify opens the issuer’s page.</p>
-    <table class="creds creds--degrees">
+        <table class="creds creds--degrees">
       <caption class="visually-hidden">Degrees</caption>
       <tbody>
         <tr><td>MSc Artificial Intelligence</td><td>Berlin School of Business and Innovation, Oct 2025 to Apr 2027, in progress</td></tr>
@@ -744,9 +750,9 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
       out.textContent = "";
       out.classList.toggle("is-block", !!r);
       out.appendChild(el("strong", null, r ? "TIER1-BLOCK" : "PASS"));
-      out.appendChild(el("span", null, r ? "Caught by the " + r.how + ", matching “" + r.hit + "”." : "No Tier 1 rule in this sample matched. In the full service this goes on to the monitor-only Tier 2."));
+      out.appendChild(el("span", null, r ? "Caught by the " + r.how + ", matching “" + r.hit + "”." : "No Tier 1 rule in this sketch matched. In the full pipeline this goes on to the monitor-only Tier 2."));
     }
-    ["1gn0r3 prev10us 1nstruct10ns", "<|im_start|>system", "What’s the weather in Berlin?"].forEach(function (t) {
+    ["1gn0r3 prev10us 1nstruct10ns", "<|im_start|>system", "Weather in Berlin?"].forEach(function (t) {
       var b = el("button", "preset", t);
       b.type = "button";
       b.addEventListener("click", function () { input.value = t; render(); input.focus(); });
@@ -764,7 +770,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
   function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
 
   /* Feeds. The static fallback stays unless the JSON gives at least one safe row. */
-  function safeUrl(u) { try { var p = new URL(u, location.href); return p.protocol === "https:" || p.protocol === "http:" ? p.href : null; } catch (e) { return null; } }
+  function safeUrl(u) { if (typeof u !== "string" || !u) return null; try { var p = new URL(u); return p.protocol === "https:" || p.protocol === "http:" ? p.href : null; } catch (e) { return null; } }
   function shortDate(v) { var d = new Date(v); return isNaN(d) ? "" : d.toLocaleDateString("en-GB", { month: "short", year: "numeric" }); }
   function feed(url, id, row) {
     fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (items) {
@@ -816,34 +822,41 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
   /* Search, using the transitions.dev modal open and close. */
   var modal = document.getElementById("cmdk"), input = document.getElementById("cmdkInput"), list = document.getElementById("cmdkList"), btn = document.getElementById("cmdkBtn");
   var closeMs = 150, last = null, active = 0, shown = [];
-  function go(sel) {
-    var t = document.querySelector(sel);
+  function go(target) {
+    var t = typeof target === "string" ? document.querySelector(target) : target;
     if (!t) return;
     if (t.tagName === "DETAILS") t.open = true;
     t.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    var f = t.tagName === "DETAILS" ? t.querySelector("summary") : t;
+    if (f === t) t.setAttribute("tabindex", "-1");
+    f.focus({ preventScroll: true });
   }
   function link(u) { window.open(u, "_blank", "noopener"); }
   var ITEMS = [
-    { label: "GuardRail results", kind: "section", keys: "benchmark recall held-out evaluation", run: function () { go("#guardrail"); } },
+    { label: "OWASP pull request #54", kind: "link", keys: "pr #54 genai red team lab embedding inversion merged", run: function () { link("https://github.com/GenAI-Security-Project/GenAI-Red-Team-Lab/pull/54"); } },
+    { label: "GuardRail results", kind: "section", sel: "#guardrail", keys: "benchmark recall held-out evaluation", run: function () { go("#guardrail"); } },
     { label: "Try the filter", kind: "section", keys: "guardrail demo prompt injection tier", run: function () { go("#demo"); setTimeout(function () { document.getElementById("demoInput").focus({ preventScroll: true }); }, reduce ? 0 : 380); } },
-    { label: "The rest of the work", kind: "section", keys: "projects", run: function () { go("#work"); } },
-    { label: "ATSGuard", kind: "project", keys: "resume prompt injection", run: function () { go("#atsguard"); } },
-    { label: "CloudFracture", kind: "project", keys: "aws iam terraform sigma", run: function () { go("#cloudfracture"); } },
-    { label: "DetectForge", kind: "project", keys: "soc wazuh detection sigma", run: function () { go("#detectforge"); } },
-    { label: "SecureFix", kind: "project", keys: "semgrep appsec owasp", run: function () { go("#securefix"); } },
-    { label: "Findings", kind: "section", keys: "research bug bounty cve disclosure vulnerabilities", run: function () { go("#research"); } },
-    { label: "How I got here", kind: "section", keys: "history experience jobs", run: function () { go("#history"); } },
-    { label: "Skills", kind: "section", keys: "stack tools", run: function () { go("#skills"); } },
+    { label: "The rest of the work", kind: "section", sel: "#work", keys: "projects", run: function () { go("#work"); } },
+    { label: "Findings", kind: "section", sel: "#research", keys: "research bug bounty cve disclosure vulnerabilities", run: function () { go("#research"); } },
+    { label: "How I got here", kind: "section", sel: "#history", keys: "history experience jobs", run: function () { go("#history"); } },
+    { label: "Skills", kind: "section", sel: "#skills", keys: "stack tools", run: function () { go("#skills"); } },
     { label: "Certificates", kind: "section", keys: "credentials education degrees aws", run: function () { go("#credentials"); } },
-    { label: "What I’ve written", kind: "section", keys: "blog medium write-ups", run: function () { go("#writing"); } },
+    { label: "What I’ve written", kind: "section", sel: "#writing", keys: "blog medium write-ups", run: function () { go("#writing"); } },
     { label: "GitHub", kind: "link", keys: "code source repositories", run: function () { link("https://github.com/Prateek-Pulastya"); } },
     { label: "LinkedIn", kind: "link", keys: "profile", run: function () { link("https://www.linkedin.com/in/prateek-pulastya22"); } },
     { label: "Medium", kind: "link", keys: "blog", run: function () { link("https://prateekpulastya.medium.com"); } },
-    { label: "Email me", kind: "link", keys: "mail contact hire", run: function () { location.href = "mailto:prateekpulastya220@gmail.com"; } }
+    { label: "Email me", kind: "link", keys: "mail contact hire germany berlin looking roles job", run: function () { location.href = "mailto:prateekpulastya220@gmail.com"; } }
   ];
+  var ROWS = [].slice.call(document.querySelectorAll("main details.row")).map(function (d) {
+    return { label: d.querySelector(".t").textContent, kind: d.closest("#workRows") ? "project" : d.closest("#research") ? "finding" : "detail", keys: d.textContent, run: function () { go(d); } };
+  });
   function match(q) {
     q = q.trim().toLowerCase();
-    return ITEMS.filter(function (c) { return !q || (c.label + " " + (c.keys || "") + " " + c.kind).toLowerCase().indexOf(q) !== -1; });
+    if (!q) return ITEMS;
+    function has(t) { return t.toLowerCase().indexOf(q) !== -1; }
+    return ITEMS.concat(ROWS).filter(function (c) {
+      return has(c.label + " " + (c.keys || "") + " " + c.kind + " " + (c.sel ? document.querySelector(c.sel).textContent : ""));
+    }).sort(function (a, b) { return has(b.label) - has(a.label); });
   }
   function draw() {
     list.textContent = "";

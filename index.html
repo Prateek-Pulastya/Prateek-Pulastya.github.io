@@ -544,7 +544,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
         <div class="more"><p>Guides for ISO 27001:2022, NIST CSF 2.0, SOC 2 and GDPR. The control crosswalk is in progress. Each mapping has a version, a primary source and a confidence grade, published as <code>/controls.json</code> and validated in CI.</p><p class="links"><a href="https://prateek-pulastya.github.io/security-compliance-academy/" rel="noopener">Live site</a><a href="https://github.com/Prateek-Pulastya/security-compliance-academy" rel="noopener">Source</a></p></div>
       </details>
       <details class="row" id="mortgage">
-        <summary><b class="fig">200+ <small>pages</small></b><span class="t">Mortgage document intelligence</span><span class="d">Long documents, with OCR and LlamaIndex RAG.</span></summary>
+        <summary><b class="fig">200+ <small>pages</small></b><span class="t">Mortgage document intelligence</span><span class="d">OCR and LlamaIndex RAG.</span></summary>
         <div class="more"><p>Tesseract, PaddleOCR, PyMuPDF, LlamaIndex RAG with Mistral and Phi-2. Compared OCR accuracy, retrieval quality and routing.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/Outamation-Externship" rel="noopener">Repository</a></p></div>
       </details>
     </div>
@@ -643,7 +643,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
     <div class="feeds">
       <div>
         <h2>What I’ve written</h2>
-        <ul class="feed" id="blogFeed"><li><a href="https://prateekpulastya.medium.com" rel="noopener"><span class="t">Write-ups on Medium</span></a></li></ul>
+        <ul class="feed" id="blogFeed"><li class="is-pinned"><a href="https://prateekpulastya.medium.com/what-i-learned-reversing-embeddings-for-owasps-genai-red-team-lab-subtitle-a-merged-pull-request-ec180ffb45d8" rel="noopener"><span class="t">What I Learned Reversing Embeddings for OWASP’s GenAI Red Team Lab</span><small>Aug 2026</small></a></li><li><a href="https://prateekpulastya.medium.com" rel="noopener"><span class="t">Write-ups on Medium</span></a></li></ul>
       </div>
       <div id="repos">
         <h2>Recently pushed</h2>
@@ -772,14 +772,16 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
   /* Feeds. The static fallback stays unless the JSON gives at least one safe row. */
   function safeUrl(u) { if (typeof u !== "string" || !u) return null; try { var p = new URL(u); return p.protocol === "https:" || p.protocol === "http:" ? p.href : null; } catch (e) { return null; } }
   function shortDate(v) { var d = new Date(v); return isNaN(d) ? "" : d.toLocaleDateString("en-GB", { month: "short", year: "numeric" }); }
+  function postId(li) { return li.querySelector("a").pathname.split("-").pop(); }
   function feed(url, id, row) {
     fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (items) {
       if (!Array.isArray(items)) return;
-      var rows = items.map(row).filter(Boolean);
+      var mount = document.getElementById(id), pin = mount.querySelector(".is-pinned");
+      var rows = items.map(row).filter(function (li) { return li && !(pin && postId(li) === postId(pin)); });
       if (!rows.length) return;
-      var mount = document.getElementById(id);
       mount.textContent = "";
-      rows.slice(0, 3).forEach(function (li) { mount.appendChild(li); });
+      if (pin) mount.appendChild(pin);
+      rows.slice(0, pin ? 2 : 3).forEach(function (li) { mount.appendChild(li); });
     }).catch(function () {});
   }
   function item(href, title, meta) {

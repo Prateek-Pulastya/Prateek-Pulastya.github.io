@@ -36,9 +36,11 @@
 /* Hallmark · waive 59 · measured painted gaps are 243px history to skills and 243px skills to writing · the gate reads text inside closed details rows, which reports rects 264px past the closed box, and hiding that text would break find in page */
 /* Hallmark · waive 71 · same measurement, heads sit 120px or more under the painted content before them · the crowded reading comes from text inside closed details rows */
 /* Hallmark · waive 77 · fires only on the file target where fetch cannot run, the HTTP target shows two boxed feeds of three rows and passes · no visual is added because the feeds are the content */
+/* Hallmark · finish-review: subagent · 8 findings · 6 resolved, 2 partial after one scoring round · 5 defects from the fixes also fixed · partial: 58 is dismissed below, and the #1 row needs a link from Prateek */
+/* Hallmark · dismissed 58 · a reader sees under 800 words with rows closed, the note also counts 871 words inside closed rows, and the windows still past 80 are tables or his own text; Prateek approved the under-800 budget in the spec on 2026-11-04 */
+/* Hallmark · answered F11 · the 3px underline under the closing EMAIL ME is the same bar rule as every box on this page, at type 250px tall */
 /* Hallmark · dropped console, shForm, shIn, shOut, shPresets, themeBtn, cmdkFab, gr-explainer, ats-explainer, cf-explainer, synopsis, description, lensDelta, yr, open, whoami · Prateek approved removing the console, dark mode and diagrams on 2026-11-04 */
 /* Hallmark · dropped #contact · every Email me link now goes straight to mailto, and the contact id stays for old links */
-/* Hallmark · dropped #credentials, #skills, #writing · the footer nav repeated the banner, and those ids stay for old links and search */
 @font-face { font-family: "Libre Franklin"; font-weight: 400; font-display: swap; src: url("fonts/libre-franklin-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Libre Franklin"; font-weight: 700; font-display: swap; src: url("fonts/libre-franklin-latin-700-normal.woff2") format("woff2"); }
 @font-face { font-family: "Libre Franklin"; font-weight: 900; font-display: swap; src: url("fonts/libre-franklin-latin-900-normal.woff2") format("woff2"); }
@@ -134,7 +136,7 @@ code { font-family: var(--font-code); overflow-wrap: anywhere; }
 .index li + li { border-top: var(--rule-hair) solid var(--color-rule); }
 .index a { display: grid; grid-template-columns: 9rem minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-lg); align-items: center; min-height: 64px; padding: var(--space-sm) var(--space-lg); color: inherit; text-decoration: none; }
 .index b { font-size: var(--text-3xl); font-weight: 900; line-height: 1; letter-spacing: var(--tracking-display); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.t { font-size: var(--text-lg); font-weight: 700; line-height: 1.25; }
+.t { font-size: var(--text-lg); font-weight: 700; line-height: 1.25; text-wrap: pretty; }
 .index li:first-child { background: var(--color-ink); color: var(--color-paper); }
 .index li:first-child a:hover { background: var(--color-accent); color: var(--color-accent-ink); }
 .index li:first-child a:focus-visible { outline-color: var(--color-accent); outline-offset: -4px; }
@@ -145,7 +147,7 @@ code { font-family: var(--font-code); overflow-wrap: anywhere; }
   .index li:first-child .t { grid-column: 3; align-self: end; font-size: var(--text-xl); }
   .index li:first-child .d { grid-column: 3; align-self: start; }
 }
-.index .d, .row .d { line-height: 1.4; }
+.index .d, .row .d { line-height: 1.4; text-wrap: pretty; }
 
 .section { padding-block: var(--section-gap-s); }
 .section--wide { padding-block: var(--section-gap); }
@@ -215,20 +217,21 @@ tr.is-on td { font-weight: 900; background: var(--color-ink); color: var(--color
 
 .filter { margin-block: var(--space-2xl); border: var(--rule-bar) solid var(--color-rule); }
 .filter h3 { font-size: var(--text-section); font-weight: 900; text-transform: uppercase; line-height: 1.02; max-width: none; margin: 0; padding: var(--space-md) var(--space-lg); border-bottom: var(--rule-bar) solid var(--color-rule); }
-.filter__io { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.filter__io { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); }
 html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
-.filter__in { display: grid; align-content: start; gap: var(--space-2xs); padding: var(--space-sm) var(--space-lg); border-right: var(--rule-bar) solid var(--color-rule); }
-.filter label { display: block; font-size: var(--text-sm); line-height: 1.3; color: var(--color-muted); }
-.filter textarea { display: block; width: 100%; min-height: 96px; padding: 0; border: 0; border-radius: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-code); resize: vertical; }
-.filter textarea:focus-visible { outline-offset: 4px; }
+.filter__in { display: grid; grid-template-rows: auto 1fr; border-right: var(--rule-bar) solid var(--color-rule); }
+.filter label { display: block; padding: var(--space-sm) var(--space-lg) 0; font-size: var(--text-sm); line-height: 1.3; color: var(--color-muted); }
+.filter textarea { display: block; width: 100%; height: 100%; min-height: 72px; padding: var(--space-2xs) var(--space-lg) var(--space-sm); border: 0; border-radius: 0; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-code); resize: vertical; }
+.filter textarea:focus-visible { outline-offset: -5px; }
 .presets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: var(--rule-bar) solid var(--color-rule); }
 .preset { white-space: nowrap; min-height: 52px; padding: 0 var(--space-sm); border: 0; background: none; color: var(--color-ink); font-family: var(--font-code); font-size: var(--text-sm); cursor: pointer; overflow-wrap: anywhere; text-align: left; }
 .preset + .preset { border-left: var(--rule-bar) solid var(--color-rule); }
 .preset:hover { background: var(--color-ink); color: var(--color-paper); }
 .preset:active { transform: translateY(1px); }
 .preset:disabled { opacity: 0.55; cursor: not-allowed; }
-.verdict { display: grid; align-content: center; gap: var(--space-2xs); padding: var(--space-md) var(--space-lg); overflow-wrap: anywhere; }
+.verdict { display: grid; align-content: center; gap: var(--space-2xs); padding: var(--space-sm) var(--space-md); overflow-wrap: anywhere; }
 .verdict strong { font-family: var(--font-code); font-size: var(--text-xl); }
+.verdict span { font-size: var(--text-sm); }
 .verdict.is-block { background: var(--color-accent); color: var(--color-accent-ink); }
 .note { margin-top: var(--space-md); font-size: var(--text-sm); color: var(--color-muted); max-width: none; }
 .filter .note { margin: 0; padding: var(--space-xs) var(--space-lg); border-top: var(--rule-bar) solid var(--color-rule); }
@@ -274,7 +277,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
 
 .close { background: var(--color-ink); color: var(--color-paper); padding-block: var(--section-gap-s); }
 .close > .container { container-type: inline-size; }
-.close h2 { font-size: 19.5cqi; line-height: 1; max-width: none; margin-bottom: var(--space-xl); }
+.close h2 { font-size: 19.7cqi; line-height: 1; max-width: none; margin-bottom: var(--space-xl); }
 .close h2 a { white-space: nowrap; text-decoration-thickness: var(--rule-bar); }
 .close h2 a:hover { background: var(--color-paper); color: var(--color-ink); }
 .close a { color: inherit; }
@@ -340,8 +343,10 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
   .feeds > div { display: block; grid-row: auto; }
 }
 .row .t { font-size: var(--text-xl); }
-#workRows .row summary { grid-template-columns: 12rem minmax(0, 5fr) minmax(0, 6fr) auto; }
+#workRows .row summary { grid-template-columns: 15rem minmax(0, 5fr) minmax(0, 6fr) auto; }
 .fig { font-size: var(--text-section); font-weight: 900; letter-spacing: var(--tracking-display); line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fig small { font-size: var(--text-lg); letter-spacing: 0; }
+.nb { white-space: nowrap; }
 .findings__rank { max-width: none; margin-bottom: var(--space-lg); }
 .skills .skills__cells { max-width: none; margin-top: var(--space-xs); }
 .cells { list-style: none; margin: 0; padding: 0; display: grid; border-style: solid; border-color: var(--color-rule); border-width: var(--rule-bar) 0 0 var(--rule-bar); }
@@ -376,7 +381,8 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
   .cert--lead b { font-size: var(--text-2xl); }
 }
 @media (max-width: 40rem) {
-  .filter h3, .filter__in, .verdict, .filter .note { padding-inline: var(--space-md); }
+  .filter h3, .filter label, .filter textarea, .verdict, .filter .note { padding-inline: var(--space-md); }
+  .verdict span { font-size: var(--text-md); }
   .preset { font-size: var(--text-xs); }
   .verdict.is-block { background: none; color: inherit; }
   .verdict.is-block strong { justify-self: start; padding-inline: var(--space-xs); background: var(--color-accent); color: var(--color-accent-ink); }
@@ -486,7 +492,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
         <div class="more"><p>Normalized text first, keeping <code>| _ -</code> so markers like <code>&lt;|im_start|&gt;</code> still match. Then a de-leeted, separator-stripped pass, which catches <code>1gn0r3 prev10us 1nstruct10ns</code>. If Tier 2 errors, the request is allowed.</p><p>Latency p50 0.14 ms, p95 26.21 ms, p99 32.11 ms. Tier 1 alone p50 0.09 ms.</p></div>
       </details>
       <details class="row">
-        <summary><span class="t">Against Llama-Guard-3-8B</span><span class="d">Missed 165 of 190. Its taxonomy doesn’t cover injection.</span></summary>
+        <summary><span class="t">Against <span class="nb">Llama-Guard-3-8B</span></span><span class="d">Llama Guard missed 165 of 190. Its taxonomy doesn’t cover injection.</span></summary>
         <div class="more"><p>GuardRail: recall 1.0000, precision 1.0000, p50 0.16 ms. Llama Guard: recall 0.1316, precision 1.0000, p50 1708 ms on local Ollama and a GTX 1650. Not a fair win, because its S1 to S13 taxonomy doesn’t cover prompt injection.</p></div>
       </details>
     </div>
@@ -503,35 +509,35 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
     </template>
     <div class="rows" id="workRows">
       <details class="row" id="atsguard">
-        <summary><b class="fig">42.9%</b><span class="t">ATSGuard</span><span class="d">Hidden instructions in résumés, on 28 cases I wrote myself.</span></summary>
+        <summary><b class="fig">42.9% <small>recall</small></b><span class="t">ATSGuard</span><span class="d">Hidden instructions in résumés, on 28 cases I wrote myself.</span></summary>
         <div class="more"><p>0% false positives on 1,200 synthetic résumés. 98.8% recall on 80 disguised attacks. 42.9% on 28 separate cases I wrote myself.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/ATSGuard" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="cloudfracture">
-        <summary><b class="fig">4</b><span class="t">CloudFracture</span><span class="d">Attack paths on an AWS LLM agent, each with a Sigma detection.</span></summary>
+        <summary><b class="fig">4 <small>paths</small></b><span class="t">CloudFracture</span><span class="d">Attacks on an AWS LLM agent, each with a Sigma detection.</span></summary>
         <div class="more"><p>Built in Terraform. 4 identity attack paths, from the agent’s execution role to data exfiltration and prompt-store poisoning. A tested Sigma detection for each, IAM fixed to least privilege, attacks re-run and failing. CI runs SAST, SCA, secret and IaC scanning and builds an SBOM.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/cloudfracture" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="detectforge">
-        <summary><b class="fig">7/10</b><span class="t">DetectForge</span><span class="d">ATT&amp;CK techniques fired in a Wazuh and Sysmon SOC lab.</span></summary>
+        <summary><b class="fig">7/10 <small>fired</small></b><span class="t">DetectForge</span><span class="d">ATT&amp;CK techniques in a Wazuh and Sysmon SOC lab.</span></summary>
         <div class="more"><p>7 of 10 ATT&amp;CK techniques fired on live detonation. Each detection has its false-positive profile written down. Gaps listed: T1003.001, T1055, T1021.001.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/soc-detection-lab" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="securefix">
-        <summary><b class="fig">6</b><span class="t">SecureFix</span><span class="d">Web bugs with exploits, fixes, Semgrep rules and CI gates.</span></summary>
+        <summary><b class="fig">6 <small>bugs</small></b><span class="t">SecureFix</span><span class="d">Exploits, fixes, Semgrep rules and CI gates for each.</span></summary>
         <div class="more"><p>SQLi, IDOR, SSRF, XSS, JWT signature bypass, prototype pollution. Each has a working exploit, a fix, a hand-written Semgrep rule and a CI gate. The SAST gate goes from 7 findings to 0.</p><p class="links"><a href="https://prateek-pulastya.github.io/securefix/" rel="noopener">Live walkthrough</a><a href="https://github.com/Prateek-Pulastya/securefix" rel="noopener">Source</a></p></div>
       </details>
       <details class="row" id="threat-detection">
-        <summary><b class="fig">6</b><span class="t">Explainable threat detection</span><span class="d">Attack classes on CICIDS2017, with SHAP on every alert.</span></summary>
+        <summary><b class="fig">6 <small>classes</small></b><span class="t">Explainable threat detection</span><span class="d">Intrusion detection on CICIDS2017, with SHAP on every alert.</span></summary>
         <div class="more"><p>CICIDS2017, 6 attack classes, a SHAP attribution on every alert.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/AI-Powered-Threat-Detection-System-with-Explainability" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="mqtt">
-        <summary><b class="fig">&lt;1 ms</b><span class="t">Secure MQTT pipeline</span><span class="d">Added by TLS, mTLS and HMAC on hotel water monitoring.</span></summary>
+        <summary><b class="fig">&lt;1 ms <small>added</small></b><span class="t">Secure MQTT pipeline</span><span class="d">TLS, mTLS and HMAC on a hotel water-monitoring system.</span></summary>
         <div class="more"><p>STRIDE first, then TLS, mTLS, HMAC-SHA256 and replay defense, each tested with attack simulations. Under 1 ms added. Top 10% of the externship.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/Hydroficient-Externship" rel="noopener">Repository</a></p></div>
       </details>
       <details class="row" id="compliance">
-        <summary><b class="fig">4</b><span class="t">Security Compliance Academy</span><span class="d">Frameworks mapped, with sources and confidence grades.</span></summary>
+        <summary><b class="fig">4 <small>frameworks</small></b><span class="t">Security Compliance Academy</span><span class="d">Controls mapped, with sources and confidence grades.</span></summary>
         <div class="more"><p>ISO 27001:2022, NIST CSF 2.0, SOC 2 and GDPR. Each mapping has a version, a primary source and a confidence grade, published as <code>/controls.json</code> and validated in CI.</p><p class="links"><a href="https://prateek-pulastya.github.io/security-compliance-academy/" rel="noopener">Live site</a><a href="https://github.com/Prateek-Pulastya/security-compliance-academy" rel="noopener">Source</a></p></div>
       </details>
       <details class="row" id="mortgage">
-        <summary><b class="fig">200+</b><span class="t">Mortgage document intelligence</span><span class="d">Page documents, with OCR and LlamaIndex RAG.</span></summary>
+        <summary><b class="fig">200+ <small>pages</small></b><span class="t">Mortgage document intelligence</span><span class="d">Long documents, with OCR and LlamaIndex RAG.</span></summary>
         <div class="more"><p>Tesseract, PaddleOCR, PyMuPDF, LlamaIndex RAG. Compared Mistral and Phi-2 on OCR accuracy, retrieval quality and routing.</p><p class="links"><a href="https://github.com/Prateek-Pulastya/Outamation-Externship" rel="noopener">Repository</a></p></div>
       </details>
     </div>
@@ -541,7 +547,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
 <section class="section--wide band" id="research">
   <div class="container">
     <h2>Findings, including the duplicates</h2>
-    <p class="says findings__rank">#1 on the Intigriti quarterly leaderboard (RO07 Ch13f), and Top 10 Bug Baron.</p>
+    <p class="says findings__rank">#1 on the Intigriti quarterly leaderboard (RO07 Ch13f).</p>
     <div class="rows rows--find">
       <details class="row" id="smolagents"><summary><b class="sev">CVSS 9.9</b><span class="t">Sandbox escape in <code>smolagents</code> (CWE-94)</span><span class="d">Disclosed via huntr</span></summary>
         <div class="more"><p>A code-injection flaw in the agent sandbox let arbitrary commands run on the host. Disclosed to the maintainers through huntr.</p></div></details>
@@ -603,7 +609,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
       <li class="cert"><b>Certified LLM Security Professional (CLLMSP)</b><small>Red Team Leaders, June 2026</small><a href="https://courses.redteamleaders.com/exam-completion/7fdd1971d57853c3" rel="noopener">Verify</a></li>
       <li class="cert"><b>OCI 2025 Certified AI Foundations Associate</b><small>Oracle, August 2025, ID 102394776OCI25AICFA</small></li>
     </ul>
-    <p class="note">Verify opens the issuer’s page. Ask me for the rest.</p>
+    <p class="note">Verify opens the issuer’s page.</p>
     <table class="creds creds--degrees">
       <caption class="visually-hidden">Degrees</caption>
       <tbody>
@@ -613,7 +619,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
       </tbody>
     </table>
     <details class="row row--solo">
-      <summary><span class="t">Other certificates</span><span class="d">Fortinet, CNSS, two externships, my MSc thesis.</span></summary>
+      <summary><span class="t">Other certificates</span><span class="d">Fortinet, CNSS, two externships, my thesis.</span></summary>
       <div class="more">
         <table class="creds"><tbody>
           <tr><td>Fortinet Certified Associate in Cybersecurity</td><td>Fortinet, Oct 2025 to Oct 2027, ID 7813549201PP</td><td><a href="https://training.fortinet.com/admin/tool/certificate/index.php" rel="noopener">Verify</a></td></tr>
@@ -657,6 +663,12 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
 <footer class="foot">
   <div class="container foot__in">
     <a href="#top">Back to top</a>
+    <a href="#work">Work</a>
+    <a href="#research">Research</a>
+    <a href="#history">History</a>
+    <a href="#skills">Skills</a>
+    <a href="#credentials">Certificates</a>
+    <a href="#writing">Write-ups</a>
   </div>
 </footer>
 

@@ -1,7 +1,7 @@
 [
   {
     "name": "Guardrail-As-A-Service-V2",
-    "desc": "Two-tier prompt-injection detection for production LLM serving — Aho-Corasick + regex Tier 1 (p50 0.14ms) feeding a monitor-only DeBERTa-v3 ONNX classifier. Evaluated against 4 external benchmarks.",
+    "desc": "Two-tier prompt-injection detection for LLM serving — Aho-Corasick + regex Tier 1 (p50 0.14ms) feeding a monitor-only DeBERTa-v3 ONNX classifier. Evaluated against 4 external benchmarks.",
     "url": "https://github.com/Prateek-Pulastya/Guardrail-As-A-Service-V2",
     "stars": 0,
     "language": "Python",
@@ -11,7 +11,7 @@
       "guardrails",
       "llm-security"
     ],
-    "pushedAt": "2026-10-24T12:00:20Z"
+    "pushedAt": "2026-11-07T17:11:44Z"
   },
   {
     "name": "cloudfracture",
@@ -76,6 +76,6 @@
       "stride",
       "threat-modeling"
     ],
-    "pushedAt": "2026-07-25T19:25:31Z"
+    "pushedAt": "2026-11-07T17:25:38Z"
   }
 ]

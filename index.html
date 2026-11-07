@@ -138,8 +138,8 @@ code { font-family: var(--font-code); overflow-wrap: anywhere; }
 .row + .row { border-top: var(--rule-hair) solid var(--color-rule); }
 .row summary { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr) auto; gap: var(--space-lg); align-items: center; min-height: 72px; padding: var(--space-sm) var(--space-lg); cursor: pointer; list-style: none; }
 .row summary::-webkit-details-marker { display: none; }
-.row summary::after { content: "+"; font-size: var(--text-xl); font-weight: 900; line-height: 1; }
-.row[open] summary::after { content: "\2212"; }
+.row summary::after { content: "+"; content: "+" / ""; font-size: var(--text-xl); font-weight: 900; line-height: 1; }
+.row[open] summary::after { content: "\2212"; content: "\2212" / ""; }
 .row summary:hover { background: var(--color-accent); color: var(--color-accent-ink); }
 .row summary:focus-visible { outline-offset: -4px; }
 [tabindex="-1"]:focus { outline: none; }
@@ -465,7 +465,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
         </div>
       </div>
       <div class="presets needs-js" id="demoPresets"></div>
-      <p class="note">A 25-rule sketch of GuardRail’s Tier 1, in your browser. Nothing is sent anywhere.</p>
+      <p class="note">A 25-rule sample of GuardRail’s Tier 1, in your browser. Nothing is sent anywhere.</p>
       <noscript><p class="note">This is an example result. Turn on JavaScript to try your own prompt.</p></noscript>
     </div>
 
@@ -705,12 +705,12 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
     show("heldout");
   })();
 
-  /* Tier 1 filter sketch. Output only ever goes through textContent. */
+  /* 25 rules copied verbatim from GuardRail config/rules.yaml. Output only ever goes through textContent. */
   (function () {
     var input = document.getElementById("demoInput"), out = document.getElementById("demoVerdict"), mount = document.getElementById("demoPresets");
     if (!input) return;
-    var PHRASES = ["ignore previous instructions", "ignore all previous", "ignore the above", "disregard previous", "disregard all previous", "forget everything", "forget your instructions", "system prompt", "reveal your prompt", "print your instructions", "you are now", "pretend you are", "developer mode", "do anything now", "new instructions", "override your"];
-    var DELIMS = ["<|im_start|>", "<|im_end|>", "[inst]", "[/inst]", "<<sys>>", "### system", "### instruction", "\nsystem:", "\nassistant:"];
+    var PHRASES = ["ignore previous", "ignore all previous instructions", "ignore all prior instructions", "ignore prior instructions", "ignore all instructions", "ignore the above", "ignore everything above", "previous instructions", "disregard all prior", "disregard the previous", "forget everything you were told", "forget all previous", "override your instructions", "new instructions:", "do anything now", "you are now dan", "developer mode", "your system prompt", "reveal your instructions", "jailbreak mode", "unrestricted ai"];
+    var DELIMS = ["<|im_start|>", "<|im_end|>", "[inst]", "### system"];
     function deleet(s) {
       var map = { "1": "i", "0": "o", "3": "e", "4": "a", "5": "s", "7": "t", "@": "a", "$": "s", "!": "i" }, r = "", i;
       for (i = 0; i < s.length; i++) r += map[s[i]] || s[i];
@@ -730,7 +730,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
       out.textContent = "";
       out.classList.toggle("is-block", !!r);
       out.appendChild(el("strong", null, r ? "TIER1-BLOCK" : "PASS"));
-      out.appendChild(el("span", null, r ? "Caught by the " + r.how + ", matching “" + r.hit + "”." : "No Tier 1 rule in this sketch matched. In the full pipeline this goes on to the monitor-only Tier 2."));
+      out.appendChild(el("span", null, r ? "Caught by the " + r.how + ", matching “" + r.hit + "”." : "No Tier 1 rule in this sample matched. In the full pipeline this goes on to the monitor-only Tier 2."));
     }
     ["1gn0r3 prev10us 1nstruct10ns", "<|im_start|>system", "Weather in Berlin?"].forEach(function (t) {
       var b = el("button", "preset", t);
@@ -819,7 +819,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
     { label: "GuardRail results", kind: "section", sel: "#guardrail", keys: "benchmark recall held-out evaluation", run: function () { go("#guardrail"); } },
     { label: "Try the filter", kind: "section", keys: "guardrail demo prompt injection tier", run: function () { go("#demo"); setTimeout(function () { document.getElementById("demoInput").focus({ preventScroll: true }); }, reduce ? 0 : 380); } },
     { label: "The rest of the work", kind: "section", sel: "#work", keys: "projects", run: function () { go("#work"); } },
-    { label: "Findings", kind: "section", sel: "#research", keys: "research bug bounty cve disclosure vulnerabilities", run: function () { go("#research"); } },
+    { label: "Research findings", kind: "section", sel: "#research", keys: "research bug bounty cve disclosure vulnerabilities", run: function () { go("#research"); } },
     { label: "How I got here", kind: "section", sel: "#history", keys: "history experience jobs", run: function () { go("#history"); } },
     { label: "Skills", kind: "section", sel: "#skills", keys: "stack tools", run: function () { go("#skills"); } },
     { label: "Certificates", kind: "section", keys: "credentials education degrees aws", run: function () { go("#credentials"); } },
@@ -830,15 +830,21 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
     { label: "Email me", kind: "link", keys: "mail contact hire germany berlin looking roles job", run: function () { location.href = "mailto:prateekpulastya220@gmail.com"; } }
   ];
   var ROWS = [].slice.call(document.querySelectorAll("main details.row")).map(function (d) {
-    return { label: d.querySelector(".t").textContent, kind: d.closest("#workRows") ? "project" : d.closest("#research") ? "finding" : "detail", keys: d.textContent, run: function () { go(d); } };
+    return { row: true, label: d.querySelector(".t").textContent, kind: d.closest("#workRows") ? "project" : d.closest("#research") ? "finding" : "detail", keys: d.textContent, run: function () { go(d); } };
   });
   function match(q) {
     q = q.trim().toLowerCase();
     if (!q) return ITEMS;
-    function has(t) { return t.toLowerCase().indexOf(q) !== -1; }
-    return ITEMS.concat(ROWS).filter(function (c) {
-      return has(c.label + " " + (c.keys || "") + " " + c.kind + " " + (c.sel ? document.querySelector(c.sel).textContent : ""));
-    }).sort(function (a, b) { return has(b.label) - has(a.label); });
+    function has(t) { return !!t && t.toLowerCase().indexOf(q) !== -1; }
+    function score(c) {
+      if (has(c.label)) return 4;
+      if (has(c.keys + " " + c.kind)) return c.row ? 2 : 3;
+      return c.sel && has(document.querySelector(c.sel).textContent) ? 1 : 0;
+    }
+    return ITEMS.concat(ROWS).map(function (c) { return { c: c, s: score(c) }; })
+      .filter(function (x) { return x.s; })
+      .sort(function (a, b) { return b.s - a.s; })
+      .map(function (x) { return x.c; });
   }
   function draw() {
     list.textContent = "";

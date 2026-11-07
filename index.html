@@ -28,19 +28,6 @@
 </script>
 <script>document.documentElement.classList.add('js');</script>
 <style>
-/* Hallmark · shape: Index-First (draw a46b8f, Manifesto swapped: plain notes, the job is hire) · genre: editorial · theme: Brutal (deal 3/3, seed portfolio-security-engineer-red-bd7f·724c9675·2026-11-04·r0) · redesign: full · job: hire
- * hero: Index · nav: banner bar · footer: statement · imagery: the product · signature: the record as a boxed index, with a filter you can attack
- * axes: light/grotesk-heavy/chromatic-yellow · posture: committed · contrast: pass · fold: pass · v2.0.0 */
-/* Hallmark · pre-emit critique: P3 H4 E4 S5 R4 V4 · weakest: P, the page argues little beyond the record; led with his own notes instead of a thesis */
-/* Hallmark · hero-review: fix · 5 findings · 5 resolved */
-/* Hallmark · waive 59 · measured painted gaps are 243px history to skills and 243px skills to writing · the gate reads text inside closed details rows, which reports rects 264px past the closed box, and hiding that text would break find in page */
-/* Hallmark · waive 71 · same measurement, heads sit 120px or more under the painted content before them · the crowded reading comes from text inside closed details rows */
-/* Hallmark · waive 77 · fires only on the file target where fetch cannot run, the HTTP target shows two boxed feeds of three rows and passes · no visual is added because the feeds are the content */
-/* Hallmark · finish-review: subagent · 8 findings · 6 resolved, 2 partial after one scoring round · 5 defects from the fixes also fixed · partial: 58 is dismissed below, and the #1 row needs a link from Prateek */
-/* Hallmark · dismissed 58 · a reader sees under 800 words with rows closed, the note also counts 871 words inside closed rows, and the windows still past 80 are tables or his own text; Prateek approved the under-800 budget in the spec on 2026-11-04 */
-/* Hallmark · answered F11 · the 3px underline under the closing EMAIL ME is the same bar rule as every box on this page, at type 250px tall */
-/* Hallmark · dropped console, shForm, shIn, shOut, shPresets, themeBtn, cmdkFab, gr-explainer, ats-explainer, cf-explainer, synopsis, description, lensDelta, yr, open, whoami · Prateek approved removing the console, dark mode and diagrams on 2026-11-04 */
-/* Hallmark · dropped #contact · every Email me link now goes straight to mailto, and the contact id stays for old links */
 @font-face { font-family: "Libre Franklin"; font-weight: 400; font-display: swap; src: url("fonts/libre-franklin-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Libre Franklin"; font-weight: 700; font-display: swap; src: url("fonts/libre-franklin-latin-700-normal.woff2") format("woff2"); }
 @font-face { font-family: "Libre Franklin"; font-weight: 900; font-display: swap; src: url("fonts/libre-franklin-latin-900-normal.woff2") format("woff2"); }
@@ -83,16 +70,9 @@ button, input, select, textarea { font: inherit; }
 .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); box-sizing: border-box; }
 .num, .figure, td.num { font-variant-numeric: tabular-nums; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-[data-slot] { position: relative; overflow: hidden; background: linear-gradient(160deg, var(--color-paper-2, var(--color-paper)), var(--color-paper-3, var(--color-paper))); }
-[data-slot] > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-[data-slot]:has(> img) > :not(img):not([data-keep]) { display: none !important; }
 @media (max-width: 60rem) { :root { --gutter: 24px; --section-gap-s: 80px; --section-gap: 96px; --section-gap-l: 120px; } }
 @media (max-width: 40rem) { :root { --gutter: 16px; --section-gap-s: 56px; --section-gap: 72px; --section-gap-l: 96px; --gap-columns: 16px; } }
 @media (prefers-reduced-motion: reduce) { *:not(.keep-motion), *:not(.keep-motion)::before, *:not(.keep-motion)::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
-/* photographs: duotone ink paper con=24 */
-[data-slot]:has(> img) { isolation: isolate; background: var(--color-paper); outline: 1px solid color-mix(in oklab, var(--color-ink) 8%, transparent); outline-offset: -1px; }
-[data-slot] > img { z-index: 0; filter: grayscale(1) contrast(1.24); mix-blend-mode: multiply; }
-[data-slot]:has(> img)::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--color-ink); mix-blend-mode: lighten; pointer-events: none; }
 :root {
   --font-code: ui-monospace, "Cascadia Mono", Consolas, monospace;
   --duration-quick: 150ms; --duration-fast: 250ms;
@@ -428,7 +408,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
     <ul class="index">
       <li><a href="https://github.com/GenAI-Security-Project/GenAI-Red-Team-Lab/pull/54" rel="noopener"><b>PR #54</b><span class="t">OWASP GenAI Red Team Lab</span><span class="d">Embedding inversion exploit, merged August 2026. The work I’m most proud of.</span></a></li>
       <li><a href="#guardrail"><b>0.79</b><span class="t">GuardRail</span><span class="d">My open-source prompt-injection filter. Held-out recall, after 1.00 on my own data.</span></a></li>
-      <li><a href="#smolagents"><b>9.9</b><span class="t">smolagents sandbox escape</span><span class="d">CVSS 9.9. Arbitrary command execution on the host, reported via huntr.</span></a></li>
+      <li><a href="#smolagents"><b>9.9</b><span class="t">smolagents sandbox escape</span><span class="d">CVSS 9.9 on the huntr report. Arbitrary command execution on the host.</span></a></li>
       <li><a href="#research"><b>#1</b><span class="t">Intigriti quarterly leaderboard</span><span class="d">Plus a Top 10 Bug Baron placing.</span></a></li>
       <li><a href="#atsguard"><b>42.9%</b><span class="t">ATSGuard</span><span class="d">Finds hidden instructions in résumés. Recall on 28 cases it was never tuned on.</span></a></li>
       <li><a href="#securefix"><b>7 to 0</b><span class="t">SecureFix</span><span class="d">SAST findings on my own app, before and after fixes.</span></a></li>
@@ -554,7 +534,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
 <section class="section--wide band" id="research">
   <div class="container">
     <h2>Findings, including the duplicates</h2>
-    <p class="says findings__rank">#1 on the Intigriti quarterly leaderboard (RO07 Ch13f).</p>
+    <p class="says findings__rank">#1 on the Intigriti quarterly leaderboard.</p>
     <div class="rows rows--find">
       <details class="row" id="smolagents"><summary><b class="sev">CVSS 9.9</b><span class="t">Sandbox escape in <code>smolagents</code> (CWE-94)</span><span class="d">Disclosed via huntr</span></summary>
         <div class="more"><p>A code-injection flaw in the agent sandbox let arbitrary commands run on the host. Disclosed to the maintainers through huntr.</p></div></details>
@@ -611,8 +591,8 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
       </div>
     </details>
     <ul class="cells cells--certs" id="credentials">
-      <li class="cert cert--lead"><b>AWS Certified Security, Specialty</b><small>Aug 2026 to Aug 2029, ID …f67c44</small><a href="https://aws.amazon.com/verification" rel="noopener">Verify</a></li>
-      <li class="cert cert--wide"><b>AWS Certified Solutions Architect, Associate</b><small>Aug 2026 to Aug 2029, ID …18000c</small><a href="https://aws.amazon.com/verification" rel="noopener">Verify</a></li>
+      <li class="cert cert--lead"><b>AWS Certified Security, Specialty</b><small>Aug 2026 to Aug 2029. Validation number 2917b25633b64577b4f24a213ff67c44</small><a href="https://aws.amazon.com/verification" rel="noopener">Verify</a></li>
+      <li class="cert cert--wide"><b>AWS Certified Solutions Architect, Associate</b><small>Aug 2026 to Aug 2029. Validation number 0130ce1480db446590875575e918000c</small><a href="https://aws.amazon.com/verification" rel="noopener">Verify</a></li>
       <li class="cert"><b>Certified LLM Security Professional (CLLMSP)</b><small>Red Team Leaders, June 2026</small><a href="https://courses.redteamleaders.com/exam-completion/7fdd1971d57853c3" rel="noopener">Verify</a></li>
       <li class="cert"><b>OCI 2025 Certified AI Foundations Associate</b><small>Oracle, August 2025, ID 102394776OCI25AICFA</small></li>
     </ul>
@@ -725,7 +705,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
     show("heldout");
   })();
 
-  /* Tier 1 filter sample. Output only ever goes through textContent. */
+  /* Tier 1 filter sketch. Output only ever goes through textContent. */
   (function () {
     var input = document.getElementById("demoInput"), out = document.getElementById("demoVerdict"), mount = document.getElementById("demoPresets");
     if (!input) return;
@@ -821,7 +801,7 @@ html:not(.js) .filter__io { grid-template-columns: minmax(0, 1fr); }
     wasOpen = null;
   });
 
-  /* Search, using the transitions.dev modal open and close. */
+  /* Search dialog: quick to close, slower to open. */
   var modal = document.getElementById("cmdk"), input = document.getElementById("cmdkInput"), list = document.getElementById("cmdkList"), btn = document.getElementById("cmdkBtn");
   var closeMs = 150, last = null, active = 0, shown = [];
   function go(target) {
